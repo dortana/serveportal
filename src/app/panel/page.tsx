@@ -1,7 +1,7 @@
-import React from 'react';
+import { redirect } from 'next/navigation';
 
-const Panel = () => {
-  return <div>Dashbaord</div>;
+const PanelPage = () => {
+  return redirect('/panel/dashboard');
 };
 
-export default Panel;
+export default PanelPage;
