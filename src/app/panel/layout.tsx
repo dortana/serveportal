@@ -1,4 +1,3 @@
-import { getTranslations } from 'next-intl/server';
 import PanelHeader from './PanelHeader';
 import PanelSidebar from './PanelSidebar';
 
@@ -7,8 +6,6 @@ export default async function PanelLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const t = await getTranslations();
-
   return (
     <section className='p-2 flex flex-col gap-2 h-screen'>
       <PanelHeader />
