@@ -1,14 +1,20 @@
 'use client';
-import DashboardIcon from '@/components/icons/DashboardIcon';
-import InvoiceIcon from '@/components/icons/InvoiceIcon';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import DashboardIcon from '@/components/icons/DashboardIcon';
+import InvoiceIcon from '@/components/icons/InvoiceIcon';
 import { useTranslations } from 'next-intl';
 
-const PanelSidebar = () => {
+const PanelSidebar = ({
+  onLinkClick,
+  className,
+}: {
+  className?: string;
+  onLinkClick?: () => void;
+}) => {
   const pathname = usePathname();
   const t = useTranslations();
   const sidebarLinks = [
@@ -21,7 +27,9 @@ const PanelSidebar = () => {
     { id: 2, title: t('Invoices'), icon: InvoiceIcon, href: '/panel/invoices' },
   ];
   return (
-    <div className='h-full w-2xs bg-white rounded-lg space-y-4'>
+    <div
+      className={clsx('h-full w-2xs bg-white rounded-lg space-y-4', className)}
+    >
       <div className='p-4 flex gap-2 items-center'>
         <Avatar className='size-14'>
           <AvatarImage src='https://github.com/shadcn.png' />
@@ -49,6 +57,7 @@ const PanelSidebar = () => {
                 : 'border-white hover:text-brand transform transition-all duration-300',
             )}
             href={item.href}
+            onClick={onLinkClick}
           >
             <Icon
               className={clsx(

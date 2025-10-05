@@ -10,7 +10,7 @@ export default async function PanelLayout({
     <section className='p-3 flex flex-col gap-3 h-screen bg-tertiary'>
       <PanelHeader />
       <div className='flex gap-3 flex-1'>
-        <PanelSidebar />
+        <PanelSidebar className='hidden md:block' />
         <div className='flex-1'>{children}</div>
       </div>
     </section>

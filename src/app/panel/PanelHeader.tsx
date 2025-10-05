@@ -5,6 +5,7 @@ import Logout from './Logout';
 import { Input } from '@/components/ui/input';
 import SearchIcon from '@/components/icons/SearchIcon';
 import { getTranslations } from 'next-intl/server';
+import ToggleMenu from '@/components/ToggleMenu';
 
 const PanelHeader = async () => {
   const t = await getTranslations();
@@ -14,11 +15,18 @@ const PanelHeader = async () => {
         src='/assets/logo_with_text_1.png'
         width={200}
         height={60}
-        className='h-auto'
+        className='h-auto hidden md:flex'
         alt=''
       />
-
+      <Image
+        src='/app_logo.png'
+        width={60}
+        height={60}
+        className='h-auto md:hidden'
+        alt=''
+      />
       <div className='flex gap-2'>
+        <ToggleMenu />
         <div className='flex items-center relative max-md:hidden'>
           <Input
             type='text'
