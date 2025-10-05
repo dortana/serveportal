@@ -51,7 +51,7 @@ const PanelSidebar = ({
           <Link
             key={item.id}
             className={clsx(
-              'flex gap-2 rounded-tl-sm rounded-bl-sm px-4 border-l-6 w-full items-center',
+              'flex gap-2 rounded-tl-sm rounded-bl-sm border-l-6 w-full items-center',
               isActive
                 ? 'border-black'
                 : 'border-white hover:text-brand transform transition-all duration-300',
@@ -61,7 +61,7 @@ const PanelSidebar = ({
           >
             <Icon
               className={clsx(
-                'size-7',
+                'size-7 ml-4',
                 !isActive &&
                   'hover:stroke-brand transform transition-all duration-300',
               )}

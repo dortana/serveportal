@@ -5,7 +5,7 @@ import Logout from './Logout';
 import { Input } from '@/components/ui/input';
 import SearchIcon from '@/components/icons/SearchIcon';
 import { getTranslations } from 'next-intl/server';
-import ToggleMenu from '@/components/ToggleMenu';
+import ToggleMenu from '@/app/panel/ToggleMenu';
 
 const PanelHeader = async () => {
   const t = await getTranslations();

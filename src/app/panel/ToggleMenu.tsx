@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import MenuIcon from './icons/MenuIcon';
+import MenuIcon from '@/components/icons/MenuIcon';
 import { useTranslations } from 'next-intl';
 import {
   Sheet,
@@ -22,9 +22,9 @@ const ToggleMenu = () => {
           <span className='text-sm'>{t('Menu')}</span>
         </div>
       </SheetTrigger>
-      <SheetContent side='left'>
+      <SheetContent side='left' className='w-[80vw]'>
         <SheetTitle></SheetTitle>
-        <PanelSidebar onLinkClick={() => setOpen(false)} />
+        <PanelSidebar onLinkClick={() => setOpen(false)} className='w-full' />
       </SheetContent>
     </Sheet>
   );
