@@ -1,7 +1,10 @@
 {
   "Close": "Close",
+  "Dashboard": "Dashboard",
   "Go to Home": "Go to Home",
+  "Invoices": "Invoices",
   "Language": "Language",
   "Please select your preferred language from the options below.": "Please select your preferred language from the options below.",
+  "Search": "Search",
   "We couldn't find the page you were looking for.": "We couldn't find the page you were looking for."
 }

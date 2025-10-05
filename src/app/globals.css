@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --color-primary: var(--primary);
+  --color-brand: var(--brand);
   --color-secondary: var(--secondary);
   --color-tertiary: var(--tertiary);
   --color-background: var(--background);
@@ -47,7 +47,7 @@
 }
 
 :root {
-  --primary: #08a6ec;
+  --brand: #08a6ec;
   --secondary: #171717;
   --tertiary: #f6f6f6;
   --radius: 0.625rem;
@@ -85,7 +85,7 @@
 }
 
 .dark {
-  --primary: #08a6ec;
+  --brand: #08a6ec;
   --secondary: #171717;
   --tertiary: #f6f6f6;
   --background: oklch(0.145 0 0);
