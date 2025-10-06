@@ -7,10 +7,10 @@ export default async function PanelLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section className='p-3 flex flex-col gap-3 h-screen bg-tertiary'>
+    <section className='p-3 flex flex-col gap-3 min-h-screen bg-tertiary'>
       <PanelHeader />
       <div className='flex gap-3 flex-1'>
-        <PanelSidebar className='hidden md:block' />
+        <PanelSidebar className='!h-[calc(100vh-100px)] hidden md:block' />
         <div className='flex-1'>{children}</div>
       </div>
     </section>
