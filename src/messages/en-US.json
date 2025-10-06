@@ -1,6 +1,7 @@
 {
   "{number} of {total} row(s) selected.": "{number} of {total} row(s) selected.",
   "Account Name": "Account Name",
+  "Add Entry": "Add Entry",
   "Bank Card": "Bank Card",
   "Cash": "Cash",
   "Clear filters": "Clear filters",
@@ -12,6 +13,7 @@
   "Document Type": "Document Type",
   "Entry No.": "Entry No.",
   "Expense": "Expense",
+  "Export Data": "Export Data",
   "Filter your list...": "Filter your list...",
   "Go to first page": "Go to first page",
   "Go to Home": "Go to Home",

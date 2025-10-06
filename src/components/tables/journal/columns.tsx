@@ -26,19 +26,14 @@ export const getJournalColumns = (t: any): CustomColumnDef<JournalEntry>[] => {
       enableSorting: false,
     },
     {
-      accessorKey: 'date',
-      accessorTitle: t('Date'),
+      accessorKey: 'accountName',
+      accessorTitle: t('Account Name'),
       header: ({ column }) => (
-        <DataTableColumnHeader
-          className='w-20'
-          column={column}
-          title={t('Date')}
-        />
+        <DataTableColumnHeader column={column} title={t('Account Name')} />
       ),
-      cell: ({ row }) => {
-        const date: string = row.getValue('date');
-        return <span className='text-sm text-gray-700'>{date}</span>;
-      },
+      cell: ({ row }) => (
+        <span className='truncate block'>{row.getValue('accountName')}</span>
+      ),
     },
     {
       accessorKey: 'documentType',
@@ -100,16 +95,6 @@ export const getJournalColumns = (t: any): CustomColumnDef<JournalEntry>[] => {
       },
     },
     {
-      accessorKey: 'accountName',
-      accessorTitle: t('Account Name'),
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title={t('Account Name')} />
-      ),
-      cell: ({ row }) => (
-        <span className='truncate block'>{row.getValue('accountName')}</span>
-      ),
-    },
-    {
       accessorKey: 'taxCode',
       accessorTitle: t('Tax Code'),
       header: ({ column }) => (
@@ -147,6 +132,21 @@ export const getJournalColumns = (t: any): CustomColumnDef<JournalEntry>[] => {
         ) : (
           '-'
         );
+      },
+    },
+    {
+      accessorKey: 'date',
+      accessorTitle: t('Date'),
+      header: ({ column }) => (
+        <DataTableColumnHeader
+          className='w-20'
+          column={column}
+          title={t('Date')}
+        />
+      ),
+      cell: ({ row }) => {
+        const date: string = row.getValue('date');
+        return <span className='text-sm text-gray-700'>{date}</span>;
       },
     },
   ];

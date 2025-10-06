@@ -20,6 +20,7 @@ import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { useTranslations } from 'next-intl';
 import { CheckIcon } from 'lucide-react';
+import PlusIcon from '@/components/icons/PlusIcon';
 
 interface DataTableFacetedFilterProps<TData, TValue> {
   column?: Column<TData, TValue>;
@@ -43,29 +44,7 @@ export function DataTableFacetedFilter<TData, TValue>({
     <Popover>
       <PopoverTrigger asChild>
         <Button variant='outline' size='sm' className='h-10 border-dashed'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            viewBox='0 0 24 24'
-            width='24'
-            height='24'
-            color='#000000'
-            fill='none'
-          >
-            <path
-              d='M12 8V16M16 12H8'
-              stroke='currentColor'
-              strokeWidth='1.5'
-              strokeLinecap='round'
-              strokeLinejoin='round'
-            ></path>
-            <circle
-              cx='12'
-              cy='12'
-              r='10'
-              stroke='currentColor'
-              strokeWidth='1.5'
-            ></circle>
-          </svg>
+          <PlusIcon />
           {title}
           {selectedValues?.size > 0 && (
             <>

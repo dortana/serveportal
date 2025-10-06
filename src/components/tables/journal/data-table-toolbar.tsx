@@ -6,12 +6,13 @@ import { DataTableFacetedFilter } from './data-table-faceted-filter';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { DataTableViewOptions } from './data-table-view-options';
-// import { DataTableAddItem } from './data-table-add-item';
 import { useDebounce } from '@/hooks/useDebounce';
 import { useQueryString } from '@/hooks/useQueryString';
 import { useTranslations } from 'next-intl';
 import { JournalDocumentTypes } from './icon-renderer';
 import SearchIcon from '@/components/icons/SearchIcon';
+import ExportDataIcon from '@/components/icons/ExportDataIcon';
+import AddData from './AddData';
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
@@ -95,7 +96,11 @@ export function DataTableToolbar<TData>({
         )}
       </div>
       <div className='flex items-center gap-2 w-fit max-md:self-end'>
-        {/* <DataTableAddItem /> */}
+        <AddData />
+        <Button variant='outline' size='sm' className='h-10'>
+          <ExportDataIcon />
+          {t('Export Data')}
+        </Button>
         <DataTableViewOptions table={table} />
       </div>
     </div>
