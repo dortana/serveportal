@@ -41,4 +41,35 @@ model User {
   stay_anonymous     Boolean?           @default(false)
   createdAt          DateTime           @default(now())
   updatedAt          DateTime           @updatedAt
+  journalEntries     JournalEntry[]
+}
+
+enum JournalDocumentType {
+  BA
+  KA
+}
+
+model JournalEntry {
+  id           String              @id @default(uuid())
+  date         DateTime
+  entrySort    Int
+  documentType JournalDocumentType
+  description  String
+  expenseGross Float?
+  incomeGross  Float?
+  accountName  String
+  taxCode      String
+  vatRate      Float?
+  inputVat     Float?
+
+  // Relation to user
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([date])
+  @@index([userId])
+  @@map("journal_entries")
 }

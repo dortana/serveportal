@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import DashboardIcon from '@/components/icons/DashboardIcon';
-import InvoiceIcon from '@/components/icons/InvoiceIcon';
+import JournalIcon from '@/components/icons/JournalIcon';
 import { useTranslations } from 'next-intl';
 
 const PanelSidebar = ({
@@ -24,7 +24,7 @@ const PanelSidebar = ({
       icon: DashboardIcon,
       href: '/panel/dashboard',
     },
-    { id: 2, title: t('Invoices'), icon: InvoiceIcon, href: '/panel/invoices' },
+    { id: 2, title: t('Journals'), icon: JournalIcon, href: '/panel/journals' },
   ];
   return (
     <div

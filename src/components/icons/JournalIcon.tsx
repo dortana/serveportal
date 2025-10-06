@@ -1,6 +1,6 @@
 import React from 'react';
 
-const InvoiceIcon = ({
+const JournalIcon = ({
   variant = 'stroke',
   className,
 }: {
@@ -86,4 +86,4 @@ const InvoiceIcon = ({
   }
 };
 
-export default InvoiceIcon;
+export default JournalIcon;
