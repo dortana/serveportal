@@ -22,9 +22,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { useJournalDocumentTypes } from './icon-renderer';
 
 const AddData = () => {
   const t = useTranslations();
+  const journalDocumentTypes = useJournalDocumentTypes();
   return (
     <div>
       <Dialog>
@@ -32,14 +34,14 @@ const AddData = () => {
           <DialogTrigger asChild>
             <Button variant='outline' size='sm' className='h-10'>
               <AddIcon />
-              {t('Add Statement')}
+              {t('Add Entry')}
             </Button>
           </DialogTrigger>
           <DialogContent className='sm:max-w-[425px]'>
             <DialogHeader>
-              <DialogTitle>{t('Add Statement')}</DialogTitle>
+              <DialogTitle>{t('Add Entry')}</DialogTitle>
               <DialogDescription>
-                {t('Add new statement to the table')}
+                {t('Add new entry into the table')}
               </DialogDescription>
             </DialogHeader>
             <div className='grid gap-4'>
@@ -48,19 +50,25 @@ const AddData = () => {
                 <Input id='entryNo' name='entryNo' />
               </div>
               <div className='grid gap-3'>
-                <Label htmlFor='name-1'>{t('Account Name')}</Label>
-                <Input id='name-1' name='name' />
+                <Label htmlFor='account'>{t('Account')}</Label>
+                <Input id='account' name='account' />
               </div>
               <div className='grid gap-3'>
                 <Label htmlFor='documentType'>{t('Document Type')}</Label>
-                <Select>
+                <Select name='documentType'>
                   <SelectTrigger className='w-full'>
-                    <SelectValue placeholder='Select one ...' />
+                    <SelectValue placeholder={t('Select one ...')} />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
-                      <SelectItem value='ka'>KA</SelectItem>
-                      <SelectItem value='ba'>BA</SelectItem>
+                      {journalDocumentTypes.map(item => (
+                        <SelectItem key={item.value} value={item.value}>
+                          <div className='flex items-center gap-2'>
+                            {item.icon}
+                            <span>{item.label}</span>
+                          </div>
+                        </SelectItem>
+                      ))}
                     </SelectGroup>
                   </SelectContent>
                 </Select>
@@ -68,9 +76,9 @@ const AddData = () => {
             </div>
             <DialogFooter>
               <DialogClose asChild>
-                <Button variant='outline'>Cancel</Button>
+                <Button variant='outline'>{t('Cancel')}</Button>
               </DialogClose>
-              <Button type='submit'>Save</Button>
+              <Button type='submit'>{t('Save')}</Button>
             </DialogFooter>
           </DialogContent>
         </form>

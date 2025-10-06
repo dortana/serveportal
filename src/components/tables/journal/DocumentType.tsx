@@ -1,7 +1,7 @@
 'use client';
 import { JournalDocumentType } from '@prisma/client';
 import React from 'react';
-import { JournalDocumentTypes } from './icon-renderer';
+import { useJournalDocumentTypes } from './icon-renderer';
 
 const DocumentType = ({
   type,
@@ -10,7 +10,7 @@ const DocumentType = ({
   type: JournalDocumentType;
   iconClassName?: string;
 }) => {
-  const docTypes = JournalDocumentTypes();
+  const docTypes = useJournalDocumentTypes();
   const docType = docTypes.find(docType => docType.value === type)!;
 
   return (

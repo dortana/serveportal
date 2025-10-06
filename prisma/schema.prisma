@@ -47,6 +47,10 @@ model User {
 enum JournalDocumentType {
   BA
   KA
+  RB
+  VB
+  BK
+  UM
 }
 
 model JournalEntry {
@@ -57,7 +61,7 @@ model JournalEntry {
   description  String
   expenseGross Float?
   incomeGross  Float?
-  accountName  String
+  account      String
   taxCode      String
   vatRate      Float?
   inputVat     Float?

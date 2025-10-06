@@ -9,7 +9,7 @@ import { DataTableViewOptions } from './data-table-view-options';
 import { useDebounce } from '@/hooks/useDebounce';
 import { useQueryString } from '@/hooks/useQueryString';
 import { useTranslations } from 'next-intl';
-import { JournalDocumentTypes } from './icon-renderer';
+import { useJournalDocumentTypes } from './icon-renderer';
 import SearchIcon from '@/components/icons/SearchIcon';
 import ExportDataIcon from '@/components/icons/ExportDataIcon';
 import AddData from './AddData';
@@ -27,7 +27,7 @@ export function DataTableToolbar<TData>({
   const search = searchParams.get('search');
   const [searchValue, setSearchValue] = React.useState(search);
   const query = useDebounce(searchValue, 1000);
-  const docTypes = JournalDocumentTypes();
+  const docTypes = useJournalDocumentTypes();
 
   useEffect(() => {
     if (query) {
