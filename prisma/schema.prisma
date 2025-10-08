@@ -1,5 +1,5 @@
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
@@ -23,13 +23,14 @@ enum RegistrationStatus {
 }
 
 model User {
-  id                 String             @id @default(uuid())
+  id                 String             @id @default(auto()) @map("_id") @db.ObjectId
   email              String             @unique
   phone              String?
   image              String?
   google_id          String?
   role               Role               @default(USER)
   status             Status             @default(INACTIVE)
+  stars              Float              @default(0.00)
   registrationStatus RegistrationStatus @default(PENDING)
   verified           Boolean            @default(false)
   balance            Float              @default(0.00)
@@ -38,10 +39,11 @@ model User {
   first_name         String
   last_name          String
   token              String?
+  settings           Json?
   stay_anonymous     Boolean?           @default(false)
   createdAt          DateTime           @default(now())
   updatedAt          DateTime           @updatedAt
-  journalEntries     JournalEntry[]
+  JournalEntry       JournalEntry[]
 }
 
 enum JournalDocumentType {
@@ -54,7 +56,7 @@ enum JournalDocumentType {
 }
 
 model JournalEntry {
-  id           String              @id @default(uuid())
+  id           String              @id @default(auto()) @map("_id") @db.ObjectId
   date         DateTime
   entrySort    Int
   documentType JournalDocumentType
