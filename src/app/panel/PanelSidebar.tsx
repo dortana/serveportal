@@ -7,11 +7,14 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import DashboardIcon from '@/components/icons/DashboardIcon';
 import JournalIcon from '@/components/icons/JournalIcon';
 import { useTranslations } from 'next-intl';
+import { User } from '@prisma/client';
 
 const PanelSidebar = ({
+  user,
   onLinkClick,
   className,
 }: {
+  user: User;
   className?: string;
   onLinkClick?: () => void;
 }) => {
@@ -26,20 +29,22 @@ const PanelSidebar = ({
     },
     { id: 2, title: t('Journals'), icon: JournalIcon, href: '/panel/journals' },
   ];
+
   return (
     <div
       className={clsx('h-full w-2xs bg-white rounded-lg space-y-4', className)}
     >
       <div className='p-4 flex gap-2 items-center'>
         <Avatar className='size-14'>
-          <AvatarImage src='https://github.com/shadcn.png' />
-          <AvatarFallback>CN</AvatarFallback>
+          <AvatarImage src={user.image ?? 'https://github.com/shadcn.png'} />
+          <AvatarFallback>
+            {user.firstName.charAt(0).toUpperCase() +
+              user.lastName.charAt(0).toUpperCase()}
+          </AvatarFallback>
         </Avatar>
         <div className='flex flex-col justify-center'>
-          <span>Kapas User</span>
-          <span className='text-muted-foreground text-sm'>
-            info@dortana.com
-          </span>
+          <span>{user.firstName + ' ' + user.lastName}</span>
+          <span className='text-muted-foreground text-sm'>{user.email}</span>
         </div>
       </div>
       <hr className='-mt-4' />

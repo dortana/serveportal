@@ -9,8 +9,9 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import PanelSidebar from '@/app/panel/PanelSidebar';
+import { User } from '@prisma/client';
 
-const ToggleMenu = () => {
+const ToggleMenu = ({ user }: { user: User }) => {
   const t = useTranslations();
   const [open, setOpen] = useState(false);
 
@@ -24,7 +25,11 @@ const ToggleMenu = () => {
       </SheetTrigger>
       <SheetContent side='left' className='w-[80vw]'>
         <SheetTitle></SheetTitle>
-        <PanelSidebar onLinkClick={() => setOpen(false)} className='w-full' />
+        <PanelSidebar
+          onLinkClick={() => setOpen(false)}
+          className='w-full'
+          user={user}
+        />
       </SheetContent>
     </Sheet>
   );

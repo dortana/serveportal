@@ -1,13 +1,16 @@
 import Image from 'next/image';
 import LanguageSelectorButton from '@/components/language/LanguageSelectorButton';
 import React from 'react';
-import Logout from './Logout';
 import { Input } from '@/components/ui/input';
 import SearchIcon from '@/components/icons/SearchIcon';
 import { getTranslations } from 'next-intl/server';
 import ToggleMenu from '@/app/panel/ToggleMenu';
+import { User } from '@prisma/client';
+import ExitIcon from '@/components/icons/ExitIcon';
+import { signOutAction } from '@/actions/auth';
+import { Button } from '@/components/ui/button';
 
-const PanelHeader = async () => {
+const PanelHeader = async ({ user }: { user: User }) => {
   const t = await getTranslations();
   return (
     <div className='flex items-center justify-between w-full h-16 bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-lg p-4'>
@@ -26,7 +29,7 @@ const PanelHeader = async () => {
         alt=''
       />
       <div className='flex gap-2'>
-        <ToggleMenu />
+        <ToggleMenu user={user} />
         <div className='flex items-center relative max-md:hidden'>
           <Input
             type='text'
@@ -37,7 +40,19 @@ const PanelHeader = async () => {
         </div>
         <LanguageSelectorButton />
         <div className='border-l-2 h-6 self-center' />
-        <Logout />
+        {/* Logout Button */}
+        <form
+          action={signOutAction}
+          className='bg-tertiary size-10 rounded-full flex items-center justify-center cursor-pointer'
+        >
+          <Button
+            type='submit'
+            variant='ghost'
+            className='hover:size-5 rounded-full'
+          >
+            <ExitIcon className='size-5' />
+          </Button>
+        </form>
       </div>
     </div>
   );
