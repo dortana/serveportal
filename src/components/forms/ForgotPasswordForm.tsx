@@ -17,7 +17,6 @@ import { useRouter } from 'next/navigation';
 import Logo from '../Logo';
 import { toast } from 'sonner';
 import { forgotPasswordAction } from '@/actions/auth';
-import BackIcon from '../icons/BackIcon';
 
 const ForgotPasswordForm = () => {
   const t = useTranslations();
@@ -86,13 +85,6 @@ const ForgotPasswordForm = () => {
           <Link href='/auth/signup' className='text-black font-semibold ml-1'>
             {t('Sign up now')}
           </Link>
-        </div>
-        <div
-          onClick={() => router.back()}
-          className='text-black font-semibold flex items-center justify-center  gap-1 cursor-pointer w-full text-sm mt-4'
-        >
-          <BackIcon />
-          {t('Go Back')}
         </div>
       </CardContent>
     </Card>
