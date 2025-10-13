@@ -8,6 +8,8 @@ import DashboardIcon from '@/components/icons/DashboardIcon';
 import JournalIcon from '@/components/icons/JournalIcon';
 import { useTranslations } from 'next-intl';
 import { User } from '@prisma/client';
+import ProfileIcon from '@/components/icons/ProfileIcon';
+import SettingIcon from '@/components/icons/SettingIcon';
 
 const PanelSidebar = ({
   user,
@@ -27,7 +29,14 @@ const PanelSidebar = ({
       icon: DashboardIcon,
       href: '/panel/dashboard',
     },
-    { id: 2, title: t('Journals'), icon: JournalIcon, href: '/panel/journals' },
+    {
+      id: 2,
+      title: t('Profile'),
+      icon: ProfileIcon,
+      href: '/panel/profile',
+    },
+    { id: 3, title: t('Journals'), icon: JournalIcon, href: '/panel/journals' },
+    { id: 4, title: t('Settings'), icon: SettingIcon, href: '/panel/settings' },
   ];
 
   return (

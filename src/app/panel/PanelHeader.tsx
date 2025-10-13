@@ -29,7 +29,7 @@ const PanelHeader = async ({ user }: { user: User }) => {
             placeholder={t('Search')}
             className='rounded-full pr-10 focus:mr-3 focus:w-80 transform transition-all duration-300 peer bg-tertiary border-0 shadow-none'
           />
-          <SearchIcon className='peer-focus:size-6 absolute cursor-pointer hover:text-brand peer-focus:right-5 right-3 peer-focus:top-2 top-3 -ml-8 transform transition-all duration-300' />
+          <SearchIcon className='peer-focus:size-6 absolute cursor-pointer hover:text-brand peer-focus:right-5 right-3 -ml-8 transform transition-all duration-300' />
         </div>
         <LanguageSelectorButton />
         <div className='border-l-2 h-6 self-center' />

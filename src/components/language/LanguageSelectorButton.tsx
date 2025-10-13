@@ -14,14 +14,25 @@ import {
 } from '@/components/ui/dialog';
 import { getTranslations } from 'next-intl/server';
 import { Button } from '../ui/button';
+import { cn } from '@/lib/utils';
 
-const LanguageSelectorButton = async () => {
+const LanguageSelectorButton = async ({
+  showLangName = false,
+}: {
+  showLangName?: boolean;
+}) => {
   const lang = await languageGetAction();
   const t = await getTranslations();
+  const currentLang = langs?.find(l => l.code === lang.value)?.lang;
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <div className='flex items-center justify-center bg-tertiary size-10 rounded-full cursor-pointer'>
+        <div
+          className={cn(
+            'flex items-center justify-center bg-tertiary size-10 rounded-full cursor-pointer',
+            showLangName && 'w-fit px-4 gap-2',
+          )}
+        >
           <svg
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 24 24'
@@ -44,6 +55,7 @@ const LanguageSelectorButton = async () => {
               strokeLinejoin='round'
             />
           </svg>
+          {showLangName && currentLang && <span>{currentLang}</span>}
         </div>
       </DialogTrigger>
       <DialogContent className='sm:min-w-fit'>

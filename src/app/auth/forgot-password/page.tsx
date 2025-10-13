@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import ForgotPasswordForm from '@/components/forms/ForgotPasswordForm';
 import { Metadata } from 'next';
+import LanguageSelectorButton from '@/components/language/LanguageSelectorButton';
 
 export const metadata: Metadata = {
   title: 'RealIdea - Forgot Password',
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
 
 const LoginPage = () => {
   return (
-    <div className="flex h-[calc(100vh-theme('spacing.20'))]">
+    <div className='flex h-screen'>
       <div className='hidden lg:flex items-center justify-center flex-1 relative z-[-1] m-4 bg-tertiary rounded-lg'>
         <Image
           src='/assets/password.png'
@@ -22,6 +23,7 @@ const LoginPage = () => {
       </div>
       <div className='flex items-center md:justify-center flex-1 flex-col gap-2'>
         <ForgotPasswordForm />
+        <LanguageSelectorButton showLangName />
       </div>
     </div>
   );
