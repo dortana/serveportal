@@ -16,7 +16,7 @@ export default async function PanelLayout({
   if (!user) {
     return redirect('/auth/login');
   }
-  console.log('user: ', user);
+  // console.log('user: ', user);
   return (
     <section className='p-3 flex flex-col gap-3 min-h-screen bg-tertiary'>
       <PanelHeader user={user} />

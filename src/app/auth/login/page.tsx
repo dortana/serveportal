@@ -1,6 +1,11 @@
 import React from 'react';
 import LoginForm from '@/components/forms/LoginForm';
 import Image from 'next/image';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'RealIdea - Login',
+};
 
 const LoginPage = () => {
   return (

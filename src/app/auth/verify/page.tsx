@@ -2,6 +2,11 @@
 import React from 'react';
 import Image from 'next/image';
 import VerificationForm from '@/components/forms/VerificationForm';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'RealIdea - Verify Account',
+};
 
 interface PageProps {
   searchParams: Promise<{ email?: string; phone?: string }>;

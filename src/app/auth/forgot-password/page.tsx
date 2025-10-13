@@ -1,6 +1,11 @@
 import React from 'react';
 import Image from 'next/image';
 import ForgotPasswordForm from '@/components/forms/ForgotPasswordForm';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'RealIdea - Forgot Password',
+};
 
 const LoginPage = () => {
   return (

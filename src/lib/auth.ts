@@ -36,8 +36,19 @@ export const auth = betterAuth({
   },
   socialProviders: {
     google: {
+      prompt: 'select_account',
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+      display: 'popup',
+      mapProfileToUser(profile) {
+        return {
+          email: profile.email,
+          image: profile.picture,
+          firstName: profile.given_name,
+          lastName: profile.family_name,
+          emailVerified: profile.email_verified,
+        };
+      },
     },
   },
   plugins: [
@@ -46,7 +57,6 @@ export const auth = betterAuth({
       async sendVerificationOTP({ email, otp, type }) {
         const resend = new Resend(process.env.RESEND_API_KEY);
         const user = await prisma.user.findUnique({ where: { email } });
-        console.log('type: ', type);
         if (!user) {
           throw new Error('User not found');
         }

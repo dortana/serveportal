@@ -1,6 +1,11 @@
 import React from 'react';
 import SignUpForm from '@/components/forms/SignUpForm';
 import Image from 'next/image';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'RealIdea - Sign Up',
+};
 
 const SignUpPage = () => {
   return (
