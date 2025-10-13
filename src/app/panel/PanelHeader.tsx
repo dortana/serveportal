@@ -15,18 +15,11 @@ const PanelHeader = async ({ user }: { user: User }) => {
   return (
     <div className='flex items-center justify-between w-full h-16 bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-lg p-4'>
       <Image
-        src='/assets/logo_with_text_1.png'
-        width={200}
-        height={60}
-        className='h-auto hidden md:flex'
-        alt=''
-      />
-      <Image
         src='/app_logo.png'
         width={60}
         height={60}
-        className='h-auto md:hidden'
-        alt=''
+        className='h-auto'
+        alt='App Logo'
       />
       <div className='flex gap-2'>
         <ToggleMenu user={user} />

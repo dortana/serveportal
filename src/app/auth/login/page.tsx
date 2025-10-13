@@ -1,21 +1,25 @@
-import { signInAction } from '@/actions/auth';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import React from 'react';
+import LoginForm from '@/components/forms/LoginForm';
+import Image from 'next/image';
 
-export default function SignInPage() {
+const LoginPage = () => {
   return (
-    <div className='flex flex-col items-center justify-center h-screen gap-4'>
-      <h1 className='text-2xl font-bold'>Sign In</h1>
-      <form action={signInAction} className='flex flex-col gap-3 w-64'>
-        <Input type='email' name='email' placeholder='Email' required />
-        <Input
-          type='password'
-          name='password'
-          placeholder='Password'
-          required
+    <div className="flex h-[calc(100vh-theme('spacing.20'))]">
+      <div className='hidden lg:flex items-center justify-center flex-1 relative z-[-1] m-4 bg-tertiary rounded-lg'>
+        <Image
+          src='/assets/login.png'
+          alt=''
+          width={1000}
+          height={1000}
+          priority
+          className='w-3/4 h-auto'
         />
-        <Button type='submit'>Sign In</Button>
-      </form>
+      </div>
+      <div className='flex items-center md:justify-center flex-1 flex-col gap-2'>
+        <LoginForm />
+      </div>
     </div>
   );
-}
+};
+
+export default LoginPage;

@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
+// @ts-ignore: side-effect CSS import has no type declarations
 import './globals.css';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale } from 'next-intl/server';
+import { Toaster } from 'sonner';
 
 const roboto = Roboto({
   weight: ['100', '300', '400', '500', '700', '900'],
@@ -11,8 +13,8 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: 'KAPAS - Accounting',
-  description: 'KAPAS Software Accounting Application',
+  title: 'RealIdea - Panel',
+  description: 'RealIdea - AI powered idea generator',
   icons: {
     icon: '/app_logo.png',
   },
@@ -28,7 +30,7 @@ export default async function RootLayout({
     <html lang={locale}>
       <body className={roboto.className}>
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
-        {/* <Toaster richColors position='top-right' expand={true} closeButton /> */}
+        <Toaster richColors position='top-right' expand={true} closeButton />
       </body>
     </html>
   );

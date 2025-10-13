@@ -2,10 +2,14 @@ import { betterAuth } from 'better-auth';
 import { prismaAdapter } from 'better-auth/adapters/prisma';
 import { PrismaClient } from '@prisma/client';
 import { nextCookies } from 'better-auth/next-js';
+import { emailOTP } from 'better-auth/plugins';
+import { Resend } from 'resend';
+import { VerifyEmailTemplate } from '@/components/emails/VerifyEmailTemplate';
 
 const prisma = new PrismaClient();
 
 export const auth = betterAuth({
+  appName: 'RealIdea',
   database: prismaAdapter(prisma, {
     provider: 'mongodb',
   }),
@@ -21,16 +25,14 @@ export const auth = betterAuth({
       },
     },
   },
+  emailVerification: {
+    autoSignInAfterVerification: true,
+    sendOnSignIn: true,
+  },
   emailAndPassword: {
     enabled: true,
-  },
-  emailVerification: {
-    sendOnSignUp: true,
-    autoSignInAfterVerification: true,
-    async sendVerificationEmail({ user, url }) {
-      console.log('email verification email: ', user.email);
-      console.log('email verification url: ', url);
-    },
+    requireEmailVerification: true,
+    autoSignIn: false,
   },
   socialProviders: {
     google: {
@@ -38,7 +40,56 @@ export const auth = betterAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     },
   },
-  plugins: [nextCookies()],
+  plugins: [
+    nextCookies(),
+    emailOTP({
+      async sendVerificationOTP({ email, otp, type }) {
+        const resend = new Resend(process.env.RESEND_API_KEY);
+        const user = await prisma.user.findUnique({ where: { email } });
+        console.log('type: ', type);
+        if (!user) {
+          throw new Error('User not found');
+        }
+
+        if (type === 'sign-in') {
+          await resend.emails.send({
+            from: 'RovixPro <onboarding@resend.dev>',
+            to: [email],
+            subject: 'OTP Verification',
+            react: VerifyEmailTemplate({
+              firstName: user.firstName,
+              validationCode: otp,
+            }),
+          });
+        } else if (type === 'email-verification') {
+          await resend.emails.send({
+            from: 'RovixPro <onboarding@resend.dev>',
+            to: [email],
+            subject: 'OTP Verification',
+            react: VerifyEmailTemplate({
+              firstName: user.firstName,
+              validationCode: otp,
+            }),
+          });
+        } else {
+          await resend.emails.send({
+            from: 'RovixPro <onboarding@resend.dev>',
+            to: [email],
+            subject: 'OTP Verification',
+            react: VerifyEmailTemplate({
+              firstName: user.firstName,
+              validationCode: otp,
+            }),
+          });
+        }
+      },
+      otpLength: 6,
+      storeOTP: 'plain',
+      overrideDefaultEmailVerification: true,
+      disableSignUp: true,
+    }),
+  ],
 });
 
 export type Session = typeof auth.$Infer.Session;
+export type UserType = typeof auth.$Infer.Session.user;

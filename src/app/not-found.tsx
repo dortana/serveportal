@@ -27,7 +27,7 @@ const NotFoundPage = async () => {
           </h3>
           <Link
             href='/'
-            className='bg-black text-white h-10 px-6 pl-4 w-fit flex-center rounded-full mt-5 max-md:mb-10'
+            className='bg-black text-white h-10 px-6 pl-4 w-fit flex items-center justify-center rounded-full mt-5 max-md:mb-10'
           >
             <svg
               xmlns='http://www.w3.org/2000/svg'
