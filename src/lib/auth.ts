@@ -50,6 +50,20 @@ export const auth = betterAuth({
         };
       },
     },
+    facebook: {
+      clientId: process.env.FACEBOOK_CLIENT_ID as string,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET as string,
+      mapProfileToUser(profile) {
+        const nameParts = (profile.name || '').split(' ');
+        return {
+          email: profile.email,
+          image: profile.picture?.data?.url,
+          firstName: nameParts[0] || '',
+          lastName: nameParts[1] || '',
+          emailVerified: profile.email_verified,
+        };
+      },
+    },
   },
   plugins: [
     nextCookies(),

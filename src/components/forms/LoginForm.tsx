@@ -17,13 +17,11 @@ import { useRouter } from 'next/navigation';
 import Logo from '../Logo';
 import { toast } from 'sonner';
 import { signInAction } from '@/actions/auth';
-import { GoogleIcon } from '../icons/GoogleIcon';
-import { authClient } from '@/lib/auth-client';
+import SocialLogin from '../SocialLogin';
 
 const LoginForm = () => {
   const t = useTranslations();
   const router = useRouter();
-  const [isloading, setIsLoading] = React.useState(false);
   const [state, formAction, isPending] = useActionState(signInAction, null);
   useEffect(() => {
     if (state?.data?.email && !state.errors) {
@@ -46,15 +44,6 @@ const LoginForm = () => {
       });
     }
   }, [state, router, t]);
-
-  const signInWithGoogle = async () => {
-    setIsLoading(true);
-    await authClient.signIn.social({
-      provider: 'google',
-      callbackURL: '/panel/dashboard',
-    });
-    setIsLoading(false);
-  };
 
   return (
     <Card className='border-0 shadow-none w-full md:w-2/3 sm:max-w-[440px]'>
@@ -124,16 +113,7 @@ const LoginForm = () => {
             </span>
           </div>
         </div>
-        <div className='grid grid-cols-1'>
-          <Button
-            variant='outline'
-            onClick={signInWithGoogle}
-            isLoading={isloading}
-          >
-            <GoogleIcon />
-            Google
-          </Button>
-        </div>
+        <SocialLogin />
         <div className='text-sm mt-4 flex items-center justify-center'>
           <span className='text-zinc-500'>{t("Don't have an account?")}</span>
           <Link href='/auth/signup' className='text-black font-semibold ml-1'>
