@@ -1,7 +1,7 @@
-import { Button } from '@/components/ui/button';
 import { getTranslations } from 'next-intl/server';
-import Link from 'next/link';
 import { Metadata } from 'next';
+import SiteHeader from '@/components/SiteHeader';
+import SiteFooter from '@/components/SiteFooter';
 
 export const metadata: Metadata = {
   title: 'RealIdea - Home Page',
@@ -10,10 +10,12 @@ export const metadata: Metadata = {
 export default async function Home() {
   const t = await getTranslations();
   return (
-    <div className='w-full h-screen flex items-center justify-center'>
-      <Button asChild>
-        <Link href='/panel'>{t('Go To Panel')}</Link>
-      </Button>
-    </div>
+    <main>
+      <SiteHeader />
+      <div className='w-full flex h-[50vh] items-center justify-center'>
+        {t('Home Page')}
+      </div>
+      <SiteFooter />
+    </main>
   );
 }

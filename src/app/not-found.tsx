@@ -1,5 +1,5 @@
-// import Footer from '@/components/Footer';
-// import Header from '@/components/Header';
+import SiteFooter from '@/components/SiteFooter';
+import SiteHeader from '@/components/SiteHeader';
 import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -9,7 +9,7 @@ const NotFoundPage = async () => {
   const t = await getTranslations();
   return (
     <div>
-      {/* <Header /> */}
+      <SiteHeader />
       <div className='flex items-center w-full max-md:flex-col'>
         <div className='flex-1 p-6 flex justify-end max-md:justify-center'>
           <Image
@@ -22,7 +22,7 @@ const NotFoundPage = async () => {
         </div>
         <div className='flex flex-col gap-4 flex-1 justify-start p-6 max-md:items-center'>
           <h1 className='text-3xl md:text-6xl font-extrabold'>Oops!</h1>
-          <h3 className='text-xl md:text-2xl text-zinc-500'>
+          <h3 className='text-lg md:text-xl text-zinc-500 max-md:text-center'>
             {t("We couldn't find the page you were looking for.")}
           </h3>
           <Link
@@ -50,7 +50,7 @@ const NotFoundPage = async () => {
           </Link>
         </div>
       </div>
-      {/* <Footer /> */}
+      <SiteFooter />
     </div>
   );
 };

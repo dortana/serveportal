@@ -96,7 +96,7 @@ const VerificationForm = () => {
   return (
     <Card className='border-0 shadow-none w-full md:w-2/3 sm:max-w-[440px] relative'>
       <CardHeader>
-        <Logo className='text-brand mx-auto mb-4 max-md:hidden' width={70} />
+        <Logo className='text-brand mx-auto mb-4' width={70} />
         <CardTitle className='text-2xl'>{t('Verification')}</CardTitle>
         <CardDescription>
           {t('Please enter the code sent to {des}', {

@@ -43,7 +43,7 @@ const ForgotPasswordForm = () => {
   return (
     <Card className='border-0 shadow-none w-full md:w-2/3 sm:max-w-[440px]'>
       <CardHeader>
-        <Logo className='text-brand mx-auto mb-4 max-md:hidden' width={70} />
+        <Logo className='text-brand mx-auto mb-4' width={70} />
         <CardTitle className='text-2xl'>{t('Forgot Password')}</CardTitle>
         <CardDescription>
           {t('Enter your email to reset your password.')}
@@ -80,7 +80,7 @@ const ForgotPasswordForm = () => {
         </CardFooter>
       </form>
       <CardContent>
-        <div className='text-sm mt-4 flex items-center justify-center'>
+        <div className='text-sm flex items-center justify-center'>
           <span className='text-zinc-500'>{t("Don't have an account?")}</span>
           <Link href='/auth/signup' className='text-black font-semibold ml-1'>
             {t('Sign up now')}
