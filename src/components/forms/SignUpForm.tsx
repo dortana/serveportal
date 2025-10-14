@@ -17,15 +17,13 @@ import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 import { signUpAction } from '@/actions/auth';
 import { useRouter } from 'next/navigation';
-import { authClient } from '@/lib/auth-client';
 import Logo from '../Logo';
-import { GoogleIcon } from '../icons/GoogleIcon';
+import SocialLogin from '../SocialLogin';
 
 const SignUpForm = () => {
   const t = useTranslations();
   const router = useRouter();
   const [privacyChecked, setPrivacyChecked] = useState(true);
-  const [isloading, setIsLoading] = React.useState(false);
   const [state, formAction, isPending] = useActionState(signUpAction, null);
 
   useEffect(() => {
@@ -42,15 +40,6 @@ const SignUpForm = () => {
       });
     }
   }, [state, router, t]);
-
-  const signInWithGoogle = async () => {
-    setIsLoading(true);
-    await authClient.signIn.social({
-      provider: 'google',
-      callbackURL: '/panel/dashboard',
-    });
-    setIsLoading(false);
-  };
 
   return (
     <Card className='border-0 shadow-none w-full md:w-2/3 sm:max-w-[440px]'>
@@ -193,16 +182,7 @@ const SignUpForm = () => {
             </span>
           </div>
         </div>
-        <div className='grid grid-cols-1'>
-          <Button
-            variant='outline'
-            onClick={signInWithGoogle}
-            isLoading={isloading}
-          >
-            <GoogleIcon />
-            Google
-          </Button>
-        </div>
+        <SocialLogin />
         <div className='text-sm flex items-center justify-center mt-4'>
           <span className='text-zinc-500'>{t('Already have an account?')}</span>
           <Link href='/auth/login' className='text-black font-semibold ml-1'>
