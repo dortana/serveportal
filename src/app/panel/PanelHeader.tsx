@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import LanguageSelectorButton from '@/components/language/LanguageSelectorButton';
 import React from 'react';
 import { Input } from '@/components/ui/input';
@@ -9,18 +8,20 @@ import { User } from '@prisma/client';
 import ExitIcon from '@/components/icons/ExitIcon';
 import { signOutAction } from '@/actions/auth';
 import { Button } from '@/components/ui/button';
+import Logo from '@/components/Logo';
+import LogoText from '@/components/LogoText';
+import Link from 'next/link';
 
 const PanelHeader = async ({ user }: { user: User }) => {
   const t = await getTranslations();
   return (
     <div className='flex items-center justify-between w-full h-16 bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-lg p-4'>
-      <Image
-        src='/app_logo.png'
-        width={60}
-        height={60}
-        className='h-auto'
-        alt='App Logo'
-      />
+      <div className='flex gap-2'>
+        <Logo className='text-brand' width={50} />
+        <Link href='/' className='h-auto hidden md:block text-brand'>
+          <LogoText className='w-30' />
+        </Link>
+      </div>
       <div className='flex gap-2'>
         <ToggleMenu user={user} />
         <div className='flex items-center relative max-md:hidden'>

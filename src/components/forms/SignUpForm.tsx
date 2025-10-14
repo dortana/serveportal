@@ -55,7 +55,7 @@ const SignUpForm = () => {
   return (
     <Card className='border-0 shadow-none w-full md:w-2/3 sm:max-w-[440px]'>
       <CardHeader>
-        <Logo className='text-brand mx-auto mb-4 max-md:hidden' width={70} />
+        <Logo className='text-brand mx-auto mb-4' width={70} />
         <CardTitle className='text-2xl'>{t('Sign Up')}</CardTitle>
         <CardDescription>
           {t('Create your account to get started.')}

@@ -10,6 +10,7 @@ import { useTranslations } from 'next-intl';
 import { User } from '@prisma/client';
 import ProfileIcon from '@/components/icons/ProfileIcon';
 import SettingIcon from '@/components/icons/SettingIcon';
+import PaymentIcon from '@/components/icons/PaymentIcon';
 
 const PanelSidebar = ({
   user,
@@ -36,7 +37,8 @@ const PanelSidebar = ({
       href: '/panel/profile',
     },
     { id: 3, title: t('Journals'), icon: JournalIcon, href: '/panel/journals' },
-    { id: 4, title: t('Settings'), icon: SettingIcon, href: '/panel/settings' },
+    { id: 4, title: t('Payments'), icon: PaymentIcon, href: '/panel/payments' },
+    { id: 5, title: t('Settings'), icon: SettingIcon, href: '/panel/settings' },
   ];
 
   return (
