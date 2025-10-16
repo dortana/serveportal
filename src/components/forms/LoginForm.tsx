@@ -18,11 +18,14 @@ import Logo from '../Logo';
 import { toast } from 'sonner';
 import { signInAction } from '@/actions/auth';
 import SocialLogin from '../SocialLogin';
+import EyeIcon from '../icons/EyeIcon';
+import EyeSlashIcon from '../icons/EyeSlashIcon';
 
 const LoginForm = () => {
   const t = useTranslations();
   const router = useRouter();
   const [state, formAction, isPending] = useActionState(signInAction, null);
+  const [showPassword, setShowPassword] = React.useState(false);
   useEffect(() => {
     if (state?.data?.email && !state.errors) {
       if (state?.data?.goToVerify) {
@@ -75,15 +78,22 @@ const LoginForm = () => {
                 </p>
               )}
             </div>
-            <div className='space-y-1'>
+            <div className='space-y-1 relative'>
               <Label htmlFor='password'>{t('Password')}</Label>
               <Input
                 id='password'
                 placeholder={t('Password')}
                 name='password'
                 defaultValue={state?.data?.password}
-                type='password'
+                type={showPassword ? 'text' : 'password'}
+                className='pr-10'
               />
+              <div
+                className='cursor-pointer absolute right-3 top-8'
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <EyeIcon /> : <EyeSlashIcon />}
+              </div>
             </div>
             <div className='text-sm -mt-2 flex justify-end'>
               <Link

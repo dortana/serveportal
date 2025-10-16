@@ -19,12 +19,16 @@ import { signUpAction } from '@/actions/auth';
 import { useRouter } from 'next/navigation';
 import Logo from '../Logo';
 import SocialLogin from '../SocialLogin';
+import { cn } from '@/lib/utils';
+import EyeIcon from '../icons/EyeIcon';
+import EyeSlashIcon from '../icons/EyeSlashIcon';
 
 const SignUpForm = () => {
   const t = useTranslations();
   const router = useRouter();
   const [privacyChecked, setPrivacyChecked] = useState(true);
   const [state, formAction, isPending] = useActionState(signUpAction, null);
+  const [showPassword, setShowPassword] = React.useState(false);
 
   useEffect(() => {
     if (state?.data?.email && !state.errors) {
@@ -111,16 +115,25 @@ const SignUpForm = () => {
               )}
             </div>
 
-            <div className='space-y-1'>
+            <div className='space-y-1 relative'>
               <Label htmlFor='password'>{t('Password')}</Label>
               <Input
                 id='password'
                 placeholder={t('Password')}
                 name='password'
                 defaultValue={state?.data?.password}
-                className={state?.errors?.password && 'border-red-500'}
-                type='password'
+                className={cn(
+                  'pr-10',
+                  state?.errors?.password && 'border-red-500',
+                )}
+                type={showPassword ? 'text' : 'password'}
               />
+              <div
+                className='cursor-pointer absolute right-3 top-8'
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <EyeIcon /> : <EyeSlashIcon />}
+              </div>
               {state?.errors?.password && (
                 <p className='text-xs text-red-500'>{state.errors.password}</p>
               )}
