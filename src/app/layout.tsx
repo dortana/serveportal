@@ -5,6 +5,7 @@ import './globals.css';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale } from 'next-intl/server';
 import { Toaster } from 'sonner';
+import { app_slogan } from '@/lib/data';
 
 const roboto = Roboto({
   weight: ['100', '300', '400', '500', '700', '900'],
@@ -13,8 +14,8 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: 'RealIdea - Panel',
-  description: 'RealIdea - AI powered idea generator',
+  title: 'ServePortal',
+  description: app_slogan,
   icons: {
     icon: '/app_logo.png',
   },

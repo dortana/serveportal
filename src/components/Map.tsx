@@ -29,7 +29,7 @@ const Map = ({ lat, lng, className }: MapProps) => {
     const popup = new maptilersdk.Popup({
       offset: 25,
       closeButton: false,
-    }).setText('RovixPro LLC');
+    }).setText('ServePortal LLC');
 
     new maptilersdk.Marker({ color: '#08a6ec' })
       .setLngLat([lng, lat])

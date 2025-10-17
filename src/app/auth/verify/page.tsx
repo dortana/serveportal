@@ -6,7 +6,7 @@ import { Metadata } from 'next';
 import LanguageSelectorButton from '@/components/language/LanguageSelectorButton';
 
 export const metadata: Metadata = {
-  title: 'RealIdea - Verify Account',
+  title: 'ServePortal - Verify Account',
 };
 
 interface PageProps {

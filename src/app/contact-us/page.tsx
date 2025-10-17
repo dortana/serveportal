@@ -93,7 +93,7 @@ const ContactUsPage = async () => {
               </svg>
               <span className='font-semibold'>{t('Email')}</span>
               <p className='text-[rgba(29,29,29,0.64)] group-hover:text-brand transition-all duration-200'>
-                info@dortana.com
+                support@serveportal.com
               </p>
             </div>
           </div>

@@ -5,7 +5,7 @@ import { Metadata } from 'next';
 import LanguageSelectorButton from '@/components/language/LanguageSelectorButton';
 
 export const metadata: Metadata = {
-  title: 'RealIdea - Sign Up',
+  title: 'ServePortal - Sign Up',
 };
 
 const SignUpPage = () => {

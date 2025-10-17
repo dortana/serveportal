@@ -24,7 +24,7 @@ const SiteToggleMenu = ({ websiteLinks }: { websiteLinks: any }) => {
         <div className='flex items-center gap-2'>
           <Logo className='text-brand' />
           <Link href='/'>
-            <h2 className='font-medium tracking-widest'>RovixPro</h2>
+            <h2 className='font-medium tracking-widest'>ServePortal</h2>
           </Link>
         </div>
         <hr className='mt-6' />

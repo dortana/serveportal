@@ -4,7 +4,9 @@ export const langs = [
     code: 'en-US',
   },
   {
-    lang: 'Deutsch',
-    code: 'de-DE',
+    lang: 'Magyar',
+    code: 'hu-HU',
   },
 ];
+
+export const app_slogan = 'Your gateway to reliable expert';

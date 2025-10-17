@@ -4,7 +4,7 @@ import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 
 export const metadata: Metadata = {
-  title: 'RealIdea - Home Page',
+  title: 'ServePortal - Home Page',
 };
 
 export default async function Home() {

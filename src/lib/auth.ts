@@ -9,7 +9,7 @@ import { VerifyEmailTemplate } from '@/components/emails/VerifyEmailTemplate';
 const prisma = new PrismaClient();
 
 export const auth = betterAuth({
-  appName: 'RealIdea',
+  appName: 'ServePortal',
   database: prismaAdapter(prisma, {
     provider: 'mongodb',
   }),
@@ -77,7 +77,7 @@ export const auth = betterAuth({
 
         if (type === 'sign-in') {
           await resend.emails.send({
-            from: 'RovixPro <onboarding@resend.dev>',
+            from: 'ServePortal <onboarding@resend.dev>',
             to: [email],
             subject: 'OTP Verification',
             react: VerifyEmailTemplate({
@@ -87,7 +87,7 @@ export const auth = betterAuth({
           });
         } else if (type === 'email-verification') {
           await resend.emails.send({
-            from: 'RovixPro <onboarding@resend.dev>',
+            from: 'ServePortal <onboarding@resend.dev>',
             to: [email],
             subject: 'OTP Verification',
             react: VerifyEmailTemplate({
@@ -97,7 +97,7 @@ export const auth = betterAuth({
           });
         } else {
           await resend.emails.send({
-            from: 'RovixPro <onboarding@resend.dev>',
+            from: 'ServePortal <onboarding@resend.dev>',
             to: [email],
             subject: 'OTP Verification',
             react: VerifyEmailTemplate({

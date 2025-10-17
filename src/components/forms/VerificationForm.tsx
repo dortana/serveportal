@@ -183,7 +183,7 @@ const VerificationForm = () => {
           <div className='text-sm flex items-center justify-center my-4'>
             <span className='text-zinc-500'>
               {t.rich(
-                'You need to wait <guidelines></guidelines> seconds inorder to request a new code.',
+                'You need to wait <guidelines> seconds </guidelines> inorder to request a new code.',
                 {
                   guidelines: () => (
                     <span className='text-black font-semibold ml-1'>

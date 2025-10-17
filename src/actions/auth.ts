@@ -146,7 +146,7 @@ export async function verifyForgotAction(prevState: any, formData: FormData) {
     });
     const resend = new Resend(process.env.RESEND_API_KEY);
     await resend.emails.send({
-      from: 'RovixPro <onboarding@resend.dev>',
+      from: 'ServePortal <onboarding@resend.dev>',
       to: [payload.email],
       subject: 'New Password',
       react: NewPasswordEmailTemplate({

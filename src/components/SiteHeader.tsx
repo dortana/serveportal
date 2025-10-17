@@ -43,7 +43,7 @@ const SiteHeader = async () => {
           <Logo className='text-brand' />
           <Link href='/'>
             <h2 className='font-medium tracking-widest max-md:hidden'>
-              RovixPro
+              ServePortal
             </h2>
           </Link>
         </div>

@@ -17,12 +17,12 @@ const SiteFooter = async () => {
           <div className='flex items-center gap-2'>
             <Logo className='text-brand' />
             <Link href='/'>
-              <h2 className='font-medium tracking-widest'>RovixPro</h2>
+              <h2 className='font-medium tracking-widest'>ServePortal</h2>
             </Link>
           </div>
           <p className='text-zinc-500 text-justify'>
             {t(
-              'RovixPro is a next-generation financial manager that empowers individuals and businesses to take full control of their budgets, expenses, and investments through intuitive, data-driven tools. Our platform streamlines expense tracking, goal setting, and portfolio analysis to deliver real-time insights and personalized recommendations. Built on a foundation of security and innovation, RovixPro makes smarter money management effortless and accessible for everyone.',
+              'ServePortal connects people with trusted experts across cleaning, construction, repair, and other essential services — all in one place. Quick, reliable, and built for your convenience.',
             )}
           </p>
           <br />
@@ -142,7 +142,7 @@ const SiteFooter = async () => {
                 <span>{t('Email')}</span>
               </div>
               <p className='text-[rgba(29,29,29,0.64)] ml-8'>
-                info@dortana.com
+                support@serveportal.com
               </p>
             </div>
           </div>
@@ -167,7 +167,7 @@ const SiteFooter = async () => {
       <hr />
       <div className='flex items-center justify-between flex-wrap gap-4 max-md:flex-col-reverse'>
         <p className='text-sm max-md:mt-6'>
-          {t('Copyright © {year} RovixPro. All rights reserved.', {
+          {t('Copyright © {year} ServePortal. All rights reserved.', {
             year: new Date().getFullYear(),
           })}
         </p>

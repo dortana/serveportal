@@ -44,7 +44,7 @@ export default async function AboutUsPage() {
       ),
       title: t('Innovation'),
       description: t(
-        'We continuously push the boundaries of financial technology to deliver cutting-edge solutions that simplify complex financial processes.',
+        'We use modern technology to make finding, hiring, and managing experts effortless — saving time and stress for everyone.',
       ),
     },
     {
@@ -79,9 +79,9 @@ export default async function AboutUsPage() {
           ></path>
         </svg>
       ),
-      title: t('Security'),
+      title: t('Reliability'),
       description: t(
-        'Your financial data is protected with bank-level security measures and encryption, ensuring complete privacy and peace of mind.',
+        'We verify every professional to ensure consistent quality, accountability, and trust in every service delivered.',
       ),
     },
     {
@@ -141,7 +141,7 @@ export default async function AboutUsPage() {
       ),
       title: t('Accessibility'),
       description: t(
-        'We make powerful financial tools accessible to everyone, regardless of their financial background or technical expertise.',
+        'We’re building a platform where everyone, everywhere, can access the right help — from small home projects to large construction needs.',
       ),
     },
   ];
@@ -169,10 +169,10 @@ export default async function AboutUsPage() {
 
   const timeline = [
     {
-      year: '2019',
+      year: '2024',
       title: t('Company Founded'),
       description:
-        'RovixPro was established in Budapest with a mission to simplify financial management for individuals and small businesses through innovative technology.',
+        'SServePortal was founded in Budapest with a mission to make finding trusted experts simple, fast, and reliable for everyone in Hungary.',
       icon: (
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -229,10 +229,10 @@ export default async function AboutUsPage() {
       ),
     },
     {
-      year: '2020',
-      title: t('First Product Launch'),
+      year: '2025',
+      title: t('Platform Launch'),
       description:
-        'Launched our core platform with expense tracking and basic portfolio management features, gaining our first 1,000 users.',
+        'We launched our first version, connecting users with verified professionals in cleaning, construction, and home services — quickly building a strong community of satisfied users.',
       icon: (
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -260,10 +260,10 @@ export default async function AboutUsPage() {
       ),
     },
     {
-      year: '2022',
-      title: t('AI Integration'),
+      year: '2026',
+      title: t('Smart Matching & Growth'),
       description:
-        'Introduced machine learning algorithms for personalized financial insights and automated goal tracking, revolutionizing user experience.',
+        'Introduced intelligent matching and review systems to help users find the right professional based on skill, location, and reliability — solidifying our position as Hungary’s go-to service platform.',
       icon: (
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -297,10 +297,10 @@ export default async function AboutUsPage() {
       ),
     },
     {
-      year: '2024',
-      title: t('European Expansion'),
+      year: '2027',
+      title: t('European Expansion (Upcoming)'),
       description:
-        'Expanded operations across Europe, serving 50,000+ active users and partnering with major financial institutions.',
+        'Our next step is to bring ServePortal to the rest of Europe — empowering more people and professionals through trust, technology, and simplicity.',
       icon: (
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -358,10 +358,10 @@ export default async function AboutUsPage() {
   ];
 
   const stats = [
-    { number: '50,000+', label: t('Active Users') },
-    { number: '15+', label: t('Countries') },
-    { number: '99.9%', label: t('Uptime') },
-    { number: '24/7', label: t('Support') },
+    { number: '1,000+', label: t('Verified Experts') },
+    { number: '100+', label: t('Services Offered') },
+    { number: '10+', label: t('Cities Served') },
+    { number: '24/7', label: t('Support Availability') },
   ];
 
   return (
@@ -373,21 +373,21 @@ export default async function AboutUsPage() {
           <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
             <div className='text-center max-w-4xl mx-auto'>
               <Badge variant='secondary' className='mb-6 text-sm font-medium'>
-                {t('About RovixPro')}
+                {t('About ServePortal')}
               </Badge>
               <h1 className='text-4xl lg:text-6xl font-bold text-foreground mb-6'>
-                {t('Empowering Financial')}
-                <span className='text-brand block'>{t('Excellence')}</span>
+                {t('Your gateway to reliable')}
+                <span className='text-brand block'>{t('Experts')}</span>
               </h1>
               <p className='text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-8'>
                 {t(
-                  'RovixPro is a next-generation financial manager that empowers individuals and businesses to take full control of their budgets, expenses, and investments through intuitive,data-driven tools.',
+                  'ServePortal makes finding trusted experts simple and stress-free. From cleaning to construction, we connect you with verified professionals in just a few clicks. Built on reliability and transparency, ServePortal helps you get things done — efficiently, locally, and with confidence.',
                 )}
               </p>
               <div className='flex flex-wrap gap-4 justify-center'>
                 <Button asChild>
                   <Link href='/auth/login'>
-                    {t('Get Started Today')}
+                    {t('Find Your Expert')}
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
                       viewBox='0 0 24 24'
@@ -485,17 +485,17 @@ export default async function AboutUsPage() {
                 <div className='space-y-6 text-muted-foreground leading-relaxed'>
                   <p className='text-lg'>
                     {t(
-                      'Founded in Budapest in 2019, RovixPro emerged from a simple observation: traditional financial management tools were either too complex for everyday users or too simplistic for serious financial planning.',
+                      'Founded in Budapest in 2024, ServePortal was created to make finding trusted experts simple, fast, and reliable. We noticed how difficult it was for people to locate skilled professionals they could truly depend on — whether for home repairs, construction, or cleaning services.',
                     )}
                   </p>
                   <p>
                     {t(
-                      'Our platform streamlines expense tracking, goal setting, and portfolio analysis to deliver real-time insights and personalized recommendations. Built on intuition and powered by data, RovixPro makes smarter money management accessible to individuals and businesses alike.',
+                      'Our platform bridges that gap by connecting users with verified professionals across various fields. With just a few clicks, anyone can find the right expert, compare options, and get the job done confidently.',
                     )}
                   </p>
                   <p>
                     {t(
-                      "Today, we're proud to serve thousands of users across Europe, helping them achieve their financial goals through intelligent automation and actionable insights.",
+                      'Today, ServePortal empowers thousands of users and professionals to work together more efficiently — helping communities thrive through trust, transparency, and technology.',
                     )}
                   </p>
                 </div>
@@ -525,7 +525,7 @@ export default async function AboutUsPage() {
                   </svg>
 
                   <span className='text-sm font-medium text-foreground'>
-                    {t('Trusted by 50,000+ users worldwide')}
+                    {t('Trusted by 50,000+ users')}
                   </span>
                 </div>
               </div>
@@ -566,10 +566,12 @@ export default async function AboutUsPage() {
                       </svg>
                     </div>
                     <h3 className='text-xl font-semibold text-foreground mb-2'>
-                      {t('Financial Growth')}
+                      {t('Professional Empowerment')}
                     </h3>
                     <p className='text-muted-foreground'>
-                      {t('Empowering better financial decisions')}
+                      {t(
+                        'Helping skilled experts reach new clients and grow their business.',
+                      )}
                     </p>
                   </div>
                 </div>
@@ -587,7 +589,7 @@ export default async function AboutUsPage() {
               </h2>
               <p className='text-lg text-muted-foreground max-w-2xl mx-auto'>
                 {t(
-                  'Our diverse team of financial experts, engineers, and designers work together to revolutionize financial management.',
+                  'Our diverse team of innovators, engineers, and creators work together to make finding trusted service experts simple and reliable.',
                 )}
               </p>
             </div>
@@ -629,7 +631,7 @@ export default async function AboutUsPage() {
               </h2>
               <p className='text-lg text-muted-foreground'>
                 {t(
-                  "Key milestones in RovixPro's evolution from startup to industry leader.",
+                  'Key milestones in ServePortal’s evolution — from a local startup in Hungary to a growing platform on its way to European expansion.',
                 )}
               </p>
             </div>
@@ -677,17 +679,17 @@ export default async function AboutUsPage() {
         <section className='py-20 bg-brand'>
           <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center'>
             <h2 className='text-3xl lg:text-4xl font-bold text-white mb-6'>
-              {t('Ready to Transform Your Financial Future?')}
+              {t('Need a Hand? We’ve Got the Experts.')}
             </h2>
             <p className='text-xl text-blue-100 mb-8 leading-relaxed'>
               {t(
-                'Join thousands of users who trust RovixPro to manage their finances smarter, not harder.',
+                'From home repairs to construction, discover trusted professionals on ServePortal — all in one place.',
               )}
             </p>
             <div className='flex flex-col sm:flex-row gap-4 justify-center'>
               <Button asChild className='bg-white text-black hover:bg-white'>
                 <Link href='/auth/login'>
-                  {t('Get Started Today')}
+                  {t('Find Your Expert')}
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
                     viewBox='0 0 24 24'
