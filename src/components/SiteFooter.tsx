@@ -1,5 +1,4 @@
 import React from 'react';
-import Logo from './Logo';
 import Link from 'next/link';
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
@@ -7,6 +6,7 @@ import LinkedinIcon from './icons/LinkedinIcon';
 import YoutubeIcon from './icons/YoutubeIcon';
 import FacebookIcon from './icons/FacebookIcon';
 import InstagramIcon from './icons/InstagramIcon';
+import BrandText from './BrandText';
 
 const SiteFooter = async () => {
   const t = await getTranslations();
@@ -15,9 +15,15 @@ const SiteFooter = async () => {
       <div className='flex items-baseline flex-wrap'>
         <div className='w-full md:flex-1 space-y-4'>
           <div className='flex items-center gap-2'>
-            <Logo className='text-brand' />
-            <Link href='/'>
-              <h2 className='font-medium tracking-widest'>ServePortal</h2>
+            <Link href='/' className='flex items-center gap-2'>
+              <Image
+                src='/app_logo.png'
+                width={50}
+                height={50}
+                className='h-auto'
+                alt='App Logo'
+              />
+              <BrandText />
             </Link>
           </div>
           <p className='text-zinc-500 text-justify'>

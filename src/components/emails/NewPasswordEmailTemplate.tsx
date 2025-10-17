@@ -25,7 +25,7 @@ export const NewPasswordEmailTemplate = ({
     <Body style={main}>
       <Container style={container}>
         <Img
-          src={`https://serveportal.vercel.app/assets/bull.png`}
+          src={`https://serveportal.vercel.app/app_logo.png`}
           alt='Logo'
           style={logo}
         />

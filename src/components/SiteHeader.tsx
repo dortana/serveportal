@@ -1,12 +1,13 @@
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import React from 'react';
-import Logo from './Logo';
 import { Button } from './ui/button';
 import { auth } from '@/lib/auth';
 import LanguageSelectorButton from './language/LanguageSelectorButton';
 import { headers } from 'next/headers';
 import SiteToggleMenu from './SiteToggleMenu';
+import Image from 'next/image';
+import BrandText from './BrandText';
 
 const SiteHeader = async () => {
   const session = await auth.api.getSession({
@@ -37,14 +38,18 @@ const SiteHeader = async () => {
     { name: t('Contact Us'), href: '/contact-us', sublinks: [] },
   ];
   return (
-    <header className='h-20 sticky top-0 left-0 w-full px-4 max-sm:px-2 flex items-center justify-between border-b border-[rgba(29, 29, 29, 0.08)] bg-white z-10'>
+    <header className='h-20 sticky top-0 left-0 w-full px-4 flex items-center justify-between border-b border-[rgba(29, 29, 29, 0.08)] bg-white z-10'>
       <div className='flex items-center gap-4'>
         <div className='flex items-center gap-2'>
-          <Logo className='text-brand' />
-          <Link href='/'>
-            <h2 className='font-medium tracking-widest max-md:hidden'>
-              ServePortal
-            </h2>
+          <Link href='/' className='flex items-center gap-2'>
+            <Image
+              src='/app_logo.png'
+              width={50}
+              height={50}
+              className='h-auto'
+              alt='App Logo'
+            />
+            <BrandText className='max-md:hidden' />
           </Link>
         </div>
         <div className='h-6 border-l border-separate max-md:hidden' />

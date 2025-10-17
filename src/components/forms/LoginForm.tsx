@@ -14,12 +14,13 @@ import { Input } from '@/components/ui/input';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import Logo from '../Logo';
 import { toast } from 'sonner';
 import { signInAction } from '@/actions/auth';
 import SocialLogin from '../SocialLogin';
 import EyeIcon from '../icons/EyeIcon';
 import EyeSlashIcon from '../icons/EyeSlashIcon';
+import Image from 'next/image';
+import BrandText from '../BrandText';
 
 const LoginForm = () => {
   const t = useTranslations();
@@ -51,7 +52,19 @@ const LoginForm = () => {
   return (
     <Card className='border-0 shadow-none w-full md:w-2/3 sm:max-w-[440px]'>
       <CardHeader>
-        <Logo className='text-brand mx-auto mb-4' width={70} />
+        <Link
+          href='/'
+          className='flex flex-col gap-2 items-center mx-auto mb-10'
+        >
+          <Image
+            src='/app_logo.png'
+            width={70}
+            height={50}
+            className='h-auto'
+            alt='App Logo'
+          />
+          <BrandText />
+        </Link>
         <CardTitle className='text-2xl'>{t('Login')}</CardTitle>
         <CardDescription>
           {t('Access your account by signing in.')}

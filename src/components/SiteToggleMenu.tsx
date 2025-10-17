@@ -8,7 +8,8 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import Link from 'next/link';
-import Logo from './Logo';
+import Image from 'next/image';
+import BrandText from './BrandText';
 
 const SiteToggleMenu = ({ websiteLinks }: { websiteLinks: any }) => {
   const [open, setOpen] = useState(false);
@@ -21,12 +22,16 @@ const SiteToggleMenu = ({ websiteLinks }: { websiteLinks: any }) => {
       </SheetTrigger>
       <SheetContent side='left' className='w-[80vw]'>
         <SheetTitle></SheetTitle>
-        <div className='flex items-center gap-2'>
-          <Logo className='text-brand' />
-          <Link href='/'>
-            <h2 className='font-medium tracking-widest'>ServePortal</h2>
-          </Link>
-        </div>
+        <Link href='/' className='flex items-center gap-2'>
+          <Image
+            src='/app_logo.png'
+            width={50}
+            height={50}
+            className='h-auto'
+            alt='App Logo'
+          />
+          <BrandText />
+        </Link>
         <hr className='mt-6' />
         <div className='flex flex-col gap-2 mt-3'>
           {websiteLinks.map((item: any, index: any) => {
