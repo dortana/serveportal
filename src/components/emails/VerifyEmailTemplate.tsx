@@ -25,7 +25,7 @@ export const VerifyEmailTemplate = ({
     <Body style={main}>
       <Container style={container}>
         <Img
-          src={`https://rovixpro.vercel.app/assets/bull.png`}
+          src={`https://serveportal.vercel.app/assets/bull.png`}
           alt='Logo'
           style={logo}
         />

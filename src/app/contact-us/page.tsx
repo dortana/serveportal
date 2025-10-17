@@ -35,7 +35,7 @@ const ContactUsPage = async () => {
               </svg>
               <span className='font-semibold'>{t('Address')}</span>
               <p className='text-[rgba(29,29,29,0.64)] group-hover:text-brand transition-all duration-200 text-center'>
-                1112 Budapest, Keserűfű utca 4
+                1117 Budapest, Szerémi út 4.
               </p>
             </div>
             <div className='flex items-center flex-col justify-center gap-2 flex-1 border rounded-md p-2 shadow group'>
