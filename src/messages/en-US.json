@@ -1,6 +1,6 @@
 {
   "{number} of {total} row(s) selected.": "{number} of {total} row(s) selected.",
-  "About ServePortal": "About ServePortal",
+  "About": "About",
   "About Us": "About Us",
   "Access your account by signing in.": "Access your account by signing in.",
   "Accessibility": "Accessibility",
@@ -19,7 +19,7 @@
   "Company Founded": "Company Founded",
   "Contact Us": "Contact Us",
   "Continue": "Continue",
-  "Copyright © {year} ServePortal. All rights reserved.": "Copyright © {year} ServePortal. All rights reserved.",
+  "Copyright © {year} {app_name}. All rights reserved.": "Copyright © {year} {app_name}. All rights reserved.",
   "Create Account": "Create Account",
   "Create your account to get started.": "Create your account to get started.",
   "Dashboard": "Dashboard",
@@ -155,5 +155,6 @@
   "You can view all your journal entries here. Use the filters to narrow down your search.": "You can view all your journal entries here. Use the filters to narrow down your search.",
   "You must accept the terms and privacy policy.": "You must accept the terms and privacy policy.",
   "You need to wait <guidelines> seconds </guidelines> inorder to request a new code.": "You need to wait <guidelines> seconds </guidelines> inorder to request a new code.",
-  "Your gateway to reliable": "Your gateway to reliable"
+  "Your gateway to reliable": "Your gateway to reliable",
+  "Your gateway to reliable expert": "Your gateway to reliable expert"
 }

@@ -3,9 +3,10 @@ import LoginForm from '@/components/forms/LoginForm';
 import Image from 'next/image';
 import { Metadata } from 'next';
 import LanguageSelectorButton from '@/components/language/LanguageSelectorButton';
+import { app_name } from '@/lib/data';
 
 export const metadata: Metadata = {
-  title: 'ServePortal - Login',
+  title: app_name + ' - Login',
 };
 
 const LoginPage = () => {

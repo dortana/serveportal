@@ -4,6 +4,7 @@ import ContactUsForm from '@/components/forms/ContactUsForm';
 import { getTranslations } from 'next-intl/server';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
+import { companyAddress, companyEmail, companyPhone } from '@/lib/data';
 
 const ContactUsPage = async () => {
   const t = await getTranslations();
@@ -35,7 +36,7 @@ const ContactUsPage = async () => {
               </svg>
               <span className='font-semibold'>{t('Address')}</span>
               <p className='text-[rgba(29,29,29,0.64)] group-hover:text-brand transition-all duration-200 text-center'>
-                1117 Budapest, Szerémi út 4.
+                {companyAddress}
               </p>
             </div>
             <div className='flex items-center flex-col justify-center gap-2 flex-1 border rounded-md p-2 shadow group'>
@@ -61,7 +62,7 @@ const ContactUsPage = async () => {
               </svg>
               <span className='font-semibold'>{t('Phone')}</span>
               <p className='text-[rgba(29,29,29,0.64)] group-hover:text-brand transition-all duration-200'>
-                +36 30 527 5249
+                {companyPhone}
               </p>
             </div>
             <div className='flex items-center flex-col justify-center gap-2 flex-1 border rounded-md p-2 shadow group'>
@@ -93,7 +94,7 @@ const ContactUsPage = async () => {
               </svg>
               <span className='font-semibold'>{t('Email')}</span>
               <p className='text-[rgba(29,29,29,0.64)] group-hover:text-brand transition-all duration-200'>
-                support@serveportal.com
+                {companyEmail}
               </p>
             </div>
           </div>

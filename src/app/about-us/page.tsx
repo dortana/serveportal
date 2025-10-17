@@ -6,6 +6,7 @@ import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
+import { app_name } from '@/lib/data';
 
 export default async function AboutUsPage() {
   const t = await getTranslations();
@@ -172,7 +173,7 @@ export default async function AboutUsPage() {
       year: '2024',
       title: t('Company Founded'),
       description:
-        'SServePortal was founded in Budapest with a mission to make finding trusted experts simple, fast, and reliable for everyone in Hungary.',
+        'ServePortal was founded in Budapest with a mission to make finding trusted experts simple, fast, and reliable for everyone in Hungary.',
       icon: (
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -373,7 +374,7 @@ export default async function AboutUsPage() {
           <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
             <div className='text-center max-w-4xl mx-auto'>
               <Badge variant='secondary' className='mb-6 text-sm font-medium'>
-                {t('About ServePortal')}
+                {t('About') + ' ' + app_name}
               </Badge>
               <h1 className='text-4xl lg:text-6xl font-bold text-foreground mb-6'>
                 {t('Your gateway to reliable')}

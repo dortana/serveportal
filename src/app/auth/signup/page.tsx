@@ -3,9 +3,10 @@ import SignUpForm from '@/components/forms/SignUpForm';
 import Image from 'next/image';
 import { Metadata } from 'next';
 import LanguageSelectorButton from '@/components/language/LanguageSelectorButton';
+import { app_name } from '@/lib/data';
 
 export const metadata: Metadata = {
-  title: 'ServePortal - Sign Up',
+  title: app_name + ' - Sign Up',
 };
 
 const SignUpPage = () => {

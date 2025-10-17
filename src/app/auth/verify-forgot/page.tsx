@@ -4,9 +4,10 @@ import Image from 'next/image';
 import VerificationForgotForm from '@/components/forms/VerificationForgotForm';
 import { Metadata } from 'next';
 import LanguageSelectorButton from '@/components/language/LanguageSelectorButton';
+import { app_name } from '@/lib/data';
 
 export const metadata: Metadata = {
-  title: 'ServePortal - Verify Account',
+  title: app_name + ' - Verify Account',
 };
 
 interface PageProps {

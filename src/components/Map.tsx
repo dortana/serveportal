@@ -4,6 +4,7 @@ import * as maptilersdk from '@maptiler/sdk';
 // @ts-ignore
 import '@maptiler/sdk/dist/maptiler-sdk.css';
 import { cn } from '@/lib/utils';
+import { app_name } from '@/lib/data';
 
 interface MapProps {
   lat: number;
@@ -29,7 +30,7 @@ const Map = ({ lat, lng, className }: MapProps) => {
     const popup = new maptilersdk.Popup({
       offset: 25,
       closeButton: false,
-    }).setText('ServePortal LLC');
+    }).setText(app_name);
 
     new maptilersdk.Marker({ color: '#08a6ec' })
       .setLngLat([lng, lat])

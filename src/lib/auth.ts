@@ -5,11 +5,12 @@ import { nextCookies } from 'better-auth/next-js';
 import { emailOTP } from 'better-auth/plugins';
 import { Resend } from 'resend';
 import { VerifyEmailTemplate } from '@/components/emails/VerifyEmailTemplate';
+import { app_name } from './data';
 
 const prisma = new PrismaClient();
 
 export const auth = betterAuth({
-  appName: 'ServePortal',
+  appName: app_name,
   database: prismaAdapter(prisma, {
     provider: 'mongodb',
   }),
@@ -77,7 +78,7 @@ export const auth = betterAuth({
 
         if (type === 'sign-in') {
           await resend.emails.send({
-            from: 'ServePortal <onboarding@resend.dev>',
+            from: app_name + ' <onboarding@resend.dev>',
             to: [email],
             subject: 'OTP Verification',
             react: VerifyEmailTemplate({
@@ -87,7 +88,7 @@ export const auth = betterAuth({
           });
         } else if (type === 'email-verification') {
           await resend.emails.send({
-            from: 'ServePortal <onboarding@resend.dev>',
+            from: app_name + ' <onboarding@resend.dev>',
             to: [email],
             subject: 'OTP Verification',
             react: VerifyEmailTemplate({
@@ -97,7 +98,7 @@ export const auth = betterAuth({
           });
         } else {
           await resend.emails.send({
-            from: 'ServePortal <onboarding@resend.dev>',
+            from: app_name + ' <onboarding@resend.dev>',
             to: [email],
             subject: 'OTP Verification',
             react: VerifyEmailTemplate({

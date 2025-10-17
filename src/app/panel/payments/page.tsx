@@ -1,8 +1,9 @@
+import { app_name } from '@/lib/data';
 import { Metadata } from 'next';
 import React from 'react';
 
 export const metadata: Metadata = {
-  title: 'ServePortal - Payments',
+  title: app_name + ' - Payments',
 };
 
 const PaymentsPage = () => {

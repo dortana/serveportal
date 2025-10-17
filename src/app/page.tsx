@@ -2,10 +2,14 @@ import { getTranslations } from 'next-intl/server';
 import { Metadata } from 'next';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
+import { app_name } from '@/lib/data';
 
-export const metadata: Metadata = {
-  title: 'ServePortal - Home Page',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations();
+  return {
+    title: app_name + ' - ' + t('Home Page'),
+  };
+}
 
 export default async function Home() {
   const t = await getTranslations();

@@ -7,11 +7,18 @@ import YoutubeIcon from './icons/YoutubeIcon';
 import FacebookIcon from './icons/FacebookIcon';
 import InstagramIcon from './icons/InstagramIcon';
 import BrandText from './BrandText';
+import {
+  app_name,
+  companyAddress,
+  companyEmail,
+  companyPhone,
+  socialLinks,
+} from '@/lib/data';
 
 const SiteFooter = async () => {
   const t = await getTranslations();
   return (
-    <footer className='border-t border-[rgba(29, 29, 29, 0.08)] bg-white px-4 md:px-8 pt-8 space-y-4 mb-12'>
+    <footer className='border-t border-[rgba(29, 29, 29, 0.08)] px-4 md:px-8 pt-8 space-y-4 mb-12'>
       <div className='flex items-baseline flex-wrap'>
         <div className='w-full md:flex-1 space-y-4'>
           <div className='flex items-center gap-2'>
@@ -90,7 +97,7 @@ const SiteFooter = async () => {
                 <span>{t('Address')}</span>
               </div>
               <p className='text-[rgba(29,29,29,0.64)] ml-8'>
-                1117 Budapest, Szerémi út 4.
+                {companyAddress}
               </p>
             </div>
             <div className='space-y-1 mt-2'>
@@ -116,7 +123,7 @@ const SiteFooter = async () => {
                 </svg>
                 <span>{t('Phone')}</span>
               </div>
-              <p className='text-[rgba(29,29,29,0.64)] ml-8'>+36 30 527 5249</p>
+              <p className='text-[rgba(29,29,29,0.64)] ml-8'>{companyPhone}</p>
             </div>
             <div className='space-y-1 mt-2'>
               <div className='flex items-center gap-2 font-semibold'>
@@ -147,24 +154,22 @@ const SiteFooter = async () => {
                 </svg>
                 <span>{t('Email')}</span>
               </div>
-              <p className='text-[rgba(29,29,29,0.64)] ml-8'>
-                support@serveportal.com
-              </p>
+              <p className='text-[rgba(29,29,29,0.64)] ml-8'>{companyEmail}</p>
             </div>
           </div>
-          <div className='flex items-center gap-3 w-full justify-end -mt-11'>
+          <div className='flex items-center gap-3 w-full justify-center mt-4 md:mt-0 md:justify-end lg:-mt-11'>
             <Image
-              src='/assets/hungary.webp'
+              src='/assets/hungary-flag.png'
               width={50}
               height={100}
-              className='h-auto rounded-md'
+              className='h-auto'
               alt='hungary'
             />
             <Image
-              src='/assets/european-union.webp'
+              src='/assets/european-union-flag.png'
               width={50}
               height={100}
-              className='h-auto rounded-md'
+              className='h-auto'
               alt='hungary'
             />
           </div>
@@ -173,21 +178,34 @@ const SiteFooter = async () => {
       <hr />
       <div className='flex items-center justify-between flex-wrap gap-4 max-md:flex-col-reverse'>
         <p className='text-sm max-md:mt-6'>
-          {t('Copyright © {year} ServePortal. All rights reserved.', {
+          {t('Copyright © {year} {app_name}. All rights reserved.', {
             year: new Date().getFullYear(),
+            app_name: app_name,
           })}
         </p>
         <div className='flex items-center gap-2'>
-          <Link href='/' className='bg-tertiary p-2 rounded-lg border'>
+          <Link
+            href={socialLinks.instagram}
+            className='bg-tertiary p-2 rounded-lg border'
+          >
             <InstagramIcon />
           </Link>
-          <Link href='/' className='bg-tertiary p-2 rounded-lg border'>
+          <Link
+            href={socialLinks.facebook}
+            className='bg-tertiary p-2 rounded-lg border'
+          >
             <FacebookIcon />
           </Link>
-          <Link href='/' className='bg-tertiary p-2 rounded-lg border'>
+          <Link
+            href={socialLinks.youtube}
+            className='bg-tertiary p-2 rounded-lg border'
+          >
             <YoutubeIcon />
           </Link>
-          <Link href='/' className='bg-tertiary p-2 rounded-lg border'>
+          <Link
+            href={socialLinks.linkedin}
+            className='bg-tertiary p-2 rounded-lg border'
+          >
             <LinkedinIcon />
           </Link>
         </div>
