@@ -20,3 +20,15 @@ export interface Service {
   icon: React.ElementType;
   isPopular: boolean;
 }
+
+export interface Expert {
+  id: number;
+  firstName: string;
+  lastName: string;
+  imageUrl: string;
+  service: string;
+  location: string;
+  pricePerHour: number;
+  rating: number;
+  reviewsCount: number;
+}

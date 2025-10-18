@@ -4,49 +4,23 @@ import { Button } from './ui/button';
 import Link from 'next/link';
 import CleaningIcon from './icons/services/CleaningIcon';
 import LocationIcon from './icons/LocationIcon';
+import { Expert } from '@/types/app';
 
-const ExpertCard = () => {
-  const random = Math.floor(Math.random() * 100) + 1;
-  const firstNames = [
-    'Alex',
-    'Sam',
-    'Chris',
-    'Taylor',
-    'Jordan',
-    'Casey',
-    'Jamie',
-    'Morgan',
-    'Riley',
-    'Cameron',
-  ];
-  const lastNames = [
-    'Smith',
-    'Johnson',
-    'Brown',
-    'Taylor',
-    'Anderson',
-    'Lee',
-    'Walker',
-    'Hall',
-    'Allen',
-    'Young',
-  ];
-
-  const randomName = `${firstNames[Math.floor(Math.random() * firstNames.length)]} ${
-    lastNames[Math.floor(Math.random() * lastNames.length)]
-  }`;
+const ExpertCard = ({ expert }: { expert: Expert }) => {
   return (
     <div className='min-w-72 h-auto shadow-[0_3px_10px_rgb(0,0,0,0.2)] bg-white rounded-lg p-4 my-4'>
       <div className='flex gap-2 items-center'>
         <Image
-          src={`https://randomuser.me/api/portraits/men/${random}.jpg`}
+          src={expert.imageUrl}
           width={70}
           height={70}
           alt='User Image'
           className='rounded-md'
         />
         <div className='space-y-1'>
-          <h2 className='text-xl'>{randomName}</h2>
+          <h2 className='text-xl'>
+            {expert.firstName + ' ' + expert.lastName}
+          </h2>
           <div className='flex gap-1 items-center'>
             <CleaningIcon />
             <span className='text-sm'>Cleaner</span>
@@ -98,7 +72,12 @@ const ExpertCard = () => {
               fill='#141B34'
             />
           </svg>
-          <span className='text-sm'>15.000 Ft/h</span>
+          <span className='text-sm'>
+            {expert.pricePerHour
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, '.')}{' '}
+            Ft/h
+          </span>
         </div>
       </div>
       <div className='flex gap-1 items-center'>
