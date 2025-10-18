@@ -7,12 +7,10 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'github.com',
-        port: '',
       },
       {
         protocol: 'https',
         hostname: 'randomuser.me',
-        port: '',
         pathname: '/api/portraits/**',
       },
     ],

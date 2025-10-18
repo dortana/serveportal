@@ -11,7 +11,7 @@ const ExpertCard = ({ expert }: { expert: Expert }) => {
     <div className='min-w-72 h-auto shadow-[0_3px_10px_rgb(0,0,0,0.2)] bg-white rounded-lg p-4 my-4'>
       <div className='flex gap-2 items-center'>
         <Image
-          src={expert.imageUrl}
+          src={'https://github.com/maxleiter.png'}
           width={70}
           height={70}
           alt='User Image'
