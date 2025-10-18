@@ -12,3 +12,11 @@ export interface DataFilterType {
   order?: string;
   search?: string;
 }
+
+export interface Service {
+  id: number;
+  label: string;
+  value: string;
+  icon: React.ElementType;
+  isPopular: boolean;
+}

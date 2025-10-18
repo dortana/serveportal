@@ -5,6 +5,9 @@
 
 @theme inline {
   --color-brand: var(--brand);
+  --color-brand-light: var(--brand-light);
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-blue-light: var(--brand-blue-light);
   --color-secondary: var(--secondary);
   --color-tertiary: var(--tertiary);
   --color-background: var(--background);
@@ -47,7 +50,10 @@
 }
 
 :root {
-  --brand: #08a6ec;
+  --brand: #df682e;
+  --brand-light: #f3a823;
+  --brand-blue: #1e959b;
+  --brand-blue-light: #4dcad1;
   --secondary: #171717;
   --tertiary: #f6f6f6;
   --radius: 0.625rem;
@@ -128,4 +134,41 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@keyframes scroll-animate {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scroll-vertical-animate {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: var(--animation-name, scroll-animate) var(--animation-duration)
+    linear infinite var(--animation-direction);
+}
+
+.animate-scroll:hover {
+  animation-play-state: paused !important;
+}
+
+.scroller {
+  mask-image: linear-gradient(
+    var(--mask-direction, to right),
+    transparent,
+    white 20%,
+    white 80%,
+    transparent
+  );
 }
