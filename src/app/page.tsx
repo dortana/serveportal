@@ -12,6 +12,7 @@ import CitySelector from '@/components/city/CitySelector';
 import SearchContent from '@/components/lookup/SearchContent';
 import LookupInputCommand from '@/components/lookup/LookupInputCommand';
 import { cityGetAction } from '@/actions/app';
+import SwiperCards from '@/components/SwiperCards';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -54,10 +55,19 @@ export default async function Home() {
           <SearchContent />
         </LookupInputCommand>
       </section>
-      <br />
-      <br />
-      <br />
-      <div className='ml-[45%] pb-20'>Other contents ...</div>
+
+      <section className='w-full py-20 flex flex-col justify-center items-center overflow-hidden md:px-20'>
+        <h2 className='text-2xl md:text-4xl font-semibold mb-4 px-4'>
+          {t('Trending professionals in your area')}
+        </h2>
+        <p className='text-zinc-500 max-w-2xl mx-auto mb-8 text-center px-4'>
+          {t(
+            'Explore our diverse range of skilled professionals ready to assist you with various services in your locality.',
+          )}
+        </p>
+        <SwiperCards />
+      </section>
+
       {/* Cities of operation */}
       <section className='w-full py-12 flex flex-col justify-center items-center bg-tertiary overflow-hidden'>
         <h2 className='text-2xl md:text-4xl font-semibold mb-4 px-4'>

@@ -172,3 +172,8 @@
     transparent
   );
 }
+
+.swiper-slide {
+  width: max-content !important;
+  height: max-content !important;
+}
