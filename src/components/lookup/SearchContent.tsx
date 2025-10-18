@@ -59,7 +59,7 @@ const SearchContent = async () => {
             />
           </svg>
           <span className='text-sm'>{t('Search by specialist’s name')}</span>
-          <RightArrow className='ml-auto size-4' />
+          <RightArrow className='ml-auto size-5' />
         </Link>
 
         <hr className='my-1' />
