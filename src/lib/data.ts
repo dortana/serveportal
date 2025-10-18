@@ -7,6 +7,8 @@ import AssembleIcon from '@/components/icons/services/AssembleIcon';
 import ElectricityIcon from '@/components/icons/services/ElectricityIcon';
 import PipeIcon from '@/components/icons/services/PipeIcon';
 import CleaningIcon from '@/components/icons/services/CleaningIcon';
+import EraserIcon from '@/components/icons/services/EraserIcon';
+import TreeIcon from '@/components/icons/services/TreeIcon';
 
 export const langs = [
   {
@@ -118,16 +120,16 @@ export const fetchServices = async () => {
     },
     {
       id: 9,
-      label: t('Test'),
-      value: 'test',
-      icon: PipeIcon,
+      label: t('Car Wash'),
+      value: 'car_wash',
+      icon: EraserIcon,
       isPopular: false,
     },
     {
       id: 10,
-      label: t('Ester'),
-      value: 'ester',
-      icon: PipeIcon,
+      label: t('Gardening'),
+      value: 'gardening',
+      icon: TreeIcon,
       isPopular: false,
     },
   ];
