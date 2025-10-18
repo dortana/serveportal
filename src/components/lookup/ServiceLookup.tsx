@@ -8,24 +8,25 @@ import {
   CommandList,
   CommandSeparator,
 } from '@/components/ui/command';
-import CitySelector from '@/components/CitySelector';
 import RightArrow from '@/components/icons/RightArrow';
 import Link from 'next/link';
 import { Service } from '@/types/app';
 import { fetchServices } from '@/lib/data';
 import { getTranslations } from 'next-intl/server';
+import CitySelector from '../city/CitySelector';
+import { cityGetAction } from '@/actions/app';
 
 const ServiceLookup = async () => {
   const services: Service[] = await fetchServices();
   const t = await getTranslations();
   const popularServices = services.filter(service => service.isPopular);
   const otherServices = services.filter(service => !service.isPopular);
-
+  const currentCity = await cityGetAction();
   return (
     <div className='relative mx-auto w-[85%] md:w-[450px] group'>
       <Command className='rounded-lg shadow-[0px_0px_10px_3px_#00000024] transition-all duration-200 group-focus-within:rounded-b-none'>
         <CommandInput
-          placeholder={t('Search in ServePortal ...')}
+          placeholder={t('Search in {currentCity} ...', { currentCity })}
           className='pr-26'
         />
         <div className='absolute top-full left-0 w-full bg-white rounded-b-lg shadow-md z-10 opacity-0 pointer-events-none transition-all duration-200 group-focus-within:opacity-100 group-focus-within:pointer-events-auto group-focus-within:translate-y-1'>

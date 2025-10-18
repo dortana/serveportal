@@ -4,21 +4,25 @@ import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import { app_name, operation_places } from '@/lib/data';
 import { InfiniteMovingCards } from '@/components/InfiniteMovingCards';
-import ServiceLookup from '@/components/ServiceLookup';
+// import ServiceLookup from '@/components/ServiceLookup';
 import TypeWriter from '@/components/TypeWriter';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import CitySelector from '@/components/city/CitySelector';
+import SearchContent from '@/components/lookup/SearchContent';
+import LookupInputCommand from '@/components/lookup/LookupInputCommand';
+import { cityGetAction } from '@/actions/app';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
   return {
-    title: app_name + ' - ' + t('Home Page'),
+    title: app_name + ' - ' + t('Home'),
   };
 }
 
 export default async function Home() {
   const t = await getTranslations();
-
+  const city = await cityGetAction();
   return (
     <main id='top'>
       <SiteHeader />
@@ -43,7 +47,12 @@ export default async function Home() {
           )}
         </p>
         <br />
-        <ServiceLookup />
+        <LookupInputCommand
+          citySelectorCom={<CitySelector className='mr-1' />}
+          currentCity={city}
+        >
+          <SearchContent />
+        </LookupInputCommand>
       </section>
       <br />
       <br />
