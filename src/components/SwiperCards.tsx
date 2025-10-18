@@ -186,7 +186,7 @@ const SwiperCards = () => {
       centeredSlides={true}
       slidesPerView={'auto'}
       autoplay={{
-        delay: 1000, // ✅ 1 second
+        delay: 4000, // ✅ 1 second
         disableOnInteraction: false, // ✅ keeps autoplay even after user swipe
       }}
       coverflowEffect={{
