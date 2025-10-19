@@ -12,8 +12,10 @@ import CitySelector from '@/components/city/CitySelector';
 import SearchContent from '@/components/lookup/SearchContent';
 import LookupInputCommand from '@/components/lookup/LookupInputCommand';
 import { cityGetAction } from '@/actions/app';
-import SwiperCards from '@/components/SwiperCards';
+import SwiperCardsExperts from '@/components/SwiperCardsExperts';
 import Heading from '@/components/Heading';
+import SwiperCardsTestimonial from '@/components/SwiperCardsTestimonial';
+import Counters from '@/components/Counters';
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -266,6 +268,26 @@ export default async function Home() {
         </div>
       </section>
 
+      <section className='w-full py-20 flex flex-col lg:flex-row justify-center items-center gap-8 lg:gap-40 overflow-hidden'>
+        <Heading
+          head={t('What Our Customers Say')}
+          subHead={t('Real experiences from real people')}
+        />
+        <div>
+          <SwiperCardsTestimonial />
+        </div>
+      </section>
+
+      <section className='w-full py-20 flex flex-col justify-center items-center bg-tertiary gap-8 overflow-hidden'>
+        <Heading
+          head={t('Why thousands trust ServePortal')}
+          subHead={t(
+            'From verified professionals to round-the-clock support, ServePortal makes getting on-site service quick and easy.',
+          )}
+        />
+        <Counters />
+      </section>
+
       <section className='w-full py-20 flex flex-col justify-center items-center gap-8 overflow-hidden'>
         <Heading
           head={t('Trending professionals in {city}', { city })}
@@ -273,7 +295,7 @@ export default async function Home() {
             'Explore our diverse range of skilled professionals ready to assist you with various services in your locality.',
           )}
         />
-        <SwiperCards />
+        <SwiperCardsExperts />
       </section>
 
       {/* Cities of operation */}

@@ -2,15 +2,15 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Autoplay } from 'swiper/modules';
-// @ts-ignore: no type declarations for these side-effect CSS imports in this proj
+// @ts-ignore
 import 'swiper/css';
-//@ts-ignore: no type declarations for these side-effect CSS imports in this project
+//@ts-ignore
 import 'swiper/css/effect-coverflow';
 
 import ExpertCard from './ExpertCard';
 import { Expert } from '@/types/app';
 
-const SwiperCards = () => {
+const SwiperCardsExperts = () => {
   const experts: Expert[] = [
     {
       id: 1,
@@ -212,4 +212,4 @@ const SwiperCards = () => {
   );
 };
 
-export default SwiperCards;
+export default SwiperCardsExperts;
