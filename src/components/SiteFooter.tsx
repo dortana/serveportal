@@ -47,16 +47,22 @@ const SiteFooter = async () => {
               {t('Home')}
             </Link>
             <Link
-              href='/'
+              href='/explore-services'
               className='font-semibold hover:text-brand transition-all duration-300'
             >
-              {t('Products')}
+              {t('Explore Services')}
             </Link>
             <Link
-              href='/'
+              href='/find-an-expert'
               className='font-semibold hover:text-brand transition-all duration-300'
             >
-              {t('Services')}
+              {t('Find an Expert')}
+            </Link>
+            <Link
+              href='/join-us'
+              className='font-semibold hover:text-brand transition-all duration-300'
+            >
+              {t('Join as a Professional')}
             </Link>
             <Link
               href='/about-us'
@@ -69,6 +75,12 @@ const SiteFooter = async () => {
               className='font-semibold hover:text-brand transition-all duration-300'
             >
               {t('Contact Us')}
+            </Link>
+            <Link
+              href='/terms-and-privacy'
+              className='font-semibold hover:text-brand transition-all duration-300'
+            >
+              {t('Terms & Privacy')}
             </Link>
           </div>
           <br />

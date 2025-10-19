@@ -15,7 +15,7 @@ export default function SwiperCardsTestimonial() {
   return (
     <div className='relative flex justify-center items-center w-fit mx-auto'>
       <button
-        className='custom-prev absolute left-[-80px] top-1/2 max-sm:hidden -translate-y-1/2 z-10 cursor-pointer'
+        className='custom-prev absolute left-[-80px] top-1/2 max-sm:hidden -translate-y-1/2 cursor-pointer'
         aria-label='Previous'
       >
         <svg
@@ -63,7 +63,7 @@ export default function SwiperCardsTestimonial() {
       </Swiper>
 
       <button
-        className='custom-next absolute right-[-80px] top-1/2  max-sm:hidden -translate-y-1/2 z-10 cursor-pointer'
+        className='custom-next absolute right-[-80px] top-1/2  max-sm:hidden -translate-y-1/2 cursor-pointer'
         aria-label='Next'
       >
         <svg

@@ -136,6 +136,26 @@
   }
 }
 
+@keyframes bounce-x {
+  0%,
+  100% {
+    transform: translateX(0);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateX(5%);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+.animate-bounce-x {
+  animation: bounce-x 1s infinite;
+}
+
+.animate-bounce-x:hover {
+  animation-play-state: paused !important;
+}
+
 @keyframes scroll-animate {
   0% {
     transform: translateX(0);

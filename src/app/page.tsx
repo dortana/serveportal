@@ -86,10 +86,35 @@ export default async function Home() {
         </div>
         <Button
           asChild
-          className='mt-4 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white'
+          className='mt-4 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white animate-bounce-x'
           variant='outline'
         >
-          <Link href='/services'>{t('Explore all services')}</Link>
+          <Link href='/services'>
+            {t('Explore all services')}
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              viewBox='0 0 24 24'
+              width='24'
+              height='24'
+              color='currentColor'
+              fill='none'
+            >
+              <path
+                d='M12.5 18C12.5 18 18.5 13.5811 18.5 12C18.5 10.4188 12.5 6 12.5 6'
+                stroke='currentColor'
+                strokeWidth='1.5'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+              />
+              <path
+                d='M5.50005 18C5.50005 18 11.5 13.5811 11.5 12C11.5 10.4188 5.5 6 5.5 6'
+                stroke='currentColor'
+                strokeWidth='1.5'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+              />
+            </svg>
+          </Link>
         </Button>
       </section>
 
@@ -299,12 +324,14 @@ export default async function Home() {
       </section>
 
       {/* Cities of operation */}
-      <section className='w-full py-12 flex flex-col justify-center items-center gap-8 bg-tertiary overflow-hidden'>
+      <section className="w-full py-12 md:py-32 flex flex-col justify-center items-center gap-8 bg-tertiary overflow-hidden bg-[url('/assets/city.jpg')] bg-cover bg-no-repeat md:bg-[position:40%_30%]">
         <Heading
           head={t('ServePortal in your city')}
-          subHead={t(
-            'Discover trusted professionals available across multiple Hungarian cities — bringing quality services closer to you.',
-          )}
+          // subHead={t(
+          //   'Discover trusted professionals available across multiple Hungarian cities — bringing quality services closer to you.',
+          // )}
+          headClassName='text-white'
+          // subHeadClassName='text-white'
         />
         <InfiniteMovingCards items={operation_places[0].cities} />
       </section>

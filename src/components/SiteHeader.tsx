@@ -15,27 +15,31 @@ const SiteHeader = async () => {
   });
   const t = await getTranslations();
   const websiteLinks = [
-    { name: 'Trade', href: '/trade', sublinks: [] },
+    { name: t('Home'), href: '/', sublinks: [] },
     {
-      name: 'Buy Now',
-      href: '/buy',
+      name: t('Get Started'),
+      href: '/get-started',
       sublinks: [
         {
-          name: 'Buy Now1',
-          href: '/about1',
-          description:
-            'Beautifully designed components built with Radix UI and Tailwind CSS.',
+          name: t('Explore Services'),
+          href: '/explore-services',
+          description: t('Discover trusted experts across all categories'),
         },
         {
-          name: 'Buy Now2',
-          href: '/about2',
-          description:
-            'Beautifully designed components built with Radix UI and Tailwind CSS.',
+          name: t('Find an Expert'),
+          href: '/find-an-expert',
+          description: t('Search by name, skill, or city to book instantly'),
+        },
+        {
+          name: t('Join as a Professional'),
+          href: '/join-us',
+          description: t('Showcase your expertise and grow with ServePortal'),
         },
       ],
     },
     { name: t('About Us'), href: '/about-us', sublinks: [] },
     { name: t('Contact Us'), href: '/contact-us', sublinks: [] },
+    { name: t('Terms & Privacy'), href: '/terms-and-privacy', sublinks: [] },
   ];
   return (
     <header className='h-20 sticky top-0 left-0 w-full px-4 flex items-center justify-between border-b border-[rgba(29, 29, 29, 0.08)] bg-white z-10'>
@@ -49,24 +53,24 @@ const SiteHeader = async () => {
               className='h-auto'
               alt='App Logo'
             />
-            <BrandText className='max-md:hidden' />
+            <BrandText className='max-lg:hidden' />
           </Link>
         </div>
-        <div className='h-6 border-l border-separate max-md:hidden' />
+        <div className='h-6 border-l border-separate max-lg:hidden' />
         <div className='flex items-center gap-6 max-md:hidden'>
-          <ul className='flex space-x-6'>
+          <ul className='flex space-x-4'>
             {websiteLinks.map((item, index) => {
               if (item.sublinks.length > 0) {
                 return (
                   <li className='relative group' key={index}>
-                    <button className='flex items-center text-[rgb(29, 29, 29)] hover:text-brand transition-colors duration-300'>
+                    <button className='flex items-center text-black hover:text-brand transition-colors duration-300'>
                       {item.name}
                       <svg
                         className='size-4 ml-1 group-hover:rotate-180 transition-all duration-300'
                         viewBox='0 0 24 24'
                         width='24'
                         height='24'
-                        color='#000000'
+                        color='currentColor'
                         fill='none'
                       >
                         <path
@@ -78,19 +82,19 @@ const SiteHeader = async () => {
                         ></path>
                       </svg>
                     </button>
-                    <div className='absolute left-0 mt-4 w-80 min-h-fit space-y-2 bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 p-2'>
+                    <div className='absolute left-0 mt-4 w-80 min-h-fit z-20 space-y-2 bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 p-2'>
                       {item.sublinks.map((sub, index) => {
                         return (
                           <Link
                             key={index}
                             href={sub.href}
-                            className='flex items-center justify-between min-h-14 rounded-md w-full px-4 py-2 hover:bg-tertiary transition-all duration-300 group/follow'
+                            className='flex items-center justify-between min-h-14 rounded-md w-full px-4 py-2 hover:bg-tertiary hover:text-brand transition-all duration-300 group/follow'
                           >
                             <div>
-                              <span className='text-[rgb(29, 29, 29)] font-medium'>
+                              <span className='text-black font-medium'>
                                 {sub.name}
                               </span>
-                              <p className='text-xs text-neutral-400'>
+                              <p className='text-xs text-zinc-500'>
                                 {sub.description}
                               </p>
                             </div>
@@ -100,7 +104,7 @@ const SiteHeader = async () => {
                               viewBox='0 0 24 24'
                               width='24'
                               height='24'
-                              color='#000000'
+                              color='currentColor'
                               fill='none'
                             >
                               <path

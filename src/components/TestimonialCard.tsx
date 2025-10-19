@@ -4,7 +4,7 @@ import RatingStar from './RatingStar';
 
 const TestimonialCard = () => {
   return (
-    <div className='w-full h-full shadow-md bg-white rounded-lg border flex flex-col justify-center items-center p-2'>
+    <div className='w-full h-full shadow-md bg-white rounded-lg border flex flex-col justify-center items-center p-2 px-4'>
       <Image
         src='https://github.com/maxleiter.png'
         width={70}
