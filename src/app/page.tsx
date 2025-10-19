@@ -26,18 +26,12 @@ export default async function Home() {
   const t = await getTranslations();
   const city = await cityGetAction();
   const services = await fetchServices();
+  const popularServices = services.filter(service => service.isPopular);
   return (
     <main id='top'>
       <SiteHeader />
       {/* Hero section */}
-      <section
-        className='w-full py-12 md:py-24 flex flex-col justify-center items-center bg-tertiary !pb-42'
-        // style={{
-        //   backgroundImage: `url(/assets/hero_image.png)`,
-        //   backgroundSize: 'cover',
-        //   backgroundPosition: 'center',
-        // }}
-      >
+      <section className="w-full py-20 md:py-40 flex flex-col justify-center items-center bg-tertiary bg-[url('/assets/hero-mobile.jpg')] md:bg-[url('/assets/hero2.jpg')] bg-cover bg-no-repeat bg-[position:20%_20%]">
         <h2 className='text-2xl md:text-4xl font-semibold mb-4 px-4 text-center text-brand'>
           <TypeWriter
             words={[
@@ -45,13 +39,13 @@ export default async function Home() {
               'Quality service',
               'Transparent pricing',
             ]}
-            className='text-black'
+            className='text-white'
           />
           <br />
 
           {t('made easy!')}
         </h2>
-        <p className='text-zinc-500 max-w-2xl mx-auto mb-8 text-center px-4'>
+        <p className='text-white max-w-2xl mx-auto mb-10 text-center px-4'>
           {t(
             'What service do you need? Just type it in the search below and instantly find trusted professionals ready to help.',
           )}
@@ -67,11 +61,11 @@ export default async function Home() {
 
       <section className='w-full py-20 flex flex-col justify-center items-center gap-8 overflow-hidden'>
         <Heading
-          head={t('Online services with ServePortal')}
+          head={t('Popular Services')}
           subHead={t('Explore our wide range of professional services')}
         />
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 w-full px-4 max-w-6xl max-md:px-10'>
-          {services.map(item => {
+        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 w-full px-4 max-w-6xl max-md:px-10'>
+          {popularServices.map(item => {
             const Icon = item.icon;
             return (
               <div
@@ -88,6 +82,13 @@ export default async function Home() {
             );
           })}
         </div>
+        <Button
+          asChild
+          className='mt-4 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white'
+          variant='outline'
+        >
+          <Link href='/services'>{t('Explore all services')}</Link>
+        </Button>
       </section>
 
       <section className='w-full py-20 flex flex-col justify-center items-center bg-tertiary gap-8 overflow-hidden'>
@@ -134,6 +135,27 @@ export default async function Home() {
             <h3 className='mt-2 text-center text-md text-black'>
               {t('Search and select a service or specialist')}
             </h3>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              viewBox='0 0 24 24'
+              width='24'
+              height='24'
+              color='currentColor'
+              fill='none'
+              className='text-brand'
+            >
+              <path
+                opacity='0.4'
+                d='M11.9428 1.75C14.1335 1.74999 15.9686 1.74998 17.312 1.93059C18.6886 2.11568 19.7809 2.50271 20.6391 3.36091C21.4973 4.21911 21.8843 5.31137 22.0694 6.68802C22.25 8.03144 22.25 9.86646 22.25 12.0572V12.0572C22.25 14.2479 22.25 15.9686 22.0694 17.312C21.8843 18.6886 21.4973 19.7809 20.6391 20.6391C19.7809 21.4973 18.6886 21.8843 17.312 22.0694C15.9686 22.25 14.1335 22.25 11.9428 22.25H11.9428C9.7521 22.25 8.03144 22.25 6.68802 22.0694C5.31137 21.8843 4.21911 21.4973 3.36091 20.6391C2.50271 19.7809 2.11568 18.6886 1.93059 17.312C1.74998 15.9686 1.74999 14.1335 1.75 11.9428C1.74999 9.75212 1.74998 8.03144 1.93059 6.68802C2.11568 5.31137 2.50271 4.21911 3.36091 3.36091C4.21911 2.50271 5.31137 2.11568 6.68802 1.93059C8.03144 1.74998 9.75212 1.74999 11.9428 1.75Z'
+                fill='currentColor'
+              ></path>
+              <path
+                fillRule='evenodd'
+                clipRule='evenodd'
+                d='M12.9473 6.10558C13.2861 6.27497 13.5001 6.62123 13.5001 7.00001V17C13.5001 17.5523 13.0523 18 12.5001 18C11.9478 18 11.5001 17.5523 11.5001 17V9.00001L11.1001 9.30001C10.6582 9.63138 10.0314 9.54183 9.70006 9.10001C9.36869 8.65818 9.45823 8.03138 9.90006 7.70001L11.9001 6.20001C12.2031 5.97274 12.6085 5.93619 12.9473 6.10558Z'
+                fill='currentColor'
+              ></path>
+            </svg>
           </div>
           <div className='flex items-center justify-center flex-col gap-2 w-[200px]'>
             <div className='size-34 p-4 rounded-full bg-white shadow-md flex items-center justify-center text-brand'>
@@ -175,6 +197,25 @@ export default async function Home() {
             <h3 className='mt-2 text-center text-md text-black'>
               {t('Completing the order process')}
             </h3>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              viewBox='0 0 24 24'
+              width='24'
+              height='24'
+              color='currentColor'
+              fill='none'
+              className='text-brand'
+            >
+              <path
+                opacity='0.4'
+                d='M12.0572 1.75C14.2479 1.74999 15.9686 1.74998 17.312 1.93059C18.6886 2.11568 19.7809 2.50271 20.6391 3.36091C21.4973 4.21911 21.8843 5.31137 22.0694 6.68802C22.25 8.03144 22.25 9.86646 22.25 12.0572V12.0572C22.25 14.2479 22.25 15.9686 22.0694 17.312C21.8843 18.6886 21.4973 19.7809 20.6391 20.6391C19.7809 21.4973 18.6886 21.8843 17.312 22.0694C15.9686 22.25 14.2479 22.25 12.0572 22.25H12.0572C9.86646 22.25 8.03144 22.25 6.68802 22.0694C5.31137 21.8843 4.21911 21.4973 3.36091 20.6391C2.50271 19.7809 2.11568 18.6886 1.93059 17.312C1.74998 15.9686 1.74999 14.2479 1.75 12.0572C1.74999 9.86647 1.74998 8.03144 1.93059 6.68802C2.11568 5.31137 2.50271 4.21911 3.36091 3.36091C4.21911 2.50271 5.31137 2.11568 6.68802 1.93059C8.03144 1.74998 9.86647 1.74999 12.0572 1.75Z'
+                fill='currentColor'
+              ></path>
+              <path
+                d='M8 10C8 7.79086 9.79086 6 12 6C14.2091 6 16 7.79086 16 10C16 11.4907 14.9904 12.725 14.0027 13.6024C12.9742 14.516 11.731 15.2528 10.8168 15.735C10.6781 15.8081 10.5546 15.898 10.4482 16H15C15.5523 16 16 16.4477 16 17C16 17.5523 15.5523 18 15 18H9C8.44772 18 8 17.5523 8 17C8 15.6808 8.78906 14.5434 9.88371 13.966C10.7389 13.5149 11.8205 12.8657 12.6745 12.1071C13.5694 11.3122 14 10.5879 14 10C14 8.89543 13.1046 8 12 8C10.8954 8 10 8.89543 10 10C10 10.5523 9.55228 11 9 11C8.44772 11 8 10.5523 8 10Z'
+                fill='currentColor'
+              ></path>
+            </svg>
           </div>
           <div className='flex items-center justify-center flex-col gap-2 w-[200px]'>
             <div className='size-34 p-4 rounded-full bg-white shadow-md flex items-center justify-center text-brand'>
@@ -200,6 +241,27 @@ export default async function Home() {
             <h3 className='mt-2 text-center text-md text-black'>
               {t('Getting on-site service with ease')}
             </h3>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              viewBox='0 0 24 24'
+              width='24'
+              height='24'
+              color='currentColor'
+              fill='none'
+              className='text-brand'
+            >
+              <path
+                opacity='0.4'
+                d='M12.0572 1.75C14.2479 1.74999 15.9686 1.74998 17.312 1.93059C18.6886 2.11568 19.7809 2.50271 20.6391 3.36091C21.4973 4.21911 21.8843 5.31137 22.0694 6.68802C22.25 8.03144 22.25 9.86646 22.25 12.0572V12.0572C22.25 14.2479 22.25 15.9686 22.0694 17.312C21.8843 18.6886 21.4973 19.7809 20.6391 20.6391C19.7809 21.4973 18.6886 21.8843 17.312 22.0694C15.9686 22.25 14.2479 22.25 12.0572 22.25H12.0572C9.86646 22.25 8.03144 22.25 6.68802 22.0694C5.31137 21.8843 4.21911 21.4973 3.36091 20.6391C2.50271 19.7809 2.11568 18.6886 1.93059 17.312C1.74998 15.9686 1.74999 14.1335 1.75 11.9428C1.74999 9.75212 1.74998 8.03144 1.93059 6.68802C2.11568 5.31137 2.50271 4.21911 3.36091 3.36091C4.21911 2.50271 5.31137 2.11568 6.68802 1.93059C8.03144 1.74998 9.86647 1.74999 12.0572 1.75Z'
+                fill='currentColor'
+              ></path>
+              <path
+                fillRule='evenodd'
+                clipRule='evenodd'
+                d='M8 9.5C8 7.567 9.567 6 11.5 6H12.5C14.433 6 16 7.567 16 9.5C16 10.4793 15.5978 11.3647 14.9495 12C15.5978 12.6353 16 13.5207 16 14.5C16 16.433 14.433 18 12.5 18H11.5C9.567 18 8 16.433 8 14.5C8 13.9477 8.44772 13.5 9 13.5C9.55228 13.5 10 13.9477 10 14.5C10 15.3284 10.6716 16 11.5 16H12.5C13.3284 16 14 15.3284 14 14.5C14 13.6716 13.3284 13 12.5 13H11.5C10.9477 13 10.5 12.5523 10.5 12C10.5 11.4477 10.9477 11 11.5 11H12.5C13.3284 11 14 10.3284 14 9.5C14 8.67157 13.3284 8 12.5 8H11.5C10.6716 8 10 8.67157 10 9.5C10 10.0523 9.55228 10.5 9 10.5C8.44772 10.5 8 10.0523 8 9.5Z'
+                fill='currentColor'
+              ></path>
+            </svg>
           </div>
         </div>
       </section>
