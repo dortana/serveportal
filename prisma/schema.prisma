@@ -17,12 +17,26 @@ model User {
   updatedAt     DateTime       @default(now()) @updatedAt
   firstName     String
   lastName      String
+  phone         String?
+  dob           String?
+  address       Address?
+  companyName   String?
+  vatNumber     String?
   sessions      Session[]
   accounts      Account[]
   JournalEntry  JournalEntry[]
 
   @@unique([email])
   @@map("user")
+}
+
+type Address {
+  addressLine1 String?
+  addressLine2 String?
+  city         String?
+  state        String?
+  postalCode   String?
+  country      String?
 }
 
 model Session {

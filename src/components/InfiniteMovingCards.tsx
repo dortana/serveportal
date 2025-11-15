@@ -2,7 +2,6 @@
 
 import { cn } from '@/lib/utils';
 import React, { useEffect, useState } from 'react';
-import CityIcon from './icons/CityIcon';
 
 export const InfiniteMovingCards = ({
   items,
@@ -107,12 +106,11 @@ export const InfiniteMovingCards = ({
       >
         {items.map((item, idx) => (
           <li
-            className='min-w-[150px] relative rounded-2xl flex-shrink-0 p-2 md:p-4 shadow-[0_3px_10px_rgb(0,0,0,0.2)] ml-5 border bg-white'
+            className='min-w-[150px] relative rounded-2xl flex-shrink-0 p-2 md:p-3 shadow-[0_3px_10px_rgb(0,0,0,0.2)] ml-5 backdrop-blur-xl bg-white/60'
             key={item + idx}
           >
             <div className='flex items-center justify-center gap-2 h-full'>
-              <CityIcon />
-              <span className='text-lg font-normal text-black'>{item}</span>
+              <span className='text-md font-normal text-base'>{item}</span>
             </div>
           </li>
         ))}

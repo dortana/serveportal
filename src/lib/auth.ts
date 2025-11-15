@@ -24,6 +24,26 @@ export const auth = betterAuth({
         type: 'string',
         required: true,
       },
+      phone: {
+        type: 'string',
+        required: false,
+      },
+      dob: {
+        type: 'string',
+        required: false,
+      },
+      address: {
+        type: 'json',
+        required: false,
+      },
+      companyName: {
+        type: 'string',
+        required: false,
+      },
+      vatNumber: {
+        type: 'string',
+        required: false,
+      },
     },
   },
   emailVerification: {

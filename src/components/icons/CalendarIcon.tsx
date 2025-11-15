@@ -1,0 +1,50 @@
+import React from 'react';
+
+const CalendarIcon = () => {
+  return (
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      viewBox='0 0 24 24'
+      width='24'
+      height='24'
+      color='currentColor'
+      fill='none'
+    >
+      <path
+        opacity='0.4'
+        d='M13 4H11C7.22874 4 5.34312 4 4.17155 5.17157C3.22846 6.11466 3.04454 7.52043 3.00867 10H20.9913C20.9554 7.52043 20.7715 6.11466 19.8284 5.17157C18.6568 4 16.7712 4 13 4Z'
+        fill='#141B34'
+      />
+      <path
+        d='M16 2V6M8 2V6'
+        stroke='#141B34'
+        strokeWidth='1.5'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+      <path
+        d='M13 4H11C7.22876 4 5.34315 4 4.17157 5.17157C3 6.34315 3 8.22876 3 12V14C3 17.7712 3 19.6569 4.17157 20.8284C5.34315 22 7.22876 22 11 22H13C16.7712 22 18.6569 22 19.8284 20.8284C21 19.6569 21 17.7712 21 14V12C21 8.22876 21 6.34315 19.8284 5.17157C18.6569 4 16.7712 4 13 4Z'
+        stroke='#141B34'
+        strokeWidth='1.5'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+      <path
+        d='M3 10H21'
+        stroke='#141B34'
+        strokeWidth='1.5'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+      <path
+        d='M11 14H16M8 14H8.00898M13 18H8M16 18H15.991'
+        stroke='#141B34'
+        strokeWidth='1.5'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+    </svg>
+  );
+};
+
+export default CalendarIcon;

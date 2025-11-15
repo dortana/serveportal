@@ -327,11 +327,7 @@ export default async function Home() {
       <section className="w-full py-12 md:py-32 flex flex-col justify-center items-center gap-8 bg-tertiary overflow-hidden bg-[url('/assets/city.jpg')] bg-cover bg-no-repeat md:bg-[position:40%_30%]">
         <Heading
           head={t('ServePortal in your city')}
-          // subHead={t(
-          //   'Discover trusted professionals available across multiple Hungarian cities — bringing quality services closer to you.',
-          // )}
           headClassName='text-white'
-          // subHeadClassName='text-white'
         />
         <InfiniteMovingCards items={operation_places[0].cities} />
       </section>
@@ -341,8 +337,8 @@ export default async function Home() {
             <svg
               xmlns='http://www.w3.org/2000/svg'
               viewBox='0 0 24 24'
-              width='24'
-              height='24'
+              width='30'
+              height='30'
               color='#ffffff'
               fill='none'
             >
