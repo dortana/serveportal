@@ -3,23 +3,40 @@ import React from 'react';
 import { Button } from './ui/button';
 import { GoogleIcon } from './icons/GoogleIcon';
 import FacebookIcon from './icons/FacebookIcon';
+import { accountTypeSetAction } from '@/actions/app';
 
-const SocialLogin = () => {
+const SocialLogin = ({
+  accountType,
+}: {
+  accountType?: 'customer' | 'expert';
+}) => {
   const [isloadingGoogle, setIsLoadingGoogle] = React.useState(false);
   const [isloadingFacebook, setIsLoadingFacebook] = React.useState(false);
   const signInWithGoogle = async () => {
     setIsLoadingGoogle(true);
+    if (accountType) {
+      await accountTypeSetAction(accountType);
+    }
     await authClient.signIn.social({
       provider: 'google',
-      callbackURL: '/panel/dashboard',
+      callbackURL:
+        accountType === 'expert'
+          ? '/expert-panel/dashboard'
+          : '/panel/dashboard',
     });
     setIsLoadingGoogle(false);
   };
   const signInWithFacebook = async () => {
     setIsLoadingFacebook(true);
+    if (accountType) {
+      await accountTypeSetAction(accountType);
+    }
     await authClient.signIn.social({
       provider: 'facebook',
-      callbackURL: '/panel/dashboard',
+      callbackURL:
+        accountType === 'expert'
+          ? '/expert-panel/dashboard'
+          : '/panel/dashboard',
     });
     setIsLoadingFacebook(false);
   };

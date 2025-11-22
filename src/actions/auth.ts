@@ -74,6 +74,11 @@ export async function expertSignUpAction(prevState: any, formData: FormData) {
 export async function signUpAction(prevState: any, formData: FormData) {
   const t = await getTranslations();
   const schema = z.object({
+    accountType: z
+      .string()
+      .refine(val => val === 'customer' || val === 'expert', {
+        message: t('Please select account type'),
+      }),
     email: z
       .email({ message: t('Invalid email format') })
       .min(1, t('Email is required')),

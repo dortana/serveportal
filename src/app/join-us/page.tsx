@@ -3,7 +3,7 @@ import SiteFooter from '@/components/SiteFooter';
 import SiteHeader from '@/components/SiteHeader';
 import { Badge } from '@/components/ui/badge';
 import { getTranslations } from 'next-intl/server';
-import ExpertSignUpForm from '@/components/forms/ExpertSignUpForm';
+import ExpertSignUpForm from '@/components/forms/ExpertOnboardingForm';
 
 const JoinUsPage = async () => {
   const t = await getTranslations();

@@ -4,6 +4,7 @@ import PanelSidebar from './PanelSidebar';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { User, UserRole } from '@prisma/client';
+import ExpertOnboardingForm from '@/components/forms/ExpertOnboardingForm';
 export default async function PanelLayout({
   children,
 }: {
@@ -16,18 +17,28 @@ export default async function PanelLayout({
   if (!user) {
     return redirect('/auth/login');
   }
-  if (user.role === UserRole.EXPERT) {
-    return redirect('/expert-panel/dashboard');
+  if (user.role === UserRole.USER) {
+    return redirect('/panel/dashboard');
   }
+  const needsOnboarding =
+    !user.professionDetails && user.role === UserRole.EXPERT;
   return (
     <section className='p-3 flex flex-col gap-3 min-h-screen bg-tertiary'>
       <PanelHeader user={user} />
       <div className='flex gap-3 flex-1'>
-        <PanelSidebar
-          className='!h-[calc(100vh-100px)] hidden md:block'
-          user={user}
-        />
-        <div className='flex-1'>{children}</div>
+        {needsOnboarding ? (
+          <div className='w-fit mx-auto bg-white flex justify-center rounded-lg p-4 shadow max-md:w-full'>
+            <ExpertOnboardingForm />
+          </div>
+        ) : (
+          <>
+            <PanelSidebar
+              className='!h-[calc(100vh-100px)] hidden md:block'
+              user={user}
+            />
+            <div className='flex-1'>{children}</div>
+          </>
+        )}
       </div>
     </section>
   );

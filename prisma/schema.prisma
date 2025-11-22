@@ -10,7 +10,7 @@ datasource db {
 enum UserRole {
   USER
   ADMIN
-  PROFESSIONAL
+  EXPERT
   EMPLOYEE
 }
 
@@ -34,7 +34,7 @@ model User {
   sessions          Session[]
   accounts          Account[]
   journalEntry      JournalEntry[]
-  languagesSpoken   String[]           @default([])
+  languagesSpoken   String[]
   professionDetails ProfessionDetails?
 
   @@unique([email])

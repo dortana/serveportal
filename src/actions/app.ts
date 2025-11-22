@@ -22,3 +22,16 @@ export const cityGetAction = async () => {
   const city = cookieStore.get('city');
   return city?.value || 'Budapest';
 };
+
+export const accountTypeSetAction = async (lang: string) => {
+  const cookieStore = await cookies();
+  cookieStore.set('accountType', lang);
+};
+
+export const accountTypeGetAction = async () => {
+  const cookieStore = await cookies();
+  return cookieStore.get('accountType')?.value as
+    | 'customer'
+    | 'expert'
+    | undefined;
+};

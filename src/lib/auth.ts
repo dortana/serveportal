@@ -1,11 +1,12 @@
 import { betterAuth } from 'better-auth';
 import { prismaAdapter } from 'better-auth/adapters/prisma';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, UserRole } from '@prisma/client';
 import { nextCookies } from 'better-auth/next-js';
 import { emailOTP } from 'better-auth/plugins';
 import { Resend } from 'resend';
 import { VerifyEmailTemplate } from '@/components/emails/VerifyEmailTemplate';
 import { app_name } from './data';
+import { accountTypeGetAction } from '@/actions/app';
 
 const prisma = new PrismaClient();
 
@@ -44,6 +45,10 @@ export const auth = betterAuth({
         type: 'string',
         required: false,
       },
+      role: {
+        type: 'string',
+        required: false,
+      },
     },
   },
   emailVerification: {
@@ -61,27 +66,35 @@ export const auth = betterAuth({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
       display: 'popup',
-      mapProfileToUser(profile) {
+      async mapProfileToUser(profile) {
+        const accountType = await accountTypeGetAction();
         return {
           email: profile.email,
           image: profile.picture,
           firstName: profile.given_name,
           lastName: profile.family_name,
           emailVerified: profile.email_verified,
+          ...(accountType && {
+            role: accountType === 'customer' ? UserRole.USER : UserRole.EXPERT,
+          }),
         };
       },
     },
     facebook: {
       clientId: process.env.FACEBOOK_CLIENT_ID as string,
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET as string,
-      mapProfileToUser(profile) {
+      async mapProfileToUser(profile) {
         const nameParts = (profile.name || '').split(' ');
+        const accountType = await accountTypeGetAction();
         return {
           email: profile.email,
           image: profile.picture?.data?.url,
           firstName: nameParts[0] || '',
           lastName: nameParts[1] || '',
           emailVerified: profile.email_verified,
+          ...(accountType && {
+            role: accountType === 'customer' ? UserRole.USER : UserRole.EXPERT,
+          }),
         };
       },
     },

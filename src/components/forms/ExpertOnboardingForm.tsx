@@ -1,12 +1,16 @@
 //@ts-nocheck
 'use client';
 import React, { useActionState, useEffect, useState } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import Link from 'next/link';
-import { Checkbox } from '@/components/ui/checkbox';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 import { expertSignUpAction } from '@/actions/auth';
@@ -42,11 +46,10 @@ import {
 } from '@/components/ui/multi-select';
 import { Dropzone, DropzoneContent, DropzoneEmptyState } from '../ui/dropzone';
 
-const ExpertSignUpForm = () => {
+const ExpertOnboardingForm = () => {
   const t = useTranslations();
 
   const router = useRouter();
-  const [privacyChecked, setPrivacyChecked] = useState(true);
   const [state, formAction, isPending] = useActionState(
     expertSignUpAction,
     null,
@@ -106,7 +109,13 @@ const ExpertSignUpForm = () => {
   }, [state, router, t]);
 
   return (
-    <Card className='border-0 shadow-none w-full max-w-3xl mt-4 max-md:px-4'>
+    <Card className='border-0 shadow-none w-full max-w-3xl'>
+      <CardHeader className='px-0'>
+        <CardTitle className='text-2xl'>{t('Compelete Onboarding')}</CardTitle>
+        <CardDescription>
+          {t('Please provide the following information to get started.')}
+        </CardDescription>
+      </CardHeader>
       <Stepper
         steps={steps}
         currentStep={currentStep}
@@ -123,57 +132,6 @@ const ExpertSignUpForm = () => {
         <CardContent className='grid gap-6 px-0'>
           {currentStep === 0 && (
             <div className='grid gap-4'>
-              <div className='flex items-center gap-4 w-full'>
-                <div className='flex-1 space-y-1'>
-                  <Label htmlFor='first_name'>{t('First Name')}</Label>
-                  <Input
-                    id='firstName'
-                    placeholder={t('First Name')}
-                    name='firstName'
-                    defaultValue={state?.data?.firstName}
-                    className={state?.errors?.firstName && 'border-red-500'}
-                  />
-                  {state?.errors?.firstName?.[0] && (
-                    <p className='text-xs text-red-500'>
-                      {state.errors.firstName}
-                    </p>
-                  )}
-                </div>
-                <div className='flex-1 space-y-1'>
-                  <Label htmlFor='lastName'>{t('Last Name')}</Label>
-                  <Input
-                    id='lastName'
-                    placeholder={t('Last Name')}
-                    name='lastName'
-                    defaultValue={state?.data?.lastName}
-                    className={state?.errors?.lastName && 'border-red-500'}
-                  />
-                  {state?.errors?.lastName && (
-                    <p className='text-xs text-red-500'>
-                      {state.errors.lastName}
-                    </p>
-                  )}
-                </div>
-              </div>
-
-              <div className='space-y-1'>
-                <Label htmlFor='email'>{t('Email')}</Label>
-                <Input
-                  id='email'
-                  placeholder={t('Email')}
-                  name='email'
-                  defaultValue={state?.data?.email}
-                  className={state?.errors?.email && 'border-red-500'}
-                />
-                {state?.errors?.email && (
-                  <p className='text-xs text-red-500'>
-                    {Array.isArray(state.errors.email)
-                      ? state.errors.email[0]
-                      : state.errors.email}
-                  </p>
-                )}
-              </div>
-
               <div className='space-y-1'>
                 <Label htmlFor='phone'>{t('Phone')}</Label>
                 <PhoneInput
@@ -509,45 +467,6 @@ const ExpertSignUpForm = () => {
                   </p>
                 )}
               </div>
-
-              <div className='flex items-center space-x-2'>
-                <Checkbox
-                  id='privacy_terms'
-                  checked={privacyChecked}
-                  onCheckedChange={checked => setPrivacyChecked(!!checked)}
-                />
-                <label
-                  htmlFor='privacy_terms'
-                  className='text-sm text-zinc-500 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
-                >
-                  {t.rich(
-                    'I accept the <guidelines>Terms of Use</guidelines> and <guidelines2>Privacy Policy</guidelines2>.',
-                    {
-                      guidelines: chunks => (
-                        <Link
-                          href='/terms'
-                          className='text-black font-bold underline'
-                        >
-                          {chunks}
-                        </Link>
-                      ),
-                      guidelines2: chunks => (
-                        <Link
-                          href='/privacy'
-                          className='text-black font-bold underline'
-                        >
-                          {chunks}
-                        </Link>
-                      ),
-                    },
-                  )}
-                </label>
-              </div>
-              {!privacyChecked && (
-                <p className='text-xs text-red-500 -mt-4'>
-                  {t('You must accept the terms and privacy policy.')}
-                </p>
-              )}
             </div>
           )}
         </CardContent>
@@ -578,4 +497,4 @@ const ExpertSignUpForm = () => {
   );
 };
 
-export default ExpertSignUpForm;
+export default ExpertOnboardingForm;
