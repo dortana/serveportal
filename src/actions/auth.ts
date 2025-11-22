@@ -17,6 +17,60 @@ interface UserWitPassword extends User {
   goToVerify?: boolean;
 }
 
+export async function expertSignUpAction(prevState: any, formData: FormData) {
+  const t = await getTranslations();
+  const schema = z.object({
+    email: z
+      .email({ message: t('Invalid email format') })
+      .min(1, t('Email is required')),
+    firstName: z
+      .string()
+      .min(2, t('First name must be at least 2 characters long')),
+    lastName: z
+      .string()
+      .min(2, t('Last name must be at least 2 characters long')),
+    password: z
+      .string()
+      .min(8, t('Password must be at least 8 characters long'))
+      .max(20, t('Password must be at most 20 characters long')),
+  });
+
+  const payload = makePayloadReady(formData);
+
+  const result = schema.safeParse(payload);
+
+  if (!result.success) {
+    const errors = result.error.flatten().fieldErrors;
+    return { errors: errors, data: payload };
+  }
+
+  try {
+    // const data = await auth.api.signUpEmail({
+    //   // @ts-ignore
+    //   body: {
+    //     ...payload,
+    //   },
+    // });
+    console.log('result: ', result);
+    return { data: payload as unknown as UserWitPassword };
+  } catch (error: any) {
+    if (error?.body?.message === 'User already exists. Use another email.') {
+      delete payload.password;
+      return {
+        data: payload,
+        errors: {
+          email: t('User already exists. Use another email.'),
+          firstName: undefined,
+          lastName: undefined,
+          password: undefined,
+        },
+      };
+    } else {
+      console.error('Sign up error:', error?.body?.message);
+    }
+  }
+}
+
 export async function signUpAction(prevState: any, formData: FormData) {
   const t = await getTranslations();
   const schema = z.object({

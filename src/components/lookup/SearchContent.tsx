@@ -1,7 +1,5 @@
-'use server';
-import { fetchServices } from '@/lib/data';
+'use client';
 import { Service } from '@/types/app';
-import { getTranslations } from 'next-intl/server';
 import React from 'react';
 import {
   CommandEmpty,
@@ -12,10 +10,12 @@ import {
 } from '@/components/ui/command';
 import Link from 'next/link';
 import RightArrow from '../icons/RightArrow';
+import { useServices } from '@/hooks/useServices';
+import { useTranslations } from 'next-intl';
 
-const SearchContent = async () => {
-  const services: Service[] = await fetchServices();
-  const t = await getTranslations();
+const SearchContent = () => {
+  const services: Service[] = useServices();
+  const t = useTranslations();
   const popularServices = services.filter(service => service.isPopular);
   const otherServices = services.filter(service => !service.isPopular);
 
