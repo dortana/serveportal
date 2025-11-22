@@ -42,6 +42,7 @@ interface CountryDropdownProps {
   disabled?: boolean;
   placeholder?: string;
   slim?: boolean;
+  name?: string;
 }
 
 const CountryDropdownComponent = (
@@ -55,6 +56,7 @@ const CountryDropdownComponent = (
     disabled = false,
     placeholder,
     slim = false,
+    name,
     ...props
   }: CountryDropdownProps,
   ref: React.ForwardedRef<HTMLButtonElement>,
@@ -66,25 +68,14 @@ const CountryDropdownComponent = (
   );
 
   useEffect(() => {
-    if (defaultValue) {
-      const initialCountry = options.find(
-        country => country.alpha2 === defaultValue,
-      );
-      if (initialCountry) {
-        setSelectedCountry(initialCountry);
-      } else {
-        // Reset selected country if defaultValue is not found
-        setSelectedCountry(undefined);
-      }
-    } else {
-      // Reset selected country if defaultValue is undefined or null
-      setSelectedCountry(undefined);
-    }
-  }, [defaultValue, options]);
+    if (!defaultValue) return;
+
+    const initial = options.find(c => c.alpha2 === defaultValue);
+    if (initial) setSelectedCountry(initial);
+  }, []);
 
   const handleSelect = useCallback(
     (country: Country) => {
-      console.log('🌍 CountryDropdown value: ', country);
       setSelectedCountry(country);
       onChange?.(country);
       setOpen(false);
@@ -99,6 +90,7 @@ const CountryDropdownComponent = (
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
+      <input type='hidden' name={name} value={selectedCountry?.alpha2 || ''} />
       <PopoverTrigger
         ref={ref}
         className={triggerClasses}
@@ -134,7 +126,7 @@ const CountryDropdownComponent = (
         side='bottom'
         align='start'
         collisionPadding={10}
-        className='w-[--radix-popper-anchor-width] p-0'
+        className='w-[var(--radix-popover-trigger-width)] p-0'
       >
         <Command className='w-full max-h-[200px] sm:max-h-[270px]'>
           <CommandList>

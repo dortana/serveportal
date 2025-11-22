@@ -27,7 +27,7 @@ export default async function PanelLayout({
       <PanelHeader user={user} />
       <div className='flex gap-3 flex-1'>
         {needsOnboarding ? (
-          <div className='w-fit mx-auto bg-white flex justify-center rounded-lg p-4 shadow max-md:w-full'>
+          <div className='w-fit mx-auto bg-white h-fit flex justify-center rounded-lg p-4 shadow max-md:w-full'>
             <ExpertOnboardingForm />
           </div>
         ) : (

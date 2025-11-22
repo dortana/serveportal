@@ -28,18 +28,23 @@ type PhoneInputProps = Omit<
 > &
   Omit<RPNInput.Props<typeof RPNInput.default>, 'onChange'> & {
     onChange?: (value: RPNInput.Value) => void;
+    hasError?: boolean;
   };
 
 const PhoneInput: React.ForwardRefExoticComponent<PhoneInputProps> =
   React.forwardRef<React.ElementRef<typeof RPNInput.default>, PhoneInputProps>(
-    ({ className, onChange, value, ...props }, ref) => {
+    ({ className, onChange, hasError, value, ...props }, ref) => {
       return (
         <RPNInput.default
           ref={ref}
           className={cn('flex', className)}
           flagComponent={FlagComponent}
-          countrySelectComponent={CountrySelect}
-          inputComponent={InputComponent}
+          countrySelectComponent={countrySelectProps => (
+            <CountrySelect hasError={hasError} {...countrySelectProps} />
+          )}
+          inputComponent={inputProps => (
+            <InputComponent hasError={hasError} {...inputProps} />
+          )}
           smartCaret={false}
           value={value || undefined}
           /**
@@ -61,10 +66,14 @@ PhoneInput.displayName = 'PhoneInput';
 
 const InputComponent = React.forwardRef<
   HTMLInputElement,
-  React.ComponentProps<'input'>
->(({ className, ...props }, ref) => (
+  React.ComponentProps<'input'> & { hasError?: boolean }
+>(({ className, hasError, ...props }, ref) => (
   <Input
-    className={cn('rounded-e-lg rounded-s-none', className)}
+    className={cn(
+      'rounded-e-lg rounded-s-none',
+      hasError && 'border-red-500',
+      className,
+    )}
     {...props}
     ref={ref}
   />
@@ -78,13 +87,15 @@ type CountrySelectProps = {
   value: RPNInput.Country;
   options: CountryEntry[];
   onChange: (country: RPNInput.Country) => void;
+  hasError?: boolean;
 };
 
-const CountrySelect = ({
+export const CountrySelect = ({
   disabled,
   value: selectedCountry,
   options: countryList,
   onChange,
+  hasError,
 }: CountrySelectProps) => {
   const scrollAreaRef = React.useRef<HTMLDivElement>(null);
   const [searchValue, setSearchValue] = React.useState('');
@@ -104,7 +115,10 @@ const CountrySelect = ({
         <Button
           type='button'
           variant='outline'
-          className='flex gap-1 rounded-e-none rounded-s-lg border-r-0 px-3 focus:z-10 h-10'
+          className={cn(
+            'flex gap-1 rounded-e-none rounded-s-lg border-r-0 px-3 focus:z-10 h-10',
+            hasError && 'border-red-500',
+          )}
           disabled={disabled}
         >
           <FlagComponent

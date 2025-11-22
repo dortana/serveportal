@@ -8,6 +8,7 @@ import { headers } from 'next/headers';
 import SiteToggleMenu from './SiteToggleMenu';
 import Image from 'next/image';
 import BrandText from './BrandText';
+import { UserRole } from '@prisma/client';
 
 const SiteHeader = async () => {
   const session = await auth.api.getSession({
@@ -141,7 +142,13 @@ const SiteHeader = async () => {
         <LanguageSelectorButton />
         <div className='h-6 border-l border-separate' />
         {session?.session?.token ? (
-          <Link href='/panel/dashboard'>
+          <Link
+            href={
+              session?.user.role === UserRole.EXPERT
+                ? '/expert-panel/dashboard'
+                : '/panel/dashboard'
+            }
+          >
             <Button className='rounded-full min-w-24 max-sm:text-xs'>
               {t('My Account')}
             </Button>

@@ -45,3 +45,18 @@ export const operation_places = [
     ],
   },
 ];
+
+export const PROFESSION_VALUES = [
+  'renovation',
+  'electrical_services',
+  'cleaning',
+  'auto_services',
+  'beauty',
+  'furniture_assembly',
+  'private_chef',
+  'plumbing',
+  'car_wash',
+  'gardening',
+] as const;
+
+export type Profession = (typeof PROFESSION_VALUES)[number];

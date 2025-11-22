@@ -13,6 +13,7 @@ import PipeIcon from '@/components/icons/services/PipeIcon';
 import CleaningIcon from '@/components/icons/services/CleaningIcon';
 import EraserIcon from '@/components/icons/services/EraserIcon';
 import TreeIcon from '@/components/icons/services/TreeIcon';
+import { PROFESSION_VALUES } from '@/lib/data';
 
 export function useServices() {
   const t = useTranslations();
@@ -22,70 +23,70 @@ export function useServices() {
       {
         id: 1,
         label: t('Renovation'),
-        value: 'renovation',
+        value: PROFESSION_VALUES[0],
         icon: HomeIcon,
         isPopular: true,
       },
       {
         id: 2,
         label: t('Electrical Services'),
-        value: 'electrical_services',
+        value: PROFESSION_VALUES[1],
         icon: ElectricityIcon,
         isPopular: true,
       },
       {
         id: 3,
         label: t('Cleaning'),
-        value: 'cleaning',
+        value: PROFESSION_VALUES[2],
         icon: CleaningIcon,
         isPopular: true,
       },
       {
         id: 4,
         label: t('Auto Services'),
-        value: 'auto_services',
+        value: PROFESSION_VALUES[3],
         icon: CarServiceIcon,
         isPopular: true,
       },
       {
         id: 5,
         label: t('Beauty'),
-        value: 'beauty',
+        value: PROFESSION_VALUES[4],
         icon: BarberIcon,
         isPopular: true,
       },
       {
         id: 6,
         label: t('Furniture Assembly'),
-        value: 'furniture_assembly',
+        value: PROFESSION_VALUES[5],
         icon: AssembleIcon,
         isPopular: true,
       },
       {
         id: 7,
         label: t('Private Chef'),
-        value: 'private_chef',
+        value: PROFESSION_VALUES[6],
         icon: CookingIcon,
         isPopular: true,
       },
       {
         id: 8,
         label: t('Plumbing'),
-        value: 'plumbing',
+        value: PROFESSION_VALUES[7],
         icon: PipeIcon,
         isPopular: true,
       },
       {
         id: 9,
         label: t('Car Wash'),
-        value: 'car_wash',
+        value: PROFESSION_VALUES[8],
         icon: EraserIcon,
         isPopular: false,
       },
       {
         id: 10,
         label: t('Gardening'),
-        value: 'gardening',
+        value: PROFESSION_VALUES[9],
         icon: TreeIcon,
         isPopular: false,
       },

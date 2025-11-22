@@ -116,7 +116,7 @@ const ProfileData = ({ user }: { user: User }) => {
                 defaultValue={state?.data?.dob ?? user.dob}
                 className={state?.errors?.dob && 'border-red-500'}
               /> */}
-              <DatePicker />
+              <DatePicker name='dob' />
               {state?.errors?.dob?.[0] && (
                 <p className='text-xs text-red-500'>{state.errors.dob}</p>
               )}

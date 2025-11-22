@@ -30,6 +30,8 @@ interface SearchableSelectProps {
   name: string;
   placeholder?: string;
   onChange?: (value: string) => void;
+  className?: string;
+  defaultValue?: string;
 }
 
 export default function SearchableSelect({
@@ -37,9 +39,13 @@ export default function SearchableSelect({
   placeholder = 'Select ...',
   onChange,
   name,
+  className,
+  defaultValue,
 }: SearchableSelectProps) {
   const [open, setOpen] = React.useState(false);
-  const [selected, setSelected] = React.useState<SelectItem | null>(null);
+  const [selected, setSelected] = React.useState<SelectItem | null>(
+    items.find(item => item.value === defaultValue) || null,
+  );
   const t = useTranslations();
   const selectItem = (item: SelectItem) => {
     setSelected(item);
@@ -55,7 +61,7 @@ export default function SearchableSelect({
         <Button
           variant='outline'
           role='combobox'
-          className='w-full justify-between h-10'
+          className={cn('w-full justify-between h-10', className)}
         >
           <div className='flex items-center gap-2'>
             {selected?.icon && <span className='w-5 h-5'>{selected.icon}</span>}
