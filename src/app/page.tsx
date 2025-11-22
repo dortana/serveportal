@@ -4,7 +4,6 @@ import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import { app_name, operation_places } from '@/lib/data';
 import { InfiniteMovingCards } from '@/components/InfiniteMovingCards';
-// import ServiceLookup from '@/components/ServiceLookup';
 import TypeWriter from '@/components/TypeWriter';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
