@@ -7,24 +7,35 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum UserRole {
+  USER
+  ADMIN
+  PROFESSIONAL
+  EMPLOYEE
+}
+
 model User {
-  id            String         @id @map("_id")
-  name          String?
-  email         String
-  emailVerified Boolean        @default(false)
-  image         String?
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @default(now()) @updatedAt
-  firstName     String
-  lastName      String
-  phone         String?
-  dob           String?
-  address       Address?
-  companyName   String?
-  vatNumber     String?
-  sessions      Session[]
-  accounts      Account[]
-  JournalEntry  JournalEntry[]
+  id                String             @id @map("_id")
+  name              String?
+  email             String
+  emailVerified     Boolean            @default(false)
+  image             String?
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @default(now()) @updatedAt
+  firstName         String
+  lastName          String
+  role              UserRole           @default(USER)
+  docsUrls          DocsUrls?
+  phone             String?
+  dob               String?
+  address           Address?
+  companyName       String?
+  vatNumber         String?
+  sessions          Session[]
+  accounts          Account[]
+  journalEntry      JournalEntry[]
+  languagesSpoken   String[]           @default([])
+  professionDetails ProfessionDetails?
 
   @@unique([email])
   @@map("user")
@@ -37,6 +48,20 @@ type Address {
   state        String?
   postalCode   String?
   country      String?
+}
+
+type DocsUrls {
+  idCardFront      String?
+  idCardBack       String?
+  addressCardFront String?
+  addressCardBack  String?
+}
+
+type ProfessionDetails {
+  profession        String?
+  description       String?
+  yearsOfExperience String?
+  availability      String?
 }
 
 model Session {

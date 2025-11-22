@@ -51,7 +51,7 @@ const ExpertSignUpForm = () => {
     expertSignUpAction,
     null,
   );
-  const [currentStep, setCurrentStep] = useState(2);
+  const [currentStep, setCurrentStep] = useState(0);
   const services: Service[] = useServices();
   const services_options = services.map(service => {
     const Icon = service.icon;
