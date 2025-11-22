@@ -40,6 +40,7 @@ import {
   MultiSelectTrigger,
   MultiSelectValue,
 } from '@/components/ui/multi-select';
+import { Dropzone, DropzoneContent, DropzoneEmptyState } from '../ui/dropzone';
 
 const ExpertSignUpForm = () => {
   const t = useTranslations();
@@ -50,7 +51,7 @@ const ExpertSignUpForm = () => {
     expertSignUpAction,
     null,
   );
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState(2);
   const services: Service[] = useServices();
   const services_options = services.map(service => {
     const Icon = service.icon;
@@ -72,8 +73,8 @@ const ExpertSignUpForm = () => {
       icon: <LocationIcon />,
     },
     {
-      title: 'Upload photo',
-      description: 'Add a profile picture',
+      title: 'Upload Docs',
+      description: 'Verify your identity',
       icon: <CameraIcon />,
     },
     {
@@ -82,6 +83,12 @@ const ExpertSignUpForm = () => {
       icon: <PermanentJobIcon />,
     },
   ];
+
+  const [files, setFiles] = useState<File[] | undefined>();
+  const handleDrop = (files: File[]) => {
+    console.log(files);
+    setFiles(files);
+  };
 
   useEffect(() => {
     if (state?.data?.email && !state.errors) {
@@ -295,21 +302,88 @@ const ExpertSignUpForm = () => {
             </div>
           )}
           {currentStep === 2 && (
-            <div className='bg-tertiary rounded-bl-md rounded-br-md h-auto flex items-center gap-4 p-4 justify-around'>
-              <div className='border-brand-blue-light text-brand-blue-light border rounded-full bg-white size-20 flex items-center justify-center'>
-                <CameraIcon className='w-7 h-8' />
+            <>
+              <Label htmlFor='profession'>
+                {t('1- Upload Profile Photo (Your Face)')}
+              </Label>
+              <div className='bg-tertiary rounded-bl-md rounded-br-md h-auto flex items-center gap-4 p-4 justify-around -mt-2'>
+                <div className='border-brand-blue-light text-brand-blue-light border rounded-full bg-white size-20 flex items-center justify-center'>
+                  <CameraIcon className='w-7 h-8' />
+                </div>
+                <div className='flex items-center gap-2 flex-wrap justify-end'>
+                  <Button
+                    className='w-40 md:w-48'
+                    isLoading={false}
+                    variant='outline'
+                  >
+                    <UploadIcon />
+                    {t('Upload Image')}
+                  </Button>
+                </div>
               </div>
-              <div className='flex items-center gap-2 flex-wrap justify-end'>
-                <Button
-                  className='w-40 md:w-48'
-                  isLoading={false}
-                  variant='outline'
+
+              <Label htmlFor='profession'>{t('2- Upload Your ID Card')}</Label>
+              <div className='flex gap-4 -mt-2'>
+                <Dropzone
+                  accept={{ 'image/*': [] }}
+                  maxFiles={1}
+                  maxSize={1024 * 1024 * 10}
+                  minSize={1024}
+                  onDrop={handleDrop}
+                  onError={console.error}
+                  src={files}
+                  className='flex-1 border-orange-400 border-dashed'
                 >
-                  <UploadIcon />
-                  {t('Upload Image')}
-                </Button>
+                  <DropzoneEmptyState title='ID Card Front Side' />
+                  <DropzoneContent />
+                </Dropzone>
+                <Dropzone
+                  accept={{ 'image/*': [] }}
+                  maxFiles={1}
+                  maxSize={1024 * 1024 * 10}
+                  minSize={1024}
+                  onDrop={handleDrop}
+                  onError={console.error}
+                  src={files}
+                  className='flex-1 border-orange-400 border-dashed'
+                >
+                  <DropzoneEmptyState title='ID Card Back Side' />
+                  <DropzoneContent />
+                </Dropzone>
               </div>
-            </div>
+
+              <Label htmlFor='profession'>
+                {t('3- Upload Your Address Card')}
+              </Label>
+              <div className='flex gap-4 -mt-2'>
+                <Dropzone
+                  accept={{ 'image/*': [] }}
+                  maxFiles={1}
+                  maxSize={1024 * 1024 * 10}
+                  minSize={1024}
+                  onDrop={handleDrop}
+                  onError={console.error}
+                  src={files}
+                  className='flex-1 border-orange-400 border-dashed'
+                >
+                  <DropzoneEmptyState title='Address Card Front Side' />
+                  <DropzoneContent />
+                </Dropzone>
+                <Dropzone
+                  accept={{ 'image/*': [] }}
+                  maxFiles={1}
+                  maxSize={1024 * 1024 * 10}
+                  minSize={1024}
+                  onDrop={handleDrop}
+                  onError={console.error}
+                  src={files}
+                  className='flex-1 border-orange-400 border-dashed'
+                >
+                  <DropzoneEmptyState title='Address Card Back Side' />
+                  <DropzoneContent />
+                </Dropzone>
+              </div>
+            </>
           )}
           {currentStep === 3 && (
             <div className='grid gap-4'>
@@ -364,7 +438,7 @@ const ExpertSignUpForm = () => {
                       <SelectItem value='banana'>1 to 3 years</SelectItem>
                       <SelectItem value='blueberry'>3 to 6 years</SelectItem>
                       <SelectItem value='grapes'>6 - 10 years</SelectItem>
-                      <SelectItem value='grapes'>More than 10 years</SelectItem>
+                      <SelectItem value='123'>More than 10 years</SelectItem>
                     </SelectGroup>
                   </SelectContent>
                 </Select>

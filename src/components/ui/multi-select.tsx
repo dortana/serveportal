@@ -28,6 +28,7 @@ import {
   type ReactNode,
 } from 'react';
 import { Badge } from '@/components/ui/badge';
+import { useTranslations } from 'next-intl';
 
 type MultiSelectContextType = {
   open: boolean;
@@ -257,7 +258,7 @@ export function MultiSelectContent({
   children: ReactNode;
 } & Omit<ComponentPropsWithoutRef<typeof Command>, 'children'>) {
   const canSearch = typeof search === 'object' ? true : search;
-
+  const t = useTranslations();
   return (
     <>
       <div style={{ display: 'none' }}>
@@ -268,11 +269,7 @@ export function MultiSelectContent({
       <PopoverContent className='min-w-[var(--radix-popover-trigger-width)] p-0'>
         <Command {...props}>
           {canSearch ? (
-            <CommandInput
-              placeholder={
-                typeof search === 'object' ? search.placeholder : undefined
-              }
-            />
+            <CommandInput placeholder={t('Search ...')} />
           ) : (
             <button autoFocus className='sr-only' />
           )}

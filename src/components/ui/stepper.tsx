@@ -24,18 +24,18 @@ const Step: React.FC<StepProps> = ({
       <div className='relative flex items-center justify-center'>
         <div
           className={cn(
-            'w-8 h-8 rounded-full border-2 flex items-center justify-center p-1',
+            'w-10 h-10 rounded-full border-1 flex items-center justify-center p-1.5',
             isCompleted
               ? 'border-primary bg-primary text-primary-foreground'
               : isActive
-                ? 'border-primary'
-                : 'border-muted',
+                ? 'border-brand-blue'
+                : 'border-muted-foreground',
           )}
         >
-          {isCompleted ? <Check className='w-4 h-4' /> : icon}
+          {isCompleted ? <Check className='w-6 h-6' /> : icon}
         </div>
       </div>
-      <div className='ml-4'>
+      <div className='ml-2'>
         <p
           className={cn(
             'text-sm font-medium w-max',
@@ -64,7 +64,7 @@ export function Stepper({ steps, currentStep }: StepperProps) {
     <div className='w-full max-w-3xl mx-auto'>
       <div className='flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8'>
         {steps.map((step, index) => (
-          <div key={step.title} className='relative'>
+          <div key={step.title} className='relative mr-2'>
             <Step
               title={step.title}
               description={step.description}
