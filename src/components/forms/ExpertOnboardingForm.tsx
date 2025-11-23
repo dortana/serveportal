@@ -13,7 +13,6 @@ import { Input } from '@/components/ui/input';
 import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 // import { expertSignUpAction } from '@/actions/auth';
-import UploadIcon from '../icons/UploadIcon';
 import { PhoneInput } from '../ui/phone-input';
 import { DatePicker } from '../DatePicker';
 import { Stepper } from '../ui/stepper';
@@ -70,13 +69,12 @@ const ExpertOnboardingForm = () => {
     availability: string;
     languages_spoken: string;
     profile_photo: string;
-    id_front: string;
-    id_back: string;
-    address_front: string;
-    address_back: string;
+    id_card_front: string;
+    id_card_back: string;
+    address_card: string;
   }>({
     // Step1
-    phone: '+36 30 123 4567',
+    phone: '+36301234567',
     dob: '2022-01-01',
     // Step2
     country: 'HU',
@@ -93,10 +91,9 @@ const ExpertOnboardingForm = () => {
     languages_spoken: 'EN,HU',
     // Step4
     profile_photo: '',
-    id_front: '',
-    id_back: '',
-    address_front: '',
-    address_back: '',
+    id_card_front: '',
+    id_card_back: '',
+    address_card: '',
   });
 
   const ref1 = React.useRef<HTMLFormElement>(null);
@@ -105,29 +102,10 @@ const ExpertOnboardingForm = () => {
   const ref4 = React.useRef<HTMLFormElement>(null);
 
   // Files Ref
-  const profileRef = React.useRef<HTMLInputElement>(null);
-  const idFrontRef = React.useRef<HTMLInputElement>(null);
-  const idBackRef = React.useRef<HTMLInputElement>(null);
-  const addressFrontRef = React.useRef<HTMLInputElement>(null);
-  const addressBackRef = React.useRef<HTMLInputElement>(null);
-
-  const [profilePhoto, setProfilePhoto] = useState<File | null>(null);
-
-  console.log(profilePhoto);
-
-  const [profilePreview, setProfilePreview] = useState<string | null>(null);
-
-  const handleProfileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    // Save file for upload (optional)
-    setProfilePhoto(file);
-
-    // Create a preview URL
-    const url = URL.createObjectURL(file);
-    setProfilePreview(url);
-  };
+  const profilePhotoRef = React.useRef<HTMLInputElement>(null);
+  const idCardFrontRef = React.useRef<HTMLInputElement>(null);
+  const idBCardBackRef = React.useRef<HTMLInputElement>(null);
+  const addressCardRef = React.useRef<HTMLInputElement>(null);
 
   const [stateStep1, formActionStep1, isPendingStep1] = useActionState(
     onBoardingStep1Action,
@@ -156,7 +134,7 @@ const ExpertOnboardingForm = () => {
   //   null,
   // );
 
-  const [currentStep, setCurrentStep] = useState(3);
+  const [currentStep, setCurrentStep] = useState(0);
   const services: Service[] = useServices();
   const services_options = services.map(service => {
     const Icon = service.icon;
@@ -246,11 +224,65 @@ const ExpertOnboardingForm = () => {
     }
   }, [stateStep3, t]);
 
-  useEffect(() => {
-    return () => {
-      if (profilePreview) URL.revokeObjectURL(profilePreview);
-    };
-  }, [profilePreview]);
+  const [files1, setFiles1] = useState<File[] | undefined>();
+  const [filePreview1, setFilePreview1] = useState<string | undefined>();
+  const handleDrop1 = (files: File[]) => {
+    setFiles1(files);
+    if (files.length > 0) {
+      const reader = new FileReader();
+      reader.onload = e => {
+        if (typeof e.target?.result === 'string') {
+          setFilePreview1(e.target?.result);
+        }
+      };
+      reader.readAsDataURL(files[0]);
+    }
+  };
+
+  const [files2, setFiles2] = useState<File[] | undefined>();
+  const [filePreview2, setFilePreview2] = useState<string | undefined>();
+  const handleDrop2 = (files: File[]) => {
+    setFiles2(files);
+    if (files.length > 0) {
+      const reader = new FileReader();
+      reader.onload = e => {
+        if (typeof e.target?.result === 'string') {
+          setFilePreview2(e.target?.result);
+        }
+      };
+      reader.readAsDataURL(files[0]);
+    }
+  };
+
+  const [files3, setFiles3] = useState<File[] | undefined>();
+  const [filePreview3, setFilePreview3] = useState<string | undefined>();
+  const handleDrop3 = (files: File[]) => {
+    setFiles3(files);
+    if (files.length > 0) {
+      const reader = new FileReader();
+      reader.onload = e => {
+        if (typeof e.target?.result === 'string') {
+          setFilePreview3(e.target?.result);
+        }
+      };
+      reader.readAsDataURL(files[0]);
+    }
+  };
+
+  const [files4, setFiles4] = useState<File[] | undefined>();
+  const [filePreview4, setFilePreview4] = useState<string | undefined>();
+  const handleDrop4 = (files: File[]) => {
+    setFiles4(files);
+    if (files.length > 0) {
+      const reader = new FileReader();
+      reader.onload = e => {
+        if (typeof e.target?.result === 'string') {
+          setFilePreview4(e.target?.result);
+        }
+      };
+      reader.readAsDataURL(files[0]);
+    }
+  };
 
   return (
     <Card className='border-0 shadow-none w-full max-w-3xl'>
@@ -605,163 +637,160 @@ const ExpertOnboardingForm = () => {
         )}
         {currentStep === 3 && (
           <form action={formActionStep4} ref={ref4}>
-            <Label htmlFor='profile_photo'>
-              {t('1- Upload Profile Photo (Your Face)')}
-            </Label>
-            <input
-              type='file'
-              name='profile_photo'
-              hidden
-              ref={profileRef}
-              accept='image/*'
-              onChange={handleProfileChange}
-            />
-            <div className='bg-tertiary rounded-bl-md rounded-br-md h-auto flex items-center gap-4 p-4 justify-around mt-2'>
-              <div className='border-brand-blue-light text-brand-blue-light border rounded-full bg-white size-20 aspect-square flex items-center justify-center overflow-hidden'>
-                {profilePreview ? (
-                  <Image
-                    src={profilePreview}
-                    alt='Profile Preview'
-                    className='w-full h-full object-cover'
-                    width={80}
-                    height={80}
-                    unoptimized
-                  />
-                ) : (
-                  <CameraIcon className='w-7 h-8 text-brand-blue-light' />
-                )}
-              </div>
-              <div className='flex items-center gap-2 flex-wrap justify-end'>
-                <Button
-                  className='w-40 md:w-48'
-                  isLoading={false}
-                  variant='outline'
-                  onClick={() => profileRef.current?.click()}
-                >
-                  <UploadIcon />
-                  {t('Upload Image')}
-                </Button>
-              </div>
-            </div>
-            <br />
-            <Label htmlFor='id_card'>{t('2- Upload Your ID Card')}</Label>
+            <div className='flex flex-col gap-3 mt-6'>
+              <Label htmlFor='profile_photo'>
+                {t('1- Upload your profile photo (face)')}
+                <span className='text-red-500 ml-1'>*</span>
+              </Label>
+              <input
+                id='profile_photo'
+                type='file'
+                name='profile_photo'
+                hidden
+                ref={profilePhotoRef}
+              />
 
-            <div className='flex gap-4 mt-2'>
-              <input type='file' name='id_front' hidden ref={idFrontRef} />
               <Dropzone
-                accept={{ 'image/*': [] }}
+                accept={{ 'image/*': ['.png', '.jpg', '.jpeg'] }}
+                onDrop={handleDrop1}
+                onError={console.error}
+                src={files1}
                 maxFiles={1}
                 maxSize={1024 * 1024 * 10}
-                minSize={256}
-                onDrop={files => {
-                  if (files.length > 0) {
-                    const file = files[0];
-                    const dt = new DataTransfer();
-                    dt.items.add(file);
-                    idFrontRef.current!.files = dt.files;
-                  }
-                }}
-                onError={console.error}
-                src={
-                  idFrontRef.current?.files
-                    ? Array.from(idFrontRef.current.files)
-                    : undefined
-                }
                 className='flex-1 border-orange-400 border-dashed'
               >
-                <DropzoneEmptyState title='ID Card Front Side' />
-                <DropzoneContent />
-              </Dropzone>
-              <input type='file' name='id_back' hidden ref={idBackRef} />
-              <Dropzone
-                accept={{ 'image/*': [] }}
-                maxFiles={1}
-                maxSize={1024 * 1024 * 10}
-                minSize={256}
-                onDrop={files => {
-                  if (files.length > 0) {
-                    const file = files[0];
-                    const dt = new DataTransfer();
-                    dt.items.add(file);
-                    idBackRef.current!.files = dt.files;
-                  }
-                }}
-                onError={console.error}
-                src={
-                  idBackRef.current?.files
-                    ? Array.from(idBackRef.current.files)
-                    : undefined
-                }
-                className='flex-1 border-orange-400 border-dashed'
-              >
-                <DropzoneEmptyState title='ID Card Back Side' />
-                <DropzoneContent />
+                <DropzoneEmptyState />
+                <DropzoneContent>
+                  {filePreview1 && (
+                    <div className='h-[102px] w-full flex items-center justify-center'>
+                      <Image
+                        alt='Preview'
+                        className='h-30 w-30 object-cover'
+                        src={filePreview1}
+                        width={200}
+                        height={200}
+                        unoptimized
+                      />
+                    </div>
+                  )}
+                </DropzoneContent>
               </Dropzone>
             </div>
-            <br />
-            <Label htmlFor='address_card'>
-              {t('3- Upload Your Address Card')}
-            </Label>
-            <div className='flex gap-4 mt-2'>
+
+            <div className='flex flex-col gap-3 mt-6'>
+              <Label htmlFor='id_card_front'>
+                {t('2- Upload your ID card front side')}
+                <span className='text-red-500 ml-1'>*</span>
+              </Label>
               <input
+                id='id_card_front'
                 type='file'
-                name='address_front'
+                name='id_card_front'
                 hidden
-                ref={addressFrontRef}
+                ref={idCardFrontRef}
               />
               <Dropzone
-                accept={{ 'image/*': [] }}
+                accept={{ 'image/*': ['.png', '.jpg', '.jpeg'] }}
+                onDrop={handleDrop2}
+                onError={console.error}
+                src={files2}
                 maxFiles={1}
                 maxSize={1024 * 1024 * 10}
-                minSize={256}
-                onDrop={files => {
-                  if (files.length > 0) {
-                    const file = files[0];
-                    const dt = new DataTransfer();
-                    dt.items.add(file);
-                    addressFrontRef.current!.files = dt.files;
-                  }
-                }}
-                onError={console.error}
-                src={
-                  addressFrontRef.current?.files
-                    ? Array.from(addressFrontRef.current.files)
-                    : undefined
-                }
                 className='flex-1 border-orange-400 border-dashed'
               >
-                <DropzoneEmptyState title='Address Card Front Side' />
-                <DropzoneContent />
+                <DropzoneEmptyState />
+                <DropzoneContent>
+                  {filePreview2 && (
+                    <div className='h-[102px] w-full flex items-center justify-center'>
+                      <Image
+                        alt='Preview'
+                        className='h-30 w-48 object-cover'
+                        src={filePreview2}
+                        width={200}
+                        height={200}
+                        unoptimized
+                      />
+                    </div>
+                  )}
+                </DropzoneContent>
               </Dropzone>
+            </div>
+
+            <div className='flex flex-col gap-3 mt-6'>
+              <Label htmlFor='id_card_back'>
+                {t('3- Upload your ID card back side')}
+                <span className='text-red-500 ml-1'>*</span>
+              </Label>
               <input
+                id='id_card_back'
                 type='file'
-                name='address_back'
+                name='id_card_back'
                 hidden
-                ref={addressBackRef}
+                ref={idBCardBackRef}
               />
               <Dropzone
-                accept={{ 'image/*': [] }}
+                accept={{ 'image/*': ['.png', '.jpg', '.jpeg'] }}
+                onDrop={handleDrop3}
+                onError={console.error}
+                src={files3}
                 maxFiles={1}
                 maxSize={1024 * 1024 * 10}
-                minSize={256}
-                onDrop={files => {
-                  if (files.length > 0) {
-                    const file = files[0];
-                    const dt = new DataTransfer();
-                    dt.items.add(file);
-                    addressBackRef.current!.files = dt.files;
-                  }
-                }}
-                onError={console.error}
-                src={
-                  addressBackRef.current?.files
-                    ? Array.from(addressBackRef.current.files)
-                    : undefined
-                }
                 className='flex-1 border-orange-400 border-dashed'
               >
-                <DropzoneEmptyState title='Address Card Back Side' />
-                <DropzoneContent />
+                <DropzoneEmptyState />
+                <DropzoneContent>
+                  {filePreview3 && (
+                    <div className='h-[102px] w-full flex items-center justify-center'>
+                      <Image
+                        alt='Preview'
+                        className='h-30 w-48 object-cover'
+                        src={filePreview3}
+                        width={200}
+                        height={200}
+                        unoptimized
+                      />
+                    </div>
+                  )}
+                </DropzoneContent>
+              </Dropzone>
+            </div>
+
+            <div className='flex flex-col gap-3 mt-6'>
+              <Label htmlFor='address_card'>
+                {t('4- Upload your address card')}
+                <span className='text-red-500 ml-1'>*</span>
+              </Label>
+              <input
+                id='address_card'
+                type='file'
+                name='address_card'
+                hidden
+                ref={addressCardRef}
+              />
+              <Dropzone
+                accept={{ 'image/*': ['.png', '.jpg', '.jpeg'] }}
+                onDrop={handleDrop4}
+                onError={console.error}
+                src={files4}
+                maxFiles={1}
+                maxSize={1024 * 1024 * 10}
+                className='flex-1 border-orange-400 border-dashed'
+              >
+                <DropzoneEmptyState />
+                <DropzoneContent>
+                  {filePreview4 && (
+                    <div className='h-[102px] w-full flex items-center justify-center'>
+                      <Image
+                        alt='Preview'
+                        className='h-30 w-48 object-cover'
+                        src={filePreview4}
+                        width={200}
+                        height={200}
+                        unoptimized
+                      />
+                    </div>
+                  )}
+                </DropzoneContent>
               </Dropzone>
             </div>
           </form>
