@@ -118,7 +118,7 @@ export async function onBoardingStep2Action(
   }
 }
 
-export async function onBoardingStep3Action(
+export async function onBoardingProfessionAction(
   prevState: any,
   formData: FormData,
 ): Promise<any> {
@@ -134,9 +134,7 @@ export async function onBoardingStep3Action(
       .min(10, t('Please describe your profession in more detail')),
     years_experience: z.string().min(1, t('Years of experience is required')),
     availability: z.string().min(1, t('Availability is required')),
-    languages_spoken: z
-      .string()
-      .min(1, t('Please select at least one language')),
+    price_per_hour: z.string().min(1, t('Price per hour is required')),
   });
 
   const payload = makePayloadReady(formData);
@@ -151,6 +149,70 @@ export async function onBoardingStep3Action(
     return { data: payload };
   } catch (error: any) {
     console.error('Step 3 data error:', error?.body?.message);
+  }
+}
+
+export async function onBoardingStep3Action(
+  prevState: any,
+  formData: FormData,
+): Promise<any> {
+  const t = await getTranslations();
+  const schema = z.object({
+    professions: z
+      .array(
+        z.object({
+          profession: z
+            .string()
+            .refine(val => PROFESSION_VALUES.includes(val as any), {
+              message: t('Please select a valid profession'),
+            }),
+
+          profession_details: z
+            .string()
+            .min(10, t('Please describe your profession in more detail')),
+
+          years_experience: z
+            .string()
+            .min(1, t('Years of experience is required')),
+
+          availability: z.string().min(1, t('Availability is required')),
+
+          price_per_hour: z.object({
+            currency: 'HUF',
+            amount: z.string().min(1, t('Price per hour is required')),
+          }),
+        }),
+      )
+      .min(1, t('Please add at least one profession')),
+    languages_spoken: z
+      .string()
+      .min(1, t('Please select at least one language')),
+  });
+
+  const payload = makePayloadReady(formData);
+
+  if (typeof payload.professions === 'string') {
+    try {
+      payload.professions = JSON.parse(payload.professions);
+    } catch (e) {
+      return {
+        errors: { professions: ['Invalid professions JSON'] },
+        data: null,
+      };
+    }
+  }
+
+  const result = schema.safeParse(payload);
+
+  if (!result.success) {
+    const errors = result.error.flatten().fieldErrors;
+    return { errors: errors, data: payload };
+  }
+
+  try {
+    return { data: payload };
+  } catch (error: any) {
+    console.error('Step 4 data error:', error?.body?.message);
   }
 }
 

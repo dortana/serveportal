@@ -1,39 +1,40 @@
 import React from 'react';
 
-const AddIcon = () => {
+const AddIcon = ({ className }: { className?: string }) => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 24 24'
       width='24'
       height='24'
-      color='#000000'
+      color='currentColor'
       fill='none'
+      className={className}
     >
       <path
         d='M21 12.0278V5C21 3.34315 19.6569 2 18 2H5C3.34315 2 2 3.34315 2 5V18C2 19.6569 3.34315 21 5 21L12.0278 21'
-        stroke='#141B34'
+        stroke='currentColor'
         strokeWidth='1.5'
         strokeLinecap='round'
         strokeLinejoin='round'
       />
       <path
         d='M2 7H21'
-        stroke='#141B34'
+        stroke='currentColor'
         strokeWidth='1.5'
         strokeLinecap='round'
         strokeLinejoin='round'
       />
       <path
         d='M11 16H12.5M7 16H8M11 12H16M7 12H8'
-        stroke='#141B34'
+        stroke='currentColor'
         strokeWidth='1.5'
         strokeLinecap='round'
         strokeLinejoin='round'
       />
       <path
         d='M15 18.5H22M18.5 22V15'
-        stroke='#141B34'
+        stroke='currentColor'
         strokeWidth='1.5'
         strokeLinecap='round'
         strokeLinejoin='round'
