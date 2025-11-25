@@ -7,6 +7,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum UserStatus {
+  ACTIVE
+  BLOCKED
+  BANNED
+  DISABLED
+  UNDER_REVIEW
+}
+
 enum UserRole {
   USER
   ADMIN
@@ -15,27 +23,28 @@ enum UserRole {
 }
 
 model User {
-  id                String             @id @map("_id")
-  name              String?
-  email             String
-  emailVerified     Boolean            @default(false)
-  image             String?
-  createdAt         DateTime           @default(now())
-  updatedAt         DateTime           @default(now()) @updatedAt
-  firstName         String
-  lastName          String
-  role              UserRole           @default(USER)
-  docsUrls          DocsUrls?
-  phone             String?
-  dob               String?
-  address           Address?
-  companyName       String?
-  vatNumber         String?
-  sessions          Session[]
-  accounts          Account[]
-  journalEntry      JournalEntry[]
-  languagesSpoken   String[]
-  professionDetails ProfessionDetails?
+  id              String             @id @map("_id")
+  name            String?
+  email           String
+  emailVerified   Boolean            @default(false)
+  image           String?
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @default(now()) @updatedAt
+  firstName       String
+  lastName        String
+  role            UserRole           @default(USER)
+  status          UserStatus         @default(ACTIVE)
+  docsUrls        DocsUrls?
+  phone           String?
+  dob             String?
+  address         Address?
+  companyName     String?
+  vatNumber       String?
+  sessions        Session[]
+  accounts        Account[]
+  journalEntry    JournalEntry[]
+  languagesSpoken String[]
+  professions     ExpertiseDetails[]
 
   @@unique([email])
   @@map("user")
@@ -57,11 +66,24 @@ type DocsUrls {
   addressCardBack  String?
 }
 
-type ProfessionDetails {
-  profession        String?
-  description       String?
-  yearsOfExperience String?
-  availability      String?
+type ExpertiseDetails {
+  profession        String
+  professionDetails String
+  yearsExperience   String
+  availability      String
+  pricePerHour      PricePerHour
+}
+
+type PricePerHour {
+  currency Currency
+  amount   Float
+}
+
+enum Currency {
+  USD
+  EUR
+  GBP
+  HUF
 }
 
 model Session {

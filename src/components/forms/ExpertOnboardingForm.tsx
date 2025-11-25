@@ -97,7 +97,18 @@ const ExpertOnboardingForm = () => {
     city: 'Erd',
     postalCode: '2030',
     // Step3
-    professions: [],
+    professions: [
+      {
+        profession: 'cleaning',
+        profession_details: 'asdaasdasda',
+        years_experience: 'less_1',
+        availability: 'full_time',
+        price_per_hour: {
+          currency: 'HUF',
+          amount: 12500,
+        },
+      },
+    ],
     languages_spoken: 'EN,HU',
     // Step4
     profile_photo: '',
@@ -145,7 +156,7 @@ const ExpertOnboardingForm = () => {
   //   null,
   // );
 
-  const [currentStep, setCurrentStep] = useState(2);
+  const [currentStep, setCurrentStep] = useState(3);
   const services: Service[] = useServices();
   const experience_options = useExperienceOptions();
   const scheduleOptions = useWorkScheduleOptions();
@@ -227,7 +238,7 @@ const ExpertOnboardingForm = () => {
           profession_details: stateProfession.data.profession_details,
           years_experience: stateProfession.data.years_experience,
           availability: stateProfession.data.availability,
-          pricePerHour: {
+          price_per_hour: {
             currency: 'HUF',
             amount: Number(stateProfession.data.price_per_hour),
           },
@@ -258,7 +269,7 @@ const ExpertOnboardingForm = () => {
     }
   }, [stateProfession, t]);
 
-  // Handle side effects for step 1
+  // Handle side effects for step 3
   useEffect(() => {
     if (stateStep3?.data?.professions && !stateStep3.errors) {
       setFormData(prev => ({
@@ -274,11 +285,65 @@ const ExpertOnboardingForm = () => {
     }
   }, [stateStep3, t]);
 
+  // Handle side effects for step 4
+  useEffect(() => {
+    if (stateStep4?.data?.profile_photo && !stateStep4.errors) {
+      setFormData(prev => ({
+        ...prev,
+        profile_photo: stateStep4.data.profile_photo,
+        id_card_front: stateStep4.data.id_card_front,
+        id_card_back: stateStep4.data.id_card_back,
+        address_card: stateStep4.data.address_card,
+      }));
+      console.log('done, show review page or redirect to dashboard');
+    } else if (stateStep4?.errors) {
+      toast.error(t('Error'), {
+        description: t('Validation failed, please check your inputs.'),
+      });
+
+      // Re-populate file inputs with existing files from formData
+      if (stateStep4.data.profile_photo && profilePhotoRef.current) {
+        profilePhotoRef.current.files = createFileList([
+          stateStep4.data.profile_photo,
+        ]);
+      }
+      if (stateStep4.data.id_card_front && idCardFrontRef.current) {
+        idCardFrontRef.current.files = createFileList([
+          stateStep4.data.id_card_front,
+        ]);
+      }
+      if (stateStep4.data.id_card_back && idBCardBackRef.current) {
+        idBCardBackRef.current.files = createFileList([
+          stateStep4.data.id_card_back,
+        ]);
+      }
+      if (stateStep4.data.address_card && addressCardRef.current) {
+        addressCardRef.current.files = createFileList([
+          stateStep4.data.address_card,
+        ]);
+      }
+    }
+  }, [stateStep4, t]);
+
+  const createFileList = (files: File[]) => {
+    const dt = new DataTransfer();
+    files.forEach(file => dt.items.add(file));
+    return dt.files;
+  };
+
   const [files1, setFiles1] = useState<File[] | undefined>();
   const [filePreview1, setFilePreview1] = useState<string | undefined>();
   const handleDrop1 = (files: File[]) => {
     setFiles1(files);
     if (files.length > 0) {
+      if (profilePhotoRef.current) {
+        profilePhotoRef.current.files = createFileList(files);
+        // Trigger change event to ensure form data is updated
+        profilePhotoRef.current.dispatchEvent(
+          new Event('change', { bubbles: true }),
+        );
+      }
+
       const reader = new FileReader();
       reader.onload = e => {
         if (typeof e.target?.result === 'string') {
@@ -294,6 +359,14 @@ const ExpertOnboardingForm = () => {
   const handleDrop2 = (files: File[]) => {
     setFiles2(files);
     if (files.length > 0) {
+      if (idCardFrontRef.current) {
+        idCardFrontRef.current.files = createFileList(files);
+        // Trigger change event to ensure form data is updated
+        idCardFrontRef.current.dispatchEvent(
+          new Event('change', { bubbles: true }),
+        );
+      }
+
       const reader = new FileReader();
       reader.onload = e => {
         if (typeof e.target?.result === 'string') {
@@ -309,6 +382,14 @@ const ExpertOnboardingForm = () => {
   const handleDrop3 = (files: File[]) => {
     setFiles3(files);
     if (files.length > 0) {
+      if (idBCardBackRef.current) {
+        idBCardBackRef.current.files = createFileList(files);
+        // Trigger change event to ensure form data is updated
+        idBCardBackRef.current.dispatchEvent(
+          new Event('change', { bubbles: true }),
+        );
+      }
+
       const reader = new FileReader();
       reader.onload = e => {
         if (typeof e.target?.result === 'string') {
@@ -324,6 +405,14 @@ const ExpertOnboardingForm = () => {
   const handleDrop4 = (files: File[]) => {
     setFiles4(files);
     if (files.length > 0) {
+      if (addressCardRef.current) {
+        addressCardRef.current.files = createFileList(files);
+        // Trigger change event to ensure form data is updated
+        addressCardRef.current.dispatchEvent(
+          new Event('change', { bubbles: true }),
+        );
+      }
+
       const reader = new FileReader();
       reader.onload = e => {
         if (typeof e.target?.result === 'string') {
@@ -582,7 +671,7 @@ const ExpertOnboardingForm = () => {
                         {t('Price Per Hour:')}
                       </span>{' '}
                       <span className='text-green-700'>
-                        {profession.pricePerHour.amount
+                        {profession.price_per_hour.amount
                           .toString()
                           .replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
                         {' Ft/h'}
@@ -637,6 +726,7 @@ const ExpertOnboardingForm = () => {
                       setSelectedProfession(undefined);
                       setOpenEditProfession(true);
                     }}
+                    type='button'
                   >
                     <PlusIcon className='stroke-2' />
                     {t('Add Profession')}
@@ -698,7 +788,11 @@ const ExpertOnboardingForm = () => {
           </div>
         )}
         {currentStep === 3 && (
-          <form action={formActionStep4} ref={ref4}>
+          <form
+            action={formActionStep4}
+            ref={ref4}
+            encType='multipart/form-data'
+          >
             <div className='flex flex-col gap-3 mt-6'>
               <Label htmlFor='profile_photo'>
                 {t('1- Upload your profile photo (face)')}
@@ -737,6 +831,11 @@ const ExpertOnboardingForm = () => {
                   )}
                 </DropzoneContent>
               </Dropzone>
+              {stateStep4?.errors?.profile_photo && (
+                <p className='text-xs text-red-500'>
+                  {stateStep4.errors.profile_photo?.[0]}
+                </p>
+              )}
             </div>
 
             <div className='flex flex-col gap-3 mt-6'>
@@ -776,6 +875,11 @@ const ExpertOnboardingForm = () => {
                   )}
                 </DropzoneContent>
               </Dropzone>
+              {stateStep4?.errors?.id_card_front && (
+                <p className='text-xs text-red-500'>
+                  {stateStep4.errors.id_card_front?.[0]}
+                </p>
+              )}
             </div>
 
             <div className='flex flex-col gap-3 mt-6'>
@@ -815,6 +919,12 @@ const ExpertOnboardingForm = () => {
                   )}
                 </DropzoneContent>
               </Dropzone>
+
+              {stateStep4?.errors?.id_card_back && (
+                <p className='text-xs text-red-500'>
+                  {stateStep4.errors.id_card_back?.[0]}
+                </p>
+              )}
             </div>
 
             <div className='flex flex-col gap-3 mt-6'>
@@ -854,6 +964,12 @@ const ExpertOnboardingForm = () => {
                   )}
                 </DropzoneContent>
               </Dropzone>
+
+              {stateStep4?.errors?.address_card && (
+                <p className='text-xs text-red-500'>
+                  {stateStep4.errors.address_card?.[0]}
+                </p>
+              )}
             </div>
           </form>
         )}
@@ -904,10 +1020,11 @@ const ExpertOnboardingForm = () => {
                   placeholder={t('Tell customers about your experience')}
                   name='profession_details'
                   defaultValue={
-                    stateProfession?.data?.profession_details ||
-                    selectedProfession?.profession_details
-                      ? selectedProfession?.profession_details
-                      : undefined
+                    (stateProfession?.errors
+                      ? stateProfession?.data?.profession_details
+                      : undefined) ??
+                    selectedProfession?.profession_details ??
+                    ''
                   }
                   className={
                     stateProfession?.errors?.profession_details &&
@@ -1010,12 +1127,13 @@ const ExpertOnboardingForm = () => {
                   id='price_per_hour'
                   placeholder={t('e.g., 15000 HUF')}
                   name='price_per_hour'
-                  type='number'
+                  type='string'
                   defaultValue={
-                    stateProfession?.data?.price_per_hour ||
-                    selectedProfession?.pricePerHour
-                      ? selectedProfession?.pricePerHour?.amount
-                      : undefined
+                    (stateProfession?.errors
+                      ? stateProfession?.data?.price_per_hour
+                      : undefined) ??
+                    selectedProfession?.price_per_hour?.amount ??
+                    ''
                   }
                   className={
                     stateProfession?.errors?.price_per_hour && 'border-red-500'
@@ -1034,6 +1152,7 @@ const ExpertOnboardingForm = () => {
               </DialogClose>
               <Button
                 type='submit'
+                className='w-32'
                 isLoading={isPendingProfession}
                 disabled={isPendingProfession}
               >
@@ -1048,6 +1167,7 @@ const ExpertOnboardingForm = () => {
 
       <div className='flex justify-between'>
         <Button
+          className='w-32'
           variant='outline'
           onClick={() => setCurrentStep(currentStep - 1)}
           disabled={currentStep === 0}
@@ -1055,6 +1175,7 @@ const ExpertOnboardingForm = () => {
           {t('Previous')}
         </Button>
         <Button
+          className='w-32'
           onClick={() => {
             if (currentStep === 0) {
               ref1.current?.requestSubmit();
@@ -1066,7 +1187,6 @@ const ExpertOnboardingForm = () => {
               ref4.current?.requestSubmit();
             }
           }}
-          disabled={currentStep === steps.length - 1}
           isLoading={
             currentStep === 0
               ? isPendingStep1

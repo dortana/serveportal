@@ -28,7 +28,7 @@ export interface Expert {
   imageUrl: string;
   service: string;
   location: string;
-  pricePerHour: number;
+  price_per_hour: number;
   rating: number;
   reviewsCount: number;
 }
@@ -38,7 +38,7 @@ export interface ExpertiseDetails {
   profession_details: string;
   years_experience: string;
   availability: string;
-  pricePerHour: {
+  price_per_hour: {
     currency: 'USD' | 'EUR' | 'GBP' | 'HUF';
     amount: number;
   };

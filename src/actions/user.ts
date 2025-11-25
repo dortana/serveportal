@@ -178,7 +178,7 @@ export async function onBoardingStep3Action(
           availability: z.string().min(1, t('Availability is required')),
 
           price_per_hour: z.object({
-            currency: 'HUF',
+            currency: z.literal('HUF'),
             amount: z.string().min(1, t('Price per hour is required')),
           }),
         }),
@@ -230,19 +230,55 @@ export async function onBoardingStep4Action(
 
   const schema = z.object({
     profile_photo: fileSchema,
-    id_front: fileSchema,
-    id_back: fileSchema,
-    address_front: fileSchema,
-    address_back: fileSchema,
+    id_card_front: fileSchema,
+    id_card_back: fileSchema,
+    address_card: fileSchema,
   });
 
-  const payload = makePayloadReady(formData);
+  const payload = {
+    profile_photo: formData.get('profile_photo') as File,
+    id_card_front: formData.get('id_card_front') as File,
+    id_card_back: formData.get('id_card_back') as File,
+    address_card: formData.get('address_card') as File,
+  };
 
+  console.log(payload);
   const result = schema.safeParse(payload);
 
   if (!result.success) {
     const errors = result.error.flatten().fieldErrors;
-    return { errors: errors, data: payload };
+
+    const fileInfo = {
+      profile_photo: payload.profile_photo
+        ? {
+            name: payload.profile_photo.name,
+            size: payload.profile_photo.size,
+            type: payload.profile_photo.type,
+          }
+        : null,
+      id_card_front: payload.id_card_front
+        ? {
+            name: payload.id_card_front.name,
+            size: payload.id_card_front.size,
+            type: payload.id_card_front.type,
+          }
+        : null,
+      id_card_back: payload.id_card_back
+        ? {
+            name: payload.id_card_back.name,
+            size: payload.id_card_back.size,
+            type: payload.id_card_back.type,
+          }
+        : null,
+      address_card: payload.address_card
+        ? {
+            name: payload.address_card.name,
+            size: payload.address_card.size,
+            type: payload.address_card.type,
+          }
+        : null,
+    };
+    return { errors: errors, data: fileInfo };
   }
 
   try {

@@ -108,6 +108,7 @@ export async function signUpAction(prevState: any, formData: FormData) {
       // @ts-ignore
       body: {
         ...payload,
+        ...(payload.accountType === 'expert' && { status: 'DISABLED' }),
       },
     });
 

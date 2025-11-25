@@ -3,7 +3,7 @@ import PanelHeader from './PanelHeader';
 import PanelSidebar from './PanelSidebar';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { User, UserRole } from '@prisma/client';
+import { User, UserRole, UserStatus } from '@prisma/client';
 import ExpertOnboardingForm from '@/components/forms/ExpertOnboardingForm';
 export default async function PanelLayout({
   children,
@@ -21,7 +21,7 @@ export default async function PanelLayout({
     return redirect('/panel/dashboard');
   }
   const needsOnboarding =
-    !user.professionDetails && user.role === UserRole.EXPERT;
+    user.status === UserStatus.DISABLED && user.role === UserRole.EXPERT;
   return (
     <section className='p-3 flex flex-col gap-3 min-h-screen bg-tertiary'>
       <PanelHeader user={user} />
