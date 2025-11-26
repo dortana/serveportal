@@ -52,3 +52,13 @@ export const formatCurrency = (inputValue: string): string => {
   if (formattedValue === '0') formattedValue = '0.00';
   return '€' + formattedValue;
 };
+
+export function formatCurrencyHuf(amount: number | string): string {
+  const num = Number(amount);
+
+  if (isNaN(num)) return '';
+
+  const formatted = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+
+  return `${formatted} HUF`;
+}

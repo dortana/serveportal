@@ -7,6 +7,7 @@ import LocationIcon from './icons/LocationIcon';
 import { Expert } from '@/types/app';
 import { useTranslations } from 'next-intl';
 import StartIcon from './icons/StartIcon';
+import { formatCurrencyHuf } from '@/lib/utils';
 
 const ExpertCard = ({ expert }: { expert: Expert }) => {
   const t = useTranslations();
@@ -83,10 +84,7 @@ const ExpertCard = ({ expert }: { expert: Expert }) => {
             />
           </svg>
           <span className='text-sm'>
-            {expert.pricePerHour
-              .toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, '.')}{' '}
-            Ft/h
+            {formatCurrencyHuf(expert.price_per_hour)}/h
           </span>
         </div>
       </div>

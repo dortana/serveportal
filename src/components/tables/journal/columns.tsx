@@ -3,7 +3,7 @@
 import { ColumnDef } from '@tanstack/react-table';
 import { DataTableColumnHeader } from './data-table-column-header';
 import { JournalEntry } from '@prisma/client';
-import { formatCurrency } from '@/lib/utils';
+import { formatCurrencyHuf } from '@/lib/utils';
 import DocumentType from './DocumentType';
 
 export type CustomColumnDef<T> = ColumnDef<T> & {
@@ -85,7 +85,7 @@ export const getJournalColumns = (t: any): CustomColumnDef<JournalEntry>[] => {
         const value = row.getValue('expenseGross') as number | null;
         return value ? (
           <span className='text-red-600 font-medium text-center block'>
-            {formatCurrency(value.toString())}
+            {formatCurrencyHuf(value.toString())}
           </span>
         ) : (
           ''
@@ -102,7 +102,7 @@ export const getJournalColumns = (t: any): CustomColumnDef<JournalEntry>[] => {
         const value = row.getValue('incomeGross') as number | null;
         return value ? (
           <span className='text-green-600 font-medium text-center block'>
-            {formatCurrency(value.toString())}
+            {formatCurrencyHuf(value.toString())}
           </span>
         ) : (
           ''
@@ -142,7 +142,7 @@ export const getJournalColumns = (t: any): CustomColumnDef<JournalEntry>[] => {
         const value = row.getValue('inputVat') as number | null;
         return value ? (
           <span className='text-center block'>
-            {formatCurrency(value.toString())}
+            {formatCurrencyHuf(value.toString())}
           </span>
         ) : (
           '-'

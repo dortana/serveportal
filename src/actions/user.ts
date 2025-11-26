@@ -134,7 +134,10 @@ export async function onBoardingProfessionAction(
       .min(10, t('Please describe your profession in more detail')),
     years_experience: z.string().min(1, t('Years of experience is required')),
     availability: z.string().min(1, t('Availability is required')),
-    price_per_hour: z.string().min(1, t('Price per hour is required')),
+    price_per_hour: z
+      .string()
+      .min(1, t('Price per hour is required'))
+      .regex(/^\d{1,3}( \d{3})*$/, t('Enter a valid HUF amount')),
   });
 
   const payload = makePayloadReady(formData);
@@ -179,7 +182,10 @@ export async function onBoardingStep3Action(
 
           price_per_hour: z.object({
             currency: z.literal('HUF'),
-            amount: z.string().min(1, t('Price per hour is required')),
+            amount: z
+              .string()
+              .min(1, t('Price per hour is required'))
+              .regex(/^\d{1,3}( \d{3})*$/, t('Enter a valid HUF amount')),
           }),
         }),
       )

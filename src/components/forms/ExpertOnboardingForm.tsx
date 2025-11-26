@@ -49,7 +49,7 @@ import {
   onBoardingStep3Action,
   onBoardingStep4Action,
 } from '@/actions/user';
-import { cn } from '@/lib/utils';
+import { cn, formatCurrencyHuf } from '@/lib/utils';
 import Image from 'next/image';
 import { useExperienceOptions } from '@/hooks/useExperienceOptions';
 import { useWorkScheduleOptions } from '@/hooks/useWorkScheduleOptions';
@@ -66,6 +66,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import PlusIcon from '../icons/PlusIcon';
+import NumberInput from '../ui/number-input';
 
 const ExpertOnboardingForm = () => {
   const t = useTranslations();
@@ -105,7 +106,8 @@ const ExpertOnboardingForm = () => {
         availability: 'full_time',
         price_per_hour: {
           currency: 'HUF',
-          amount: 12500,
+          // @ts-ignore
+          amount: '12500',
         },
       },
     ],
@@ -671,10 +673,8 @@ const ExpertOnboardingForm = () => {
                         {t('Price Per Hour:')}
                       </span>{' '}
                       <span className='text-green-700'>
-                        {profession.price_per_hour.amount
-                          .toString()
-                          .replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
-                        {' Ft/h'}
+                        {formatCurrencyHuf(profession.price_per_hour.amount)}
+                        {'/h'}
                       </span>
                     </div>
 
@@ -788,11 +788,7 @@ const ExpertOnboardingForm = () => {
           </div>
         )}
         {currentStep === 3 && (
-          <form
-            action={formActionStep4}
-            ref={ref4}
-            encType='multipart/form-data'
-          >
+          <form action={formActionStep4} ref={ref4}>
             <div className='flex flex-col gap-3 mt-6'>
               <Label htmlFor='profile_photo'>
                 {t('1- Upload your profile photo (face)')}
@@ -1123,9 +1119,9 @@ const ExpertOnboardingForm = () => {
                 <Label htmlFor='price_per_hour'>
                   {t('Price Per Hour (HUF)')}
                 </Label>
-                <Input
+                <NumberInput
                   id='price_per_hour'
-                  placeholder={t('e.g., 15000 HUF')}
+                  placeholder={t('e.g., 15 000 HUF')}
                   name='price_per_hour'
                   type='string'
                   defaultValue={
