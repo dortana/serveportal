@@ -242,7 +242,9 @@ const ExpertOnboardingForm = () => {
           availability: stateProfession.data.availability,
           price_per_hour: {
             currency: 'HUF',
-            amount: Number(stateProfession.data.price_per_hour),
+            amount: stateProfession.data.price_per_hour
+              .toString()
+              .replaceAll(' ', ''),
           },
         };
 
