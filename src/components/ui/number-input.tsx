@@ -1,19 +1,14 @@
 import React from 'react';
 import { Input } from '@/components/ui/input';
+import { formatCurrencyHuf } from '@/lib/utils';
 
 interface NumberInputProps extends React.ComponentProps<'input'> {
-  allowDecimals?: boolean; //in future
+  allowDecimals?: boolean; // future use
 }
 
 const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
   ({ onChange, ...props }, ref) => {
-    const formatHuf = (value: string) => {
-      // remove non-digits
-      const digits = value.replace(/\D/g, '');
-
-      // format with Hungarian thousands separator (space)
-      return digits.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-    };
+    const [formattedValue, setFormattedValue] = React.useState('0 HUF');
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
       const key = e.key;
@@ -26,35 +21,42 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         'Tab',
       ];
 
-      // allow navigation keys
       if (allowedKeys.includes(key)) return;
 
-      // block non-digits
       if (!/^\d$/.test(key)) {
         e.preventDefault();
       }
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const rawValue = e.target.value;
+      const displayed = e.target.value;
+      const raw = displayed.replace(/\s+/g, '');
 
-      const formatted = formatHuf(rawValue);
+      setFormattedValue(formatCurrencyHuf(displayed));
 
-      // manually update the value
-      e.target.value = formatted;
+      e.target.value = displayed;
 
-      onChange?.(e);
+      onChange?.({
+        ...e,
+        target: {
+          ...e.target,
+          value: raw,
+        },
+      });
     };
 
     return (
-      <Input
-        {...props}
-        ref={ref}
-        type='text'
-        inputMode='numeric'
-        onKeyDown={handleKeyDown}
-        onChange={handleChange}
-      />
+      <>
+        <Input
+          {...props}
+          ref={ref}
+          type='text'
+          inputMode='numeric'
+          onKeyDown={handleKeyDown}
+          onChange={handleChange}
+        />
+        <span className='text-green-500 text-xs absolute top-1.5 right-0'>{`(${formattedValue})`}</span>
+      </>
     );
   },
 );

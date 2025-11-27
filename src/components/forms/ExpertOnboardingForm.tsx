@@ -242,9 +242,7 @@ const ExpertOnboardingForm = () => {
           availability: stateProfession.data.availability,
           price_per_hour: {
             currency: 'HUF',
-            amount: stateProfession.data.price_per_hour
-              .toString()
-              .replaceAll(' ', ''),
+            amount: stateProfession.data.price_per_hour,
           },
         };
 
@@ -1118,9 +1116,7 @@ const ExpertOnboardingForm = () => {
               </div>
 
               <div className='space-y-1 relative'>
-                <Label htmlFor='price_per_hour'>
-                  {t('Price Per Hour (HUF)')}
-                </Label>
+                <Label htmlFor='price_per_hour'>{t('Price Per Hour')}</Label>
                 <NumberInput
                   id='price_per_hour'
                   placeholder={t('e.g., 15 000 HUF')}

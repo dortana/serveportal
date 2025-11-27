@@ -137,7 +137,7 @@ export async function onBoardingProfessionAction(
     price_per_hour: z
       .string()
       .min(1, t('Price per hour is required'))
-      .regex(/^(\d+|\d{1,3}( \d{3})*)$/, t('Enter a valid HUF amount')),
+      .regex(/^\d+$/, t('Enter a valid HUF amount')),
   });
 
   const payload = makePayloadReady(formData);
@@ -185,7 +185,7 @@ export async function onBoardingStep3Action(
             amount: z
               .string()
               .min(1, t('Price per hour is required'))
-              .regex(/^(\d+|\d{1,3}( \d{3})*)$/, t('Enter a valid HUF amount')),
+              .regex(/^\d+$/, t('Enter a valid HUF amount')),
           }),
         }),
       )
