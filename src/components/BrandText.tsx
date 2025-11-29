@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 import { app_name } from '@/lib/data';
 
 const orbitron = Unbounded({
-  weight: '500',
+  weight: '300',
 });
 
 const BrandText = ({ className }: { className?: string }) => {

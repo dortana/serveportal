@@ -25,13 +25,24 @@ export function DatePicker({
   const [date, setDate] = React.useState<Date | undefined>(
     value ? new Date(value) : undefined,
   );
-  const formatDate = (d?: Date) => {
-    if (!d) return 'Select date';
-    return d.toISOString().split('T')[0]; // YYYY-MM-DD
-  };
+
+  function formatDateLocal(date?: Date) {
+    if (!date) return '';
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    return `${y}-${m}-${d}`;
+  }
+
+  React.useEffect(() => {
+    if (value) {
+      setDate(new Date(value));
+    }
+  }, [value]);
+
   return (
     <div className='flex flex-col gap-3'>
-      <input type='hidden' name={name} value={date ? date.toISOString() : ''} />
+      <input type='hidden' name={name} value={formatDateLocal(date)} />
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
@@ -39,7 +50,7 @@ export function DatePicker({
             id='date'
             className={cn('w-full justify-between font-normal h-10', className)}
           >
-            {formatDate(date)}
+            {formatDateLocal(date)}
             <CalendarIcon />
           </Button>
         </PopoverTrigger>
@@ -47,6 +58,7 @@ export function DatePicker({
           <Calendar
             mode='single'
             selected={date}
+            defaultMonth={date}
             captionLayout='dropdown'
             onSelect={date => {
               setDate(date);

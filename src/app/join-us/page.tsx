@@ -3,7 +3,6 @@ import SiteFooter from '@/components/SiteFooter';
 import SiteHeader from '@/components/SiteHeader';
 import { Badge } from '@/components/ui/badge';
 import { getTranslations } from 'next-intl/server';
-import ExpertSignUpForm from '@/components/forms/ExpertOnboardingForm';
 
 const JoinUsPage = async () => {
   const t = await getTranslations();
@@ -31,7 +30,7 @@ const JoinUsPage = async () => {
           </div>
         </section>
         <section className='flex items-center justify-center w-full mb-20'>
-          <ExpertSignUpForm />
+          {/* asdad */}
         </section>
       </div>
       <SiteFooter />

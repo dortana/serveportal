@@ -61,10 +61,10 @@ interface StepperProps {
 
 export function Stepper({ steps, currentStep }: StepperProps) {
   return (
-    <div className='w-full max-w-3xl mx-auto'>
-      <div className='flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8'>
+    <div className='w-full mx-auto'>
+      <div className='flex flex-col md:flex-row items-start md:items-center gap-4 mb-8 flex-wrap'>
         {steps.map((step, index) => (
-          <div key={step.title} className='relative mr-2'>
+          <div key={step.title} className='flex items-center'>
             <Step
               title={step.title}
               description={step.description}
@@ -72,9 +72,11 @@ export function Stepper({ steps, currentStep }: StepperProps) {
               isActive={index === currentStep}
               icon={step.icon}
             />
-            {index < steps.length - 1 && (
-              <ChevronRight className='hidden md:block w-4 h-4 text-muted-foreground absolute -right-5 top-3' />
-            )}
+            <div className='w-full flex items-center justify-center ml-4'>
+              {index < steps.length - 1 && (
+                <ChevronRight className='hidden md:block w-6 h-6 text-muted-foreground' />
+              )}
+            </div>
           </div>
         ))}
       </div>

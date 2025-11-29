@@ -10,10 +10,20 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'sswylvjbnvnnnixscchv.supabase.co',
+        port: '',
+      },
+      {
+        protocol: 'https',
         hostname: 'randomuser.me',
         pathname: '/api/portraits/**',
       },
     ],
+  },
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '10mb',
+    },
   },
 };
 

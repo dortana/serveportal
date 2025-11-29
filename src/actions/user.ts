@@ -2,11 +2,14 @@
 
 import { z } from 'zod';
 import { getTranslations } from 'next-intl/server';
-import { makePayloadReady } from '@/lib/utils';
-import { User } from '@prisma/client';
+import { generateFileName, makePayloadReady } from '@/lib/utils';
+import { ExpertiseDetails, User } from '@prisma/client';
 import prisma from '@/lib/db';
 import { isValidPhoneNumber } from 'libphonenumber-js';
 import { PROFESSION_VALUES } from '@/lib/data';
+import { uploadToSupabase } from './app';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 
 export async function profileDataAction(
   prevState: any,
@@ -35,6 +38,8 @@ export async function profileDataAction(
     return { errors: errors, data: payload };
   }
   try {
+    const session = await auth.api.getSession({ headers: await headers() });
+    if (!session?.session?.token) throw new Error('User not authenticated');
     // udpate data here
     new Promise(resolve => setTimeout(resolve, 2000));
     const user = await prisma.user.findUnique({
@@ -65,7 +70,17 @@ export async function onBoardingStep1Action(
       .min(1, 'Date of birth is required')
       .transform(val => new Date(val))
       .refine(d => d.toString() !== 'Invalid Date', 'Invalid date')
-      .refine(d => d < new Date(), 'Date cannot be in the future'),
+      .refine(d => d < new Date(), 'Date cannot be in the future')
+      .refine(d => {
+        const today = new Date();
+        const age = today.getFullYear() - d.getFullYear();
+
+        const hasBirthdayPassed =
+          today.getMonth() > d.getMonth() ||
+          (today.getMonth() === d.getMonth() && today.getDate() >= d.getDate());
+
+        return age > 18 || (age === 18 && hasBirthdayPassed);
+      }, t('You must be at least 18 years old')),
   });
 
   const payload = makePayloadReady(formData);
@@ -78,6 +93,20 @@ export async function onBoardingStep1Action(
   }
 
   try {
+    const session = await auth.api.getSession({ headers: await headers() });
+    const user = session?.user;
+
+    if (!user) throw new Error('User not authenticated');
+
+    await prisma.user.update({
+      where: { email: user.email },
+      data: {
+        phone: payload.phone.replaceAll(' ', ''),
+        dob: payload.dob,
+        onBoardingStatus: 'ADDRESS_INFO',
+      },
+    });
+
     return { data: payload };
   } catch (error: any) {
     console.error('Step 1 data error:', error?.body?.message);
@@ -112,6 +141,26 @@ export async function onBoardingStep2Action(
   }
 
   try {
+    const session = await auth.api.getSession({ headers: await headers() });
+    const user = session?.user;
+
+    if (!user) throw new Error('User not authenticated');
+
+    await prisma.user.update({
+      where: { email: user.email },
+      data: {
+        address: {
+          country: payload.country,
+          addressLine1: payload.addressLine1,
+          addressLine2: payload.addressLine2,
+          state: payload.state,
+          city: payload.city,
+          postalCode: payload.postalCode,
+        },
+        onBoardingStatus: 'EXPERTISE_DETAILS',
+      },
+    });
+
     return { data: payload };
   } catch (error: any) {
     console.error('Step 2 data error:', error?.body?.message);
@@ -129,12 +178,12 @@ export async function onBoardingProfessionAction(
       .refine(val => PROFESSION_VALUES.includes(val as any), {
         message: t('Please select a valid profession'),
       }),
-    profession_details: z
+    professionDetails: z
       .string()
       .min(10, t('Please describe your profession in more detail')),
-    years_experience: z.string().min(1, t('Years of experience is required')),
+    yearsExperience: z.string().min(1, t('Years of experience is required')),
     availability: z.string().min(1, t('Availability is required')),
-    price_per_hour: z
+    pricePerHour: z
       .string()
       .min(1, t('Price per hour is required'))
       .regex(/^\d+$/, t('Enter a valid HUF amount')),
@@ -170,17 +219,17 @@ export async function onBoardingStep3Action(
               message: t('Please select a valid profession'),
             }),
 
-          profession_details: z
+          professionDetails: z
             .string()
             .min(10, t('Please describe your profession in more detail')),
 
-          years_experience: z
+          yearsExperience: z
             .string()
             .min(1, t('Years of experience is required')),
 
           availability: z.string().min(1, t('Availability is required')),
 
-          price_per_hour: z.object({
+          pricePerHour: z.object({
             currency: z.literal('HUF'),
             amount: z
               .string()
@@ -190,7 +239,7 @@ export async function onBoardingStep3Action(
         }),
       )
       .min(1, t('Please add at least one profession')),
-    languages_spoken: z
+    languagesSpoken: z
       .string()
       .min(1, t('Please select at least one language')),
   });
@@ -216,9 +265,29 @@ export async function onBoardingStep3Action(
   }
 
   try {
+    const session = await auth.api.getSession({ headers: await headers() });
+    const user = session?.user;
+
+    if (!user) throw new Error('User not authenticated');
+
+    await prisma.user.update({
+      where: { email: user.email },
+      data: {
+        professions: payload.professions.map((p: ExpertiseDetails) => ({
+          ...p,
+          pricePerHour: {
+            ...p.pricePerHour,
+            amount: Number(p.pricePerHour.amount),
+          },
+        })),
+        languagesSpoken: payload.languagesSpoken,
+        onBoardingStatus: 'DOCUMENTS_UPLOAD',
+      },
+    });
+
     return { data: payload };
   } catch (error: any) {
-    console.error('Step 4 data error:', error?.body?.message);
+    console.error('Step 3 data error:', error?.body?.message);
   }
 }
 
@@ -235,52 +304,51 @@ export async function onBoardingStep4Action(
     .refine(f => f.type.startsWith('image/'), t('Only images allowed'));
 
   const schema = z.object({
-    profile_photo: fileSchema,
-    id_card_front: fileSchema,
-    id_card_back: fileSchema,
-    address_card: fileSchema,
+    profilePhoto: fileSchema,
+    idCardFront: fileSchema,
+    idCardBack: fileSchema,
+    addressCard: fileSchema,
   });
 
   const payload = {
-    profile_photo: formData.get('profile_photo') as File,
-    id_card_front: formData.get('id_card_front') as File,
-    id_card_back: formData.get('id_card_back') as File,
-    address_card: formData.get('address_card') as File,
+    profilePhoto: formData.get('profilePhoto') as File,
+    idCardFront: formData.get('idCardFront') as File,
+    idCardBack: formData.get('idCardBack') as File,
+    addressCard: formData.get('addressCard') as File,
   };
 
-  console.log(payload);
   const result = schema.safeParse(payload);
 
   if (!result.success) {
     const errors = result.error.flatten().fieldErrors;
 
     const fileInfo = {
-      profile_photo: payload.profile_photo
+      profilePhoto: payload.profilePhoto
         ? {
-            name: payload.profile_photo.name,
-            size: payload.profile_photo.size,
-            type: payload.profile_photo.type,
+            name: payload.profilePhoto.name,
+            size: payload.profilePhoto.size,
+            type: payload.profilePhoto.type,
           }
         : null,
-      id_card_front: payload.id_card_front
+      idCardFront: payload.idCardFront
         ? {
-            name: payload.id_card_front.name,
-            size: payload.id_card_front.size,
-            type: payload.id_card_front.type,
+            name: payload.idCardFront.name,
+            size: payload.idCardFront.size,
+            type: payload.idCardFront.type,
           }
         : null,
-      id_card_back: payload.id_card_back
+      idCardBack: payload.idCardBack
         ? {
-            name: payload.id_card_back.name,
-            size: payload.id_card_back.size,
-            type: payload.id_card_back.type,
+            name: payload.idCardBack.name,
+            size: payload.idCardBack.size,
+            type: payload.idCardBack.type,
           }
         : null,
-      address_card: payload.address_card
+      addressCard: payload.addressCard
         ? {
-            name: payload.address_card.name,
-            size: payload.address_card.size,
-            type: payload.address_card.type,
+            name: payload.addressCard.name,
+            size: payload.addressCard.size,
+            type: payload.addressCard.type,
           }
         : null,
     };
@@ -288,7 +356,60 @@ export async function onBoardingStep4Action(
   }
 
   try {
-    return { data: payload };
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+    const user = session?.user;
+
+    if (!user) throw new Error('User not authenticated');
+
+    const email = user.email;
+
+    const emailFolder = email.replace(/[^a-zA-Z0-9._-]/g, '_');
+
+    // Generate UUID filenames
+    const profileFile = generateFileName(payload.profilePhoto);
+    const frontFile = generateFileName(payload.idCardFront);
+    const backFile = generateFileName(payload.idCardBack);
+    const addrFile = generateFileName(payload.addressCard);
+
+    const [profileUrl, frontUrl, backUrl, addrUrl] = await Promise.all([
+      uploadToSupabase(
+        payload.profilePhoto,
+        `experts/${emailFolder}/${profileFile}`,
+      ),
+      uploadToSupabase(
+        payload.idCardFront,
+        `experts/${emailFolder}/${frontFile}`,
+      ),
+      uploadToSupabase(
+        payload.idCardBack,
+        `experts/${emailFolder}/${backFile}`,
+      ),
+      uploadToSupabase(
+        payload.addressCard,
+        `experts/${emailFolder}/${addrFile}`,
+      ),
+    ]);
+
+    await prisma.user.update({
+      where: { email },
+      data: {
+        docsUrls: {
+          profilePhoto: profileUrl,
+          idCardFront: frontUrl,
+          idCardBack: backUrl,
+          addressCard: addrUrl,
+        },
+        onBoardingStatus: 'UNDER_REVIEW',
+      },
+    });
+
+    return {
+      data: {
+        success: true,
+      },
+    };
   } catch (error: any) {
     console.error('Step 4 data error:', error?.body?.message);
   }

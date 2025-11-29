@@ -53,6 +53,22 @@ export const auth = betterAuth({
         type: 'string',
         required: true,
       },
+      onBoardingStatus: {
+        type: 'string',
+        required: true,
+      },
+      languagesSpoken: {
+        type: 'string',
+        required: true,
+      },
+      professions: {
+        type: 'string',
+        required: true,
+      },
+      docsUrls: {
+        type: 'string',
+        required: true,
+      },
     },
   },
   emailVerification: {

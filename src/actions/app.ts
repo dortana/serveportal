@@ -1,5 +1,6 @@
 'use server';
 import { cookies } from 'next/headers';
+import { createSupabaseClient } from '@/lib/supabase';
 
 export const languageSetAction = async (lang: string) => {
   const cookieStore = await cookies();
@@ -35,3 +36,32 @@ export const accountTypeGetAction = async () => {
     | 'expert'
     | undefined;
 };
+
+export async function uploadToSupabase(
+  file: File,
+  path: string,
+  bucketName = 'ServePortal',
+) {
+  const supabase = createSupabaseClient();
+
+  // Convert file → Buffer
+  const buffer = Buffer.from(await file.arrayBuffer());
+
+  const { error } = await supabase.storage
+    .from(bucketName)
+    .upload(path, buffer, {
+      contentType: file.type,
+      upsert: true,
+    });
+
+  if (error) {
+    console.error('Upload error:', error);
+    throw new Error(error.message);
+  }
+
+  const { data: publicUrl } = supabase.storage
+    .from(bucketName)
+    .getPublicUrl(path);
+
+  return publicUrl.publicUrl;
+}

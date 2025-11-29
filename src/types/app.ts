@@ -32,20 +32,3 @@ export interface Expert {
   rating: number;
   reviewsCount: number;
 }
-
-export interface ExpertiseDetails {
-  profession: string;
-  profession_details: string;
-  years_experience: string;
-  availability: string;
-  price_per_hour: {
-    currency: 'USD' | 'EUR' | 'GBP' | 'HUF';
-    amount: number;
-  };
-  rates?: Rate[];
-}
-
-export interface Rate {
-  star: number;
-  comment: string;
-}

@@ -62,3 +62,13 @@ export function formatCurrencyHuf(amount: number | string): string {
 
   return `${formatted} HUF`;
 }
+
+export const generateFileName = (file: File) => {
+  // Get extension from MIME type → jpg/jpeg/png
+  const ext = file.type.split('/')[1] || 'bin';
+
+  // Remove dashes to get a cleaner long hash
+  const uuid = crypto.randomUUID().replace(/-/g, '');
+
+  return `${uuid}.${ext}`;
+};
