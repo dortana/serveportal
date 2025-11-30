@@ -67,7 +67,11 @@ import {
 import PlusIcon from '../icons/PlusIcon';
 import NumberInput from '../ui/number-input';
 import ReviewIcon from '../icons/ReviewIcon';
-import { ExpertiseDetails, OnBoardingStatus, User } from '@prisma/client';
+import {
+  ExpertiseDetails,
+  OnBoardingStatus,
+  User,
+} from '@/app/generated/prisma/client';
 
 const ExpertOnboardingForm = ({ user }: { user: User }) => {
   const t = useTranslations();

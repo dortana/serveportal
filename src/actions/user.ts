@@ -3,7 +3,7 @@
 import { z } from 'zod';
 import { getTranslations } from 'next-intl/server';
 import { generateFileName, makePayloadReady } from '@/lib/utils';
-import { ExpertiseDetails, User } from '@prisma/client';
+import { ExpertiseDetails, User } from '@/app/generated/prisma/client';
 import prisma from '@/lib/db';
 import { isValidPhoneNumber } from 'libphonenumber-js';
 import { PROFESSION_VALUES } from '@/lib/data';
@@ -252,7 +252,7 @@ export async function onBoardingStep3Action(
     } catch (e) {
       return {
         errors: { professions: ['Invalid professions JSON'] },
-        data: null,
+        data: e,
       };
     }
   }

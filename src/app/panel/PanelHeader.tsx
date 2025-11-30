@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import SearchIcon from '@/components/icons/SearchIcon';
 import { getTranslations } from 'next-intl/server';
 import ToggleMenu from '@/app/panel/ToggleMenu';
-import { User } from '@prisma/client';
+import { User } from '@/app/generated/prisma/client';
 import ExitIcon from '@/components/icons/ExitIcon';
 import { signOutAction } from '@/actions/auth';
 import { Button } from '@/components/ui/button';

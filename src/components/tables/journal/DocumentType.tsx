@@ -1,5 +1,5 @@
 'use client';
-import { JournalDocumentType } from '@prisma/client';
+import { JournalDocumentType } from '@/app/generated/prisma/client';
 import React from 'react';
 import { useJournalDocumentTypes } from './icon-renderer';
 

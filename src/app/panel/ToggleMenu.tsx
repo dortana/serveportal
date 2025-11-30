@@ -9,7 +9,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import PanelSidebar from '@/app/panel/PanelSidebar';
-import { User } from '@prisma/client';
+import { User } from '@/app/generated/prisma/client';
 
 const ToggleMenu = ({ user }: { user: User }) => {
   const t = useTranslations();

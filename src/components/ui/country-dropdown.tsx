@@ -72,6 +72,7 @@ const CountryDropdownComponent = (
 
     const initial = options.find(c => c.alpha2 === defaultValue);
     if (initial) setSelectedCountry(initial);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSelect = useCallback(
@@ -98,7 +99,7 @@ const CountryDropdownComponent = (
         {...props}
       >
         {selectedCountry ? (
-          <div className='flex items-center flex-grow w-0 gap-2 overflow-hidden'>
+          <div className='flex items-center grow w-0 gap-2 overflow-hidden'>
             <div className='inline-flex items-center justify-center w-5 h-5 shrink-0 overflow-hidden rounded-full'>
               <CircleFlag
                 countryCode={selectedCountry.alpha2.toLowerCase()}

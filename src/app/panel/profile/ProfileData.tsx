@@ -1,6 +1,6 @@
 'use client';
 import React, { useActionState, useEffect, useState } from 'react';
-import { User } from '@prisma/client';
+import { User } from '@/app/generated/prisma/client';
 import { Button } from '@/components/ui/button';
 import { useTranslations } from 'next-intl';
 import {

@@ -1,6 +1,6 @@
 import { betterAuth } from 'better-auth';
 import { prismaAdapter } from 'better-auth/adapters/prisma';
-import { PrismaClient, UserRole } from '@prisma/client';
+import { PrismaClient, UserRole } from '@/app/generated/prisma/client';
 import { nextCookies } from 'better-auth/next-js';
 import { emailOTP } from 'better-auth/plugins';
 import { Resend } from 'resend';

@@ -7,7 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import DashboardIcon from '@/components/icons/DashboardIcon';
 import JournalIcon from '@/components/icons/JournalIcon';
 import { useTranslations } from 'next-intl';
-import { User } from '@prisma/client';
+import { User } from '@/app/generated/prisma/client';
 import ProfileIcon from '@/components/icons/ProfileIcon';
 import SettingIcon from '@/components/icons/SettingIcon';
 import PaymentIcon from '@/components/icons/PaymentIcon';

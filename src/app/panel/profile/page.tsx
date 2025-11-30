@@ -2,15 +2,19 @@ import { app_name } from '@/lib/data';
 import { Metadata } from 'next';
 import React from 'react';
 import UploadPhoto from './UploadPhoto';
-import { User } from '@prisma/client';
+import { User } from '@/app/generated/prisma/client';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import ProfileData from './ProfileData';
+import { getTranslations } from 'next-intl/server';
 
-export const metadata: Metadata = {
-  title: app_name + ' - Profile',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations();
+  return {
+    title: app_name + ' - ' + t('Profile'),
+  };
+}
 
 const ProfilePage = async () => {
   const session = await auth.api.getSession({

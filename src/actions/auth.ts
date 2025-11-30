@@ -6,7 +6,7 @@ import { z } from 'zod';
 import { auth } from '@/lib/auth';
 import { getTranslations } from 'next-intl/server';
 import { makePayloadReady } from '@/lib/utils';
-import { User } from '@prisma/client';
+import { User } from '@/app/generated/prisma/client';
 import { Resend } from 'resend';
 import NewPasswordEmailTemplate from '@/components/emails/NewPasswordEmailTemplate';
 import prisma from '@/lib/db';

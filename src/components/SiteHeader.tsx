@@ -8,7 +8,7 @@ import { headers } from 'next/headers';
 import SiteToggleMenu from './SiteToggleMenu';
 import Image from 'next/image';
 import BrandText from './BrandText';
-import { UserRole } from '@prisma/client';
+import { UserRole } from '@/app/generated/prisma/client';
 
 const SiteHeader = async () => {
   const session = await auth.api.getSession({

@@ -3,7 +3,7 @@ import PanelHeader from './PanelHeader';
 import PanelSidebar from './PanelSidebar';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { User, UserRole } from '@prisma/client';
+import { User, UserRole } from '@/app/generated/prisma/client';
 export default async function PanelLayout({
   children,
 }: {

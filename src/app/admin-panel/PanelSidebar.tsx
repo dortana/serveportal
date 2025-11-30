@@ -6,8 +6,9 @@ import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import DashboardIcon from '@/components/icons/DashboardIcon';
 import { useTranslations } from 'next-intl';
-import { User } from '@prisma/client';
+import { User } from '@/app/generated/prisma/client';
 import SettingIcon from '@/components/icons/SettingIcon';
+import UserIdVerificationIcon from '@/components/icons/UserIdVerificationIcon';
 
 const PanelSidebar = ({
   user,
@@ -29,6 +30,12 @@ const PanelSidebar = ({
     },
     {
       id: 2,
+      title: t('Expert Verification'),
+      icon: UserIdVerificationIcon,
+      href: '/admin-panel/expert-verification',
+    },
+    {
+      id: 3,
       title: t('Settings'),
       icon: SettingIcon,
       href: '/admin-panel/settings',

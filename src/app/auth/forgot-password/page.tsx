@@ -4,10 +4,14 @@ import ForgotPasswordForm from '@/components/forms/ForgotPasswordForm';
 import { Metadata } from 'next';
 import LanguageSelectorButton from '@/components/language/LanguageSelectorButton';
 import { app_name } from '@/lib/data';
+import { getTranslations } from 'next-intl/server';
 
-export const metadata: Metadata = {
-  title: app_name + ' - Forgot Password',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations();
+  return {
+    title: app_name + ' - ' + t('Forgot Password'),
+  };
+}
 
 const LoginPage = () => {
   return (

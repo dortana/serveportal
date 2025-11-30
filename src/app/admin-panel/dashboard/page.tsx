@@ -14,9 +14,12 @@ import {
 import VisitChart from '@/components/admin/VisitChart';
 import { CitiesTable } from '@/components/admin/CitiesTable';
 
-export const metadata: Metadata = {
-  title: app_name + ' - Dashboard',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations();
+  return {
+    title: app_name + ' - ' + t('Dashboard'),
+  };
+}
 
 const DashboardPage = async () => {
   const t = await getTranslations();

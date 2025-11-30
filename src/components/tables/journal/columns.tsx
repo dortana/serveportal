@@ -2,7 +2,7 @@
 
 import { ColumnDef } from '@tanstack/react-table';
 import { DataTableColumnHeader } from './data-table-column-header';
-import { JournalEntry } from '@prisma/client';
+import { JournalEntry } from '@/app/generated/prisma/client';
 import { formatCurrencyHuf } from '@/lib/utils';
 import DocumentType from './DocumentType';
 

@@ -4,10 +4,14 @@ import Image from 'next/image';
 import { Metadata } from 'next';
 import LanguageSelectorButton from '@/components/language/LanguageSelectorButton';
 import { app_name } from '@/lib/data';
+import { getTranslations } from 'next-intl/server';
 
-export const metadata: Metadata = {
-  title: app_name + ' - Sign Up',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations();
+  return {
+    title: app_name + ' - ' + t('Sign Up'),
+  };
+}
 
 const SignUpPage = () => {
   return (

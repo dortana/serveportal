@@ -1,6 +1,6 @@
 import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { User } from '@prisma/client';
+import { User } from '@/app/generated/prisma/client';
 import { Button } from '@/components/ui/button';
 import { useTranslations } from 'next-intl';
 import UploadIcon from '@/components/icons/UploadIcon';

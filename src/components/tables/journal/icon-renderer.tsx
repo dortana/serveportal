@@ -2,7 +2,7 @@
 
 import CashIcon from '@/components/icons/CashIcon';
 import TransferIcon from '@/components/icons/TransferIcon';
-import { JournalDocumentType } from '@prisma/client';
+import { JournalDocumentType } from '@/app/generated/prisma/client';
 import { useTranslations } from 'next-intl';
 import BankIcon from '@/components/icons/BankIcon';
 

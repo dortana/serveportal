@@ -3,7 +3,11 @@ import PanelHeader from './PanelHeader';
 import PanelSidebar from './PanelSidebar';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { OnBoardingStatus, User, UserRole } from '@prisma/client';
+import {
+  OnBoardingStatus,
+  User,
+  UserRole,
+} from '@/app/generated/prisma/client';
 import ExpertOnboardingForm from '@/components/forms/ExpertOnboardingForm';
 export default async function PanelLayout({
   children,
