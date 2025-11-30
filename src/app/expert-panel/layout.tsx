@@ -20,6 +20,9 @@ export default async function PanelLayout({
   if (user.role === UserRole.USER) {
     return redirect('/panel/dashboard');
   }
+  if (user.role === UserRole.ADMIN) {
+    return redirect('/admin-panel/dashboard');
+  }
   const needsOnboarding =
     user.onBoardingStatus !== OnBoardingStatus.COMPLETED &&
     user.role === UserRole.EXPERT;

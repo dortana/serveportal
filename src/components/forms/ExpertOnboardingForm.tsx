@@ -172,28 +172,28 @@ const ExpertOnboardingForm = ({ user }: { user: User }) => {
   //@ts-ignore
   const steps = [
     {
-      title: 'Personal Info',
-      description: 'Your basic information',
+      title: t('Personal Info'),
+      description: t('Your basic information'),
       icon: <NoteDoneIcon />,
     },
     {
-      title: 'Address',
-      description: 'Your living area',
+      title: t('Address Info'),
+      description: t('Where do you live?'),
       icon: <LocationIcon />,
     },
     {
-      title: 'Profession Details',
-      description: 'Set your working area',
+      title: t('Expertise Details'),
+      description: t('Your professional info'),
       icon: <PermanentJobIcon />,
     },
     {
-      title: 'Upload Docs',
-      description: 'Verify your identity',
+      title: t('Document Upload'),
+      description: t('Upload your documents'),
       icon: <CameraIcon />,
     },
     {
-      title: 'Review',
-      description: 'Your data is under review',
+      title: t('Review'),
+      description: t('Submit your information'),
       icon: <ReviewIcon />,
     },
   ];

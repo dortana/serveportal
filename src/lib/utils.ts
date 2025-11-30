@@ -36,6 +36,10 @@ export const makePayloadReady = (formData: FormData) => {
   return payload;
 };
 
+export const formatWithCommas = (n: number | string) => {
+  return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};
+
 export const formatCurrency = (inputValue: string): string => {
   if (inputValue === '') return '';
   const cleanedValue = inputValue.replace(/[^\d.]/g, '');

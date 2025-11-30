@@ -16,12 +16,13 @@ export default async function PanelLayout({
   if (!user) {
     return redirect('/auth/login');
   }
+  if (user.role === UserRole.USER) {
+    return redirect('/panel/dashboard');
+  }
   if (user.role === UserRole.EXPERT) {
     return redirect('/expert-panel/dashboard');
   }
-  if (user.role === UserRole.ADMIN) {
-    return redirect('/admin-panel/dashboard');
-  }
+
   return (
     <section className='p-3 flex flex-col gap-3 min-h-screen bg-tertiary'>
       <PanelHeader user={user} />
