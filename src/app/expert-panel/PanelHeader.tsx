@@ -3,7 +3,7 @@ import React from 'react';
 import { Input } from '@/components/ui/input';
 import SearchIcon from '@/components/icons/SearchIcon';
 import { getTranslations } from 'next-intl/server';
-import ToggleMenu from '@/app/panel/ToggleMenu';
+import ToggleMenu from '@/app/admin-panel/ToggleMenu';
 import { User } from '@/app/generated/prisma/client';
 import ExitIcon from '@/components/icons/ExitIcon';
 import { signOutAction } from '@/actions/auth';

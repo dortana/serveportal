@@ -89,6 +89,9 @@ importers:
       input-otp:
         specifier: ^1.4.2
         version: 1.4.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      jose:
+        specifier: 6.1.2
+        version: 6.1.2
       libphonenumber-js:
         specifier: 1.12.29
         version: 1.12.29

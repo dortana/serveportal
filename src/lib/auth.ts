@@ -2,7 +2,8 @@ import { betterAuth } from 'better-auth';
 import { prismaAdapter } from 'better-auth/adapters/prisma';
 import { PrismaClient, UserRole } from '@/app/generated/prisma/client';
 import { nextCookies } from 'better-auth/next-js';
-import { emailOTP } from 'better-auth/plugins';
+import { jwt } from 'better-auth/plugins/jwt';
+import { emailOTP } from 'better-auth/plugins/email-otp';
 import { Resend } from 'resend';
 import { VerifyEmailTemplate } from '@/components/emails/VerifyEmailTemplate';
 import { app_name } from './data';
@@ -69,6 +70,10 @@ export const auth = betterAuth({
         type: 'string',
         required: true,
       },
+      reviewRejectionReason: {
+        type: 'string',
+        required: true,
+      },
     },
   },
   emailVerification: {
@@ -120,6 +125,25 @@ export const auth = betterAuth({
     },
   },
   plugins: [
+    jwt({
+      jwks: {
+        keyPairConfig: {
+          alg: 'ES256',
+        },
+      },
+      jwt: {
+        // The "sub" claim in the token
+        getSubject: ({ user }) => user.id,
+
+        // Add ALL fields you want inside the JWT payload
+        definePayload: ({ user, session }) => ({
+          id: user.id,
+          email: user.email,
+          role: user.role,
+          sessionId: session.id,
+        }),
+      },
+    }),
     nextCookies(),
     emailOTP({
       async sendVerificationOTP({ email, otp, type }) {

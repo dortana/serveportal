@@ -8,7 +8,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import PanelSidebar from '@/app/panel/PanelSidebar';
+import PanelSidebar from '@/app/expert-panel/PanelSidebar';
 import { User } from '@/app/generated/prisma/client';
 
 const ToggleMenu = ({ user }: { user: User }) => {

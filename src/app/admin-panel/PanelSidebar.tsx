@@ -9,6 +9,7 @@ import { useTranslations } from 'next-intl';
 import { User } from '@/app/generated/prisma/client';
 import SettingIcon from '@/components/icons/SettingIcon';
 import UserIdVerificationIcon from '@/components/icons/UserIdVerificationIcon';
+import UserGroupIcon from '@/components/icons/UserGroupIcon';
 
 const PanelSidebar = ({
   user,
@@ -36,6 +37,12 @@ const PanelSidebar = ({
     },
     {
       id: 3,
+      title: t('Users'),
+      icon: UserGroupIcon,
+      href: '/admin-panel/users',
+    },
+    {
+      id: 4,
       title: t('Settings'),
       icon: SettingIcon,
       href: '/admin-panel/settings',

@@ -1,6 +1,10 @@
 'server only';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import { NextResponse, NextRequest } from 'next/server';
+import prisma from '@/lib/db';
+import { validateToken } from '@/actions/admin';
+import { UserRole } from '@/app/generated/prisma';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -76,3 +80,31 @@ export const generateFileName = (file: File) => {
 
   return `${uuid}.${ext}`;
 };
+
+export async function authenticate(req: NextRequest, role: UserRole = 'USER') {
+  const token = req.headers.get('authorization')?.split(' ')[1];
+  if (!token) {
+    return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+  }
+  const payload = await validateToken(token);
+  if (!payload.sessionId) {
+    return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+  }
+  if (payload.role !== role) {
+    return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+  }
+  const user = await prisma.user.findUnique({
+    where: {
+      id: payload.id! as string,
+    },
+  });
+  if (!user) {
+    return NextResponse.json(
+      {
+        error: 'Invalid token',
+      },
+      { status: 400 },
+    );
+  }
+  return user;
+}
