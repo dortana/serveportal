@@ -37,6 +37,7 @@ const UsersPage = async ({ searchParams }: PageProps) => {
         </CardDescription>
       </CardHeader>
       <br />
+
       <DataTable
         columns={getUsersColumns}
         // @ts-ignore

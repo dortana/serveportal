@@ -81,30 +81,31 @@ export const generateFileName = (file: File) => {
   return `${uuid}.${ext}`;
 };
 
-export async function authenticate(req: NextRequest, role: UserRole = 'USER') {
+export const authenticate = async (req: NextRequest, role: UserRole) => {
   const token = req.headers.get('authorization')?.split(' ')[1];
+
   if (!token) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
   }
+
   const payload = await validateToken(token);
+
   if (!payload.sessionId) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
   }
+
   if (payload.role !== role) {
+    console.log('AUTH FAILED: Role mismatch', payload.role, '≠', role);
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
   }
+
   const user = await prisma.user.findUnique({
-    where: {
-      id: payload.id! as string,
-    },
+    where: { id: payload.id! as string },
   });
+
   if (!user) {
-    return NextResponse.json(
-      {
-        error: 'Invalid token',
-      },
-      { status: 400 },
-    );
+    return NextResponse.json({ error: 'Invalid token' }, { status: 400 });
   }
+
   return user;
-}
+};
