@@ -5,6 +5,7 @@ import { DataTableColumnHeader } from './data-table-column-header';
 import { User } from '@/app/generated/prisma/client';
 import { formatCurrencyHuf } from '@/lib/utils';
 import DocumentType from './DocumentType';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 export type CustomColumnDef<T> = ColumnDef<T> & {
   accessorTitle?: string;
@@ -12,6 +13,44 @@ export type CustomColumnDef<T> = ColumnDef<T> & {
 
 export const getUsersColumns = (t: any): CustomColumnDef<User>[] => {
   return [
+    {
+      accessorKey: 'image',
+      accessorTitle: t('Profile Image'),
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title={t('Profile Image')} />
+      ),
+      cell: ({ row }) => {
+        return row.original.role === 'EXPERT' ? (
+          <div className='w-32 flex items-center justify-center'>
+            <Avatar className='size-14'>
+              <AvatarImage
+                src={
+                  row.original.docsUrls?.profilePhoto ??
+                  'https://github.com/shadcn.png'
+                }
+              />
+              <AvatarFallback>
+                {row.original.firstName.charAt(0).toUpperCase() +
+                  row.original.lastName.charAt(0).toUpperCase()}
+              </AvatarFallback>
+            </Avatar>
+          </div>
+        ) : (
+          <div className='w-32 flex items-center justify-center'>
+            <Avatar className='size-14'>
+              <AvatarImage
+                src={row.original.image ?? 'https://github.com/shadcn.png'}
+              />
+              <AvatarFallback>
+                {row.original.firstName.charAt(0).toUpperCase() +
+                  row.original.lastName.charAt(0).toUpperCase()}
+              </AvatarFallback>
+            </Avatar>
+          </div>
+        );
+      },
+      enableSorting: false,
+    },
     {
       accessorFn: row => `${row.firstName} ${row.lastName}`,
       accessorKey: 'fullName',
