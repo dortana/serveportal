@@ -64,7 +64,7 @@ const ContactUsForm = () => {
                 // className={state?.error?.full_name && 'border-red-500'}
               />
               {/* {state?.error?.full_name && (
-                <p className='text-xs text-red-500'>{state.error.full_name}</p>
+                <p className='text-xs text-red-500 break-all'>{state.error.full_name}</p>
               )} */}
             </div>
 
@@ -79,7 +79,7 @@ const ContactUsForm = () => {
                 // className={state?.error?.email && 'border-red-500'}
               />
               {/* {state?.error?.email && (
-                <p className='text-xs text-red-500'>{state.error.email}</p>
+                <p className='text-xs text-red-500 break-all'>{state.error.email}</p>
               )} */}
             </div>
 
@@ -93,7 +93,7 @@ const ContactUsForm = () => {
                 international
               />
               {/* {state?.error?.phone && (
-                <p className='text-xs text-red-500'>{state.error.phone}</p>
+                <p className='text-xs text-red-500 break-all'>{state.error.phone}</p>
               )} */}
             </div>
             <div className='space-y-1'>
@@ -107,7 +107,7 @@ const ContactUsForm = () => {
                 // className={state?.error?.subject && 'border-red-500'}
               />
               {/* {state?.error?.subject && (
-                <p className='text-xs text-red-500'>{state.error.subject}</p>
+                <p className='text-xs text-red-500 break-all'>{state.error.subject}</p>
               )} */}
             </div>
 
@@ -121,7 +121,7 @@ const ContactUsForm = () => {
                 // className={state?.error?.comment && 'border-red-500'}
               />
               {/* {state?.error?.comment && (
-                <p className='text-xs text-red-500'>{state.error.comment}</p>
+                <p className='text-xs text-red-500 break-all'>{state.error.comment}</p>
               )} */}
             </div>
           </div>

@@ -157,7 +157,7 @@ const SignUpForm = () => {
                   className={state?.errors?.firstName && 'border-red-500'}
                 />
                 {state?.errors?.firstName?.[0] && (
-                  <p className='text-xs text-red-500'>
+                  <p className='text-xs text-red-500 break-all'>
                     {state.errors.firstName}
                   </p>
                 )}
@@ -172,7 +172,7 @@ const SignUpForm = () => {
                   className={state?.errors?.lastName && 'border-red-500'}
                 />
                 {state?.errors?.lastName && (
-                  <p className='text-xs text-red-500'>
+                  <p className='text-xs text-red-500 break-all'>
                     {state.errors.lastName}
                   </p>
                 )}
@@ -189,7 +189,7 @@ const SignUpForm = () => {
                 className={state?.errors?.email && 'border-red-500'}
               />
               {state?.errors?.email && (
-                <p className='text-xs text-red-500'>
+                <p className='text-xs text-red-500 break-all'>
                   {Array.isArray(state.errors.email)
                     ? state.errors.email[0]
                     : state.errors.email}
@@ -217,7 +217,9 @@ const SignUpForm = () => {
                 {showPassword ? <EyeIcon /> : <EyeSlashIcon />}
               </div>
               {state?.errors?.password && (
-                <p className='text-xs text-red-500'>{state.errors.password}</p>
+                <p className='text-xs text-red-500 break-all'>
+                  {state.errors.password}
+                </p>
               )}
             </div>
           </div>

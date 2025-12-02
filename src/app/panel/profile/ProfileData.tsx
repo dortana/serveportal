@@ -59,7 +59,9 @@ const ProfileData = ({ user }: { user: User }) => {
                 className={state?.errors?.firstName && 'border-red-500'}
               />
               {state?.errors?.firstName?.[0] && (
-                <p className='text-xs text-red-500'>{state.errors.firstName}</p>
+                <p className='text-xs text-red-500 break-all'>
+                  {state.errors.firstName}
+                </p>
               )}
             </div>
             <div className='space-y-1'>
@@ -72,7 +74,9 @@ const ProfileData = ({ user }: { user: User }) => {
                 className={state?.errors?.lastName && 'border-red-500'}
               />
               {state?.errors?.lastName?.[0] && (
-                <p className='text-xs text-red-500'>{state.errors.lastName}</p>
+                <p className='text-xs text-red-500 break-all'>
+                  {state.errors.lastName}
+                </p>
               )}
             </div>
 
@@ -103,7 +107,9 @@ const ProfileData = ({ user }: { user: User }) => {
                 international
               />
               {state?.errors?.phone?.[0] && (
-                <p className='text-xs text-red-500'>{state.errors.phone}</p>
+                <p className='text-xs text-red-500 break-all'>
+                  {state.errors.phone}
+                </p>
               )}
             </div>
 
@@ -116,20 +122,30 @@ const ProfileData = ({ user }: { user: User }) => {
                 defaultValue={state?.data?.dob ?? user.dob}
                 className={state?.errors?.dob && 'border-red-500'}
               /> */}
-              <DatePicker name='dob' />
+
+              <DatePicker
+                name='dob'
+                value={state?.data?.dob}
+                className={state?.errors?.dob && 'border-red-500'}
+              />
               {state?.errors?.dob?.[0] && (
-                <p className='text-xs text-red-500'>{state.errors.dob}</p>
+                <p className='text-xs text-red-500 break-all'>
+                  {state.errors.dob}
+                </p>
               )}
             </div>
 
             <div className='space-y-1'>
-              <Label htmlFor='lastName'>{t('Country')}</Label>
+              <Label htmlFor='country'>{t('Country')}</Label>
               <CountryDropdown
                 placeholder={t('Select country')}
-                defaultValue='HU'
+                defaultValue={state?.data?.country || 'HU'}
+                name='country'
               />
-              {state?.errors?.lastName?.[0] && (
-                <p className='text-xs text-red-500'>{state.errors.lastName}</p>
+              {state?.errors?.country?.[0] && (
+                <p className='text-xs text-red-500 break-all'>
+                  {state.errors.country}
+                </p>
               )}
             </div>
 
@@ -145,7 +161,7 @@ const ProfileData = ({ user }: { user: User }) => {
                 className={state?.errors?.addressLine1 && 'border-red-500'}
               />
               {state?.errors?.addressLine1?.[0] && (
-                <p className='text-xs text-red-500'>
+                <p className='text-xs text-red-500 break-all'>
                   {state.errors.addressLine1}
                 </p>
               )}
@@ -163,7 +179,7 @@ const ProfileData = ({ user }: { user: User }) => {
                 className={state?.errors?.addressLine2 && 'border-red-500'}
               />
               {state?.errors?.addressLine2?.[0] && (
-                <p className='text-xs text-red-500'>
+                <p className='text-xs text-red-500 break-all'>
                   {state.errors.addressLine2}
                 </p>
               )}
@@ -178,7 +194,9 @@ const ProfileData = ({ user }: { user: User }) => {
                 className={state?.errors?.state && 'border-red-500'}
               />
               {state?.errors?.state?.[0] && (
-                <p className='text-xs text-red-500'>{state.errors.state}</p>
+                <p className='text-xs text-red-500 break-all'>
+                  {state.errors.state}
+                </p>
               )}
             </div>
             <div className='space-y-1'>
@@ -191,7 +209,9 @@ const ProfileData = ({ user }: { user: User }) => {
                 className={state?.errors?.city && 'border-red-500'}
               />
               {state?.errors?.city?.[0] && (
-                <p className='text-xs text-red-500'>{state.errors.city}</p>
+                <p className='text-xs text-red-500 break-all'>
+                  {state.errors.city}
+                </p>
               )}
             </div>
 
@@ -207,7 +227,7 @@ const ProfileData = ({ user }: { user: User }) => {
                 className={state?.errors?.postalCode && 'border-red-500'}
               />
               {state?.errors?.postalCode?.[0] && (
-                <p className='text-xs text-red-500'>
+                <p className='text-xs text-red-500 break-all'>
                   {state.errors.postalCode}
                 </p>
               )}
@@ -234,7 +254,7 @@ const ProfileData = ({ user }: { user: User }) => {
                     className={state?.errors?.companyName && 'border-red-500'}
                   />
                   {state?.errors?.companyName?.[0] && (
-                    <p className='text-xs text-red-500'>
+                    <p className='text-xs text-red-500 break-all'>
                       {state.errors.companyName}
                     </p>
                   )}
@@ -249,7 +269,7 @@ const ProfileData = ({ user }: { user: User }) => {
                     className={state?.errors?.vatNumber && 'border-red-500'}
                   />
                   {state?.errors?.vatNumber?.[0] && (
-                    <p className='text-xs text-red-500'>
+                    <p className='text-xs text-red-500 break-all'>
                       {state.errors.vatNumber}
                     </p>
                   )}

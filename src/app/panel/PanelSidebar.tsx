@@ -55,7 +55,9 @@ const PanelSidebar = ({
         </Avatar>
         <div className='flex flex-col justify-center'>
           <span>{user.firstName + ' ' + user.lastName}</span>
-          <span className='text-muted-foreground text-sm'>{user.email}</span>
+          <span className='text-muted-foreground text-sm break-all'>
+            {user.email}
+          </span>
         </div>
       </div>
       <hr className='-mt-4' />

@@ -76,7 +76,7 @@ const ForgotPasswordForm = () => {
                 name='email'
               />
               {state?.errors?.email && (
-                <p className='text-xs text-red-500'>
+                <p className='text-xs text-red-500 break-all'>
                   {Array.isArray(state.errors.email)
                     ? state.errors.email[0]
                     : state.errors.email}

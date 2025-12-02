@@ -11,8 +11,8 @@ import { useQueryString } from '@/hooks/useQueryString';
 import { useTranslations } from 'next-intl';
 import { useRolesIcon, useStatusesIcon } from './icon-renderer';
 import SearchIcon from '@/components/icons/SearchIcon';
-import ExportDataIcon from '@/components/icons/ExportDataIcon';
-import AddData from './AddData';
+// import ExportDataIcon from '@/components/icons/ExportDataIcon';
+import AddUser from './AddUser';
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
@@ -104,11 +104,11 @@ export function DataTableToolbar<TData>({
         )}
       </div>
       <div className='flex items-center gap-2 w-fit max-md:self-end'>
-        <AddData />
-        <Button variant='outline' size='sm' className='h-10'>
+        <AddUser />
+        {/* <Button variant='outline' size='sm' className='h-10'>
           <ExportDataIcon />
           {t('Export Data')}
-        </Button>
+        </Button> */}
         <DataTableViewOptions table={table} />
       </div>
     </div>

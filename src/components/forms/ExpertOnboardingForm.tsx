@@ -456,7 +456,7 @@ const ExpertOnboardingForm = ({ user }: { user: User }) => {
                   }
                 />
                 {stateStep1?.errors?.phone && (
-                  <p className='text-xs text-red-500'>
+                  <p className='text-xs text-red-500 break-all'>
                     {Array.isArray(stateStep1.errors.phone)
                       ? stateStep1.errors.phone[0]
                       : stateStep1.errors.phone}
@@ -472,7 +472,7 @@ const ExpertOnboardingForm = ({ user }: { user: User }) => {
                   className={stateStep1?.errors?.dob && 'border-red-500'}
                 />
                 {stateStep1?.errors?.dob?.[0] && (
-                  <p className='text-xs text-red-500'>
+                  <p className='text-xs text-red-500 break-all'>
                     {stateStep1.errors.dob}
                   </p>
                 )}
@@ -491,7 +491,7 @@ const ExpertOnboardingForm = ({ user }: { user: User }) => {
                   name='country'
                 />
                 {stateStep2?.errors?.country?.[0] && (
-                  <p className='text-xs text-red-500'>
+                  <p className='text-xs text-red-500 break-all'>
                     {stateStep2.errors.country}
                   </p>
                 )}
@@ -511,7 +511,7 @@ const ExpertOnboardingForm = ({ user }: { user: User }) => {
                   }
                 />
                 {stateStep2?.errors?.addressLine1?.[0] && (
-                  <p className='text-xs text-red-500'>
+                  <p className='text-xs text-red-500 break-all'>
                     {stateStep2.errors.addressLine1}
                   </p>
                 )}
@@ -531,7 +531,7 @@ const ExpertOnboardingForm = ({ user }: { user: User }) => {
                   }
                 />
                 {stateStep2?.errors?.addressLine2?.[0] && (
-                  <p className='text-xs text-red-500'>
+                  <p className='text-xs text-red-500 break-all'>
                     {stateStep2.errors.addressLine2}
                   </p>
                 )}
@@ -546,7 +546,7 @@ const ExpertOnboardingForm = ({ user }: { user: User }) => {
                   className={stateStep2?.errors?.state && 'border-red-500'}
                 />
                 {stateStep2?.errors?.state?.[0] && (
-                  <p className='text-xs text-red-500'>
+                  <p className='text-xs text-red-500 break-all'>
                     {stateStep2.errors.state}
                   </p>
                 )}
@@ -561,7 +561,7 @@ const ExpertOnboardingForm = ({ user }: { user: User }) => {
                   className={stateStep2?.errors?.city && 'border-red-500'}
                 />
                 {stateStep2?.errors?.city?.[0] && (
-                  <p className='text-xs text-red-500'>
+                  <p className='text-xs text-red-500 break-all'>
                     {stateStep2.errors.city}
                   </p>
                 )}
@@ -579,7 +579,7 @@ const ExpertOnboardingForm = ({ user }: { user: User }) => {
                   className={stateStep2?.errors?.postalCode && 'border-red-500'}
                 />
                 {stateStep2?.errors?.postalCode?.[0] && (
-                  <p className='text-xs text-red-500'>
+                  <p className='text-xs text-red-500 break-all'>
                     {stateStep2.errors.postalCode}
                   </p>
                 )}
@@ -771,7 +771,7 @@ const ExpertOnboardingForm = ({ user }: { user: User }) => {
                 </MultiSelect>
 
                 {stateStep3?.errors?.languagesSpoken && (
-                  <p className='text-xs text-red-500'>
+                  <p className='text-xs text-red-500 break-all'>
                     {stateStep3.errors.languagesSpoken?.[0]}
                   </p>
                 )}
@@ -823,7 +823,7 @@ const ExpertOnboardingForm = ({ user }: { user: User }) => {
                 </DropzoneContent>
               </Dropzone>
               {stateStep4?.errors?.profilePhoto && (
-                <p className='text-xs text-red-500'>
+                <p className='text-xs text-red-500 break-all'>
                   {stateStep4.errors.profilePhoto?.[0]}
                 </p>
               )}
@@ -870,7 +870,7 @@ const ExpertOnboardingForm = ({ user }: { user: User }) => {
                 </DropzoneContent>
               </Dropzone>
               {stateStep4?.errors?.idCardFront && (
-                <p className='text-xs text-red-500'>
+                <p className='text-xs text-red-500 break-all'>
                   {stateStep4.errors.idCardFront?.[0]}
                 </p>
               )}
@@ -918,7 +918,7 @@ const ExpertOnboardingForm = ({ user }: { user: User }) => {
               </Dropzone>
 
               {stateStep4?.errors?.idCardBack && (
-                <p className='text-xs text-red-500'>
+                <p className='text-xs text-red-500 break-all'>
                   {stateStep4.errors.idCardBack?.[0]}
                 </p>
               )}
@@ -966,7 +966,7 @@ const ExpertOnboardingForm = ({ user }: { user: User }) => {
               </Dropzone>
 
               {stateStep4?.errors?.addressCard && (
-                <p className='text-xs text-red-500'>
+                <p className='text-xs text-red-500 break-all'>
                   {stateStep4.errors.addressCard?.[0]}
                 </p>
               )}
@@ -1077,7 +1077,7 @@ const ExpertOnboardingForm = ({ user }: { user: User }) => {
                   }
                 />
                 {stateProfession?.errors?.profession && (
-                  <p className='text-xs text-red-500'>
+                  <p className='text-xs text-red-500 break-all'>
                     {stateProfession.errors.profession}
                   </p>
                 )}
@@ -1104,7 +1104,7 @@ const ExpertOnboardingForm = ({ user }: { user: User }) => {
                   }
                 />
                 {stateProfession?.errors?.professionDetails && (
-                  <p className='text-xs text-red-500'>
+                  <p className='text-xs text-red-500 break-all'>
                     {stateProfession.errors.professionDetails}
                   </p>
                 )}
@@ -1145,7 +1145,7 @@ const ExpertOnboardingForm = ({ user }: { user: User }) => {
                   </SelectContent>
                 </Select>
                 {stateProfession?.errors?.yearsExperience && (
-                  <p className='text-xs text-red-500'>
+                  <p className='text-xs text-red-500 break-all'>
                     {stateProfession.errors.yearsExperience?.[0]}
                   </p>
                 )}
@@ -1185,7 +1185,7 @@ const ExpertOnboardingForm = ({ user }: { user: User }) => {
                 </Select>
 
                 {stateProfession?.errors?.availability && (
-                  <p className='text-xs text-red-500'>
+                  <p className='text-xs text-red-500 break-all'>
                     {stateProfession.errors.availability}
                   </p>
                 )}
@@ -1210,7 +1210,7 @@ const ExpertOnboardingForm = ({ user }: { user: User }) => {
                   }
                 />
                 {stateProfession?.errors?.pricePerHour && (
-                  <p className='text-xs text-red-500'>
+                  <p className='text-xs text-red-500 break-all'>
                     {stateProfession.errors.pricePerHour}
                   </p>
                 )}

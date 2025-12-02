@@ -3,9 +3,13 @@
 import { UserRole, UserStatus } from '@/app/generated/prisma/client';
 import { useTranslations } from 'next-intl';
 import AdminIcon from '@/components/icons/AdminIcon';
-import ExpertIcon from '@/components/icons/ExpertIcon';
+import ActiveStatusIcon from '@/components/icons/ActiveStatusIcon';
 import CustomerIcon from '@/components/icons/CustomerIcon';
 import EmployeeIcon from '@/components/icons/EmployeeIcon';
+import UserIdVerificationIcon from '@/components/icons/UserIdVerificationIcon';
+import CancelCircleIcon from '@/components/icons/CancelCircleIcon';
+import StopCircleIcon from '@/components/icons/StopCircleIcon';
+import HelpCircleIcon from '@/components/icons/HelpCircleIcon';
 
 export const useRolesIcon = () => {
   const t = useTranslations();
@@ -19,7 +23,7 @@ export const useRolesIcon = () => {
     {
       value: UserRole.EXPERT,
       label: t('Expert'),
-      icon: <ExpertIcon />,
+      icon: <UserIdVerificationIcon variant='bulk' />,
     },
     {
       value: UserRole.USER,
@@ -41,22 +45,22 @@ export const useStatusesIcon = () => {
     {
       value: UserStatus.ACTIVE,
       label: t('Active'),
-      icon: <AdminIcon />,
+      icon: <ActiveStatusIcon />,
     },
     {
       value: UserStatus.BANNED,
       label: t('Banned'),
-      icon: <ExpertIcon />,
+      icon: <CancelCircleIcon />,
     },
     {
       value: UserStatus.BLOCKED,
       label: t('Blocked'),
-      icon: <CustomerIcon />,
+      icon: <StopCircleIcon />,
     },
     {
       value: UserStatus.DISABLED,
       label: t('Disabled'),
-      icon: <EmployeeIcon />,
+      icon: <HelpCircleIcon />,
     },
   ];
 };
