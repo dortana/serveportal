@@ -3,9 +3,11 @@
 import { ColumnDef } from '@tanstack/react-table';
 import { DataTableColumnHeader } from './data-table-column-header';
 import { User } from '@/app/generated/prisma/client';
-import { formatCurrencyHuf } from '@/lib/utils';
-import DocumentType from './DocumentType';
+import RoleCom from './RoleCom';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import Link from 'next/link';
+import EyeIcon from '@/components/icons/EyeIcon';
+import StatusCom from './StatusCom';
 
 export type CustomColumnDef<T> = ColumnDef<T> & {
   accessorTitle?: string;
@@ -14,14 +16,32 @@ export type CustomColumnDef<T> = ColumnDef<T> & {
 export const getUsersColumns = (t: any): CustomColumnDef<User>[] => {
   return [
     {
+      id: 'rowNumber',
+      header: () => '#',
+      cell: ({ row, table }) => {
+        const pageIndex = table.getState().pagination.pageIndex;
+        const pageSize = table.getState().pagination.pageSize;
+
+        return (
+          <div className='w-fit font-medium'>
+            {pageIndex * pageSize + row.index + 1}
+          </div>
+        );
+      },
+    },
+    {
       accessorKey: 'image',
       accessorTitle: t('Profile Image'),
       header: ({ column }) => (
-        <DataTableColumnHeader column={column} title={t('Profile Image')} />
+        <DataTableColumnHeader
+          column={column}
+          title={t('Profile Image')}
+          className='w-24'
+        />
       ),
       cell: ({ row }) => {
         return row.original.role === 'EXPERT' ? (
-          <div className='w-32 flex items-center justify-center'>
+          <div className='w-fit flex items-center'>
             <Avatar className='size-14'>
               <AvatarImage
                 src={
@@ -36,7 +56,7 @@ export const getUsersColumns = (t: any): CustomColumnDef<User>[] => {
             </Avatar>
           </div>
         ) : (
-          <div className='w-32 flex items-center justify-center'>
+          <div className='w-fit flex items-center'>
             <Avatar className='size-14'>
               <AvatarImage
                 src={row.original.image ?? 'https://github.com/shadcn.png'}
@@ -59,11 +79,43 @@ export const getUsersColumns = (t: any): CustomColumnDef<User>[] => {
         <DataTableColumnHeader column={column} title={t('Full Name')} />
       ),
       cell: ({ row }) => (
-        <div className='w-32 text-center font-medium capitalize'>
+        <div className='w-32 font-medium capitalize'>
           {row.original.firstName + ' ' + row.original.lastName}
         </div>
       ),
       enableSorting: false,
+    },
+    {
+      accessorKey: 'email',
+      accessorTitle: t('Email Address'),
+      header: ({ column }) => (
+        <DataTableColumnHeader
+          className='w-fit'
+          column={column}
+          title={t('Email Address')}
+        />
+      ),
+      cell: ({ row }) => {
+        return <div className='w-fit font-medium'>{row.getValue('email')}</div>;
+      },
+    },
+    {
+      accessorKey: 'phone',
+      accessorTitle: t('Phone'),
+      header: ({ column }) => (
+        <DataTableColumnHeader
+          className='w-fit'
+          column={column}
+          title={t('Phone')}
+        />
+      ),
+      cell: ({ row }) => {
+        return (
+          <div className='w-fit font-medium'>
+            {row.getValue('phone') ?? '-'}
+          </div>
+        );
+      },
     },
     {
       accessorKey: 'role',
@@ -76,137 +128,39 @@ export const getUsersColumns = (t: any): CustomColumnDef<User>[] => {
         />
       ),
       cell: ({ row }) => {
-        return (
-          <div className='w-20 text-center font-medium'>
-            {row.getValue('role')}
-          </div>
-        );
-      },
-    },
-    {
-      accessorKey: 'phone',
-      accessorTitle: t('Phone'),
-      header: ({ column }) => (
-        <DataTableColumnHeader
-          className='w-20'
-          column={column}
-          title={t('Phone')}
-        />
-      ),
-      cell: ({ row }) => {
-        return (
-          <div className='w-20 text-center font-medium'>
-            {row.getValue('phone') ?? '-'}
-          </div>
-        );
-      },
-    },
-    {
-      accessorKey: 'documentType',
-      accessorTitle: t('Document Type'),
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title={t('Document Type')} />
-      ),
-      cell: ({ row }) => {
-        return <DocumentType type={row.getValue('documentType')} />;
+        return <RoleCom role={row.getValue('role')} />;
       },
       filterFn: (row, id, value) => {
         return value.includes(row.getValue(id));
       },
     },
     {
-      accessorKey: 'account',
-      accessorTitle: t('Account'),
+      accessorKey: 'status',
+      accessorTitle: t('Status'),
       header: ({ column }) => (
-        <DataTableColumnHeader column={column} title={t('Account')} />
-      ),
-      cell: ({ row }) => (
-        <span className='truncate block'>{row.getValue('account')}</span>
-      ),
-    },
-    {
-      accessorKey: 'description',
-      accessorTitle: t('Description'),
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title={t('Description')} />
-      ),
-      cell: ({ row }) => (
-        <span className='max-w-[300px] truncate text-gray-800 block'>
-          {row.getValue('description')}
-        </span>
-      ),
-    },
-    {
-      accessorKey: 'expenseGross',
-      accessorTitle: t('Expense'),
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title={t('Expense')} />
+        <DataTableColumnHeader
+          className='w-20'
+          column={column}
+          title={t('Status')}
+        />
       ),
       cell: ({ row }) => {
-        const value = row.getValue('expenseGross') as number | null;
-        return value ? (
-          <span className='text-red-600 font-medium text-center block'>
-            {formatCurrencyHuf(value.toString())}
-          </span>
-        ) : (
-          ''
-        );
+        return <StatusCom status={row.getValue('status')} />;
+      },
+      filterFn: (row, id, value) => {
+        return value.includes(row.getValue(id));
       },
     },
     {
-      accessorKey: 'incomeGross',
-      accessorTitle: t('Income'),
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title={t('Income')} />
-      ),
+      id: 'actions',
       cell: ({ row }) => {
-        const value = row.getValue('incomeGross') as number | null;
-        return value ? (
-          <span className='text-green-600 font-medium text-center block'>
-            {formatCurrencyHuf(value.toString())}
-          </span>
-        ) : (
-          ''
-        );
-      },
-    },
-    {
-      accessorKey: 'taxCode',
-      accessorTitle: t('Tax Code'),
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title={t('Tax Code')} />
-      ),
-      cell: ({ row }) => (
-        <span className='text-gray-700 text-center block'>
-          {row.getValue('taxCode')}
-        </span>
-      ),
-    },
-    {
-      accessorKey: 'vatRate',
-      accessorTitle: t('VAT Rate'),
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title={t('VAT Rate')} />
-      ),
-      cell: ({ row }) => {
-        const value = row.getValue('vatRate') as number | null;
-        return value ? <span className='text-center block'>{value}%</span> : '';
-      },
-    },
-    {
-      accessorKey: 'inputVat',
-      accessorTitle: t('Input VAT'),
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title={t('Input VAT')} />
-      ),
-      cell: ({ row }) => {
-        const value = row.getValue('inputVat') as number | null;
-        return value ? (
-          <span className='text-center block'>
-            {formatCurrencyHuf(value.toString())}
-          </span>
-        ) : (
-          '-'
+        return (
+          <Link
+            className='w-fit'
+            href={`/admin-panel/users/${row.original.id}`}
+          >
+            <EyeIcon />
+          </Link>
         );
       },
     },

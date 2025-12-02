@@ -22,11 +22,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { useJournalDocumentTypes } from './icon-renderer';
+import { useRolesIcon } from './icon-renderer';
 
 const AddData = () => {
   const t = useTranslations();
-  const journalDocumentTypes = useJournalDocumentTypes();
+  const rolesIcon = useRolesIcon();
   return (
     <div>
       <Dialog>
@@ -61,7 +61,7 @@ const AddData = () => {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
-                      {journalDocumentTypes.map(item => (
+                      {rolesIcon.map(item => (
                         <SelectItem key={item.value} value={item.value}>
                           <div className='flex items-center gap-2'>
                             {item.icon}

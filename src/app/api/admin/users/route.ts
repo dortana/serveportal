@@ -15,8 +15,7 @@ export const GET = roleRoute(
       const order = searchParams.get('order') || 'desc';
 
       const status = searchParams.get('status')?.split(',') || [];
-      const action = searchParams.get('action')?.split(',') || [];
-      const action_sub = searchParams.get('action_sub')?.split(',') || [];
+      const role = searchParams.get('role')?.split(',') || [];
 
       if (page < 1 || limit < 1) {
         return NextResponse.json(
@@ -43,12 +42,25 @@ export const GET = roleRoute(
 
       // Add search filter
       if (search) {
+        const trimmed = search.trim();
+        const parts = trimmed.split(/\s+/);
         // const num = Number(search);
         whereClause.OR = [
           // always match description (case‐insensitive substring)
           { email: { contains: search, mode: 'insensitive' } },
           { phone: { contains: search, mode: 'insensitive' } },
           { vatNumber: { contains: search, mode: 'insensitive' } },
+
+          // Full name search (firstName + lastName in any order)
+          {
+            AND: parts.map(part => ({
+              OR: [
+                { firstName: { contains: part, mode: 'insensitive' } },
+                { lastName: { contains: part, mode: 'insensitive' } },
+              ],
+            })),
+          },
+
           // only add the numeric match if `search` parsed to a real number
           // ...(Number.isFinite(num) ? [{ amount: num }] : []),
         ];
@@ -60,15 +72,9 @@ export const GET = roleRoute(
         };
       }
 
-      if (action.length > 0) {
-        whereClause.action = {
-          in: action,
-        };
-      }
-
-      if (action_sub.length > 0) {
-        whereClause.action_sub = {
-          in: action_sub,
+      if (role.length > 0) {
+        whereClause.role = {
+          in: role,
         };
       }
 

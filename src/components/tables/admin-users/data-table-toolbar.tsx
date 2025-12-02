@@ -9,7 +9,7 @@ import { DataTableViewOptions } from './data-table-view-options';
 import { useDebounce } from '@/hooks/useDebounce';
 import { useQueryString } from '@/hooks/useQueryString';
 import { useTranslations } from 'next-intl';
-import { useJournalDocumentTypes } from './icon-renderer';
+import { useRolesIcon, useStatusesIcon } from './icon-renderer';
 import SearchIcon from '@/components/icons/SearchIcon';
 import ExportDataIcon from '@/components/icons/ExportDataIcon';
 import AddData from './AddData';
@@ -27,7 +27,8 @@ export function DataTableToolbar<TData>({
   const search = searchParams.get('search');
   const [searchValue, setSearchValue] = React.useState(search);
   const query = useDebounce(searchValue, 1000);
-  const docTypes = useJournalDocumentTypes();
+  const rolesIcon = useRolesIcon();
+  const statusesIcon = useStatusesIcon();
 
   useEffect(() => {
     if (query) {
@@ -60,11 +61,18 @@ export function DataTableToolbar<TData>({
         </div>
 
         <div className='flex items-start gap-2 max-sm:w-full'>
-          {table.getColumn('documentType') && (
+          {table.getColumn('role') && (
             <DataTableFacetedFilter
-              column={table.getColumn('documentType')}
-              title={t('Document Type')}
-              options={docTypes}
+              column={table.getColumn('role')}
+              title={t('Role')}
+              options={rolesIcon}
+            />
+          )}
+          {table.getColumn('status') && (
+            <DataTableFacetedFilter
+              column={table.getColumn('status')}
+              title={t('Status')}
+              options={statusesIcon}
             />
           )}
         </div>

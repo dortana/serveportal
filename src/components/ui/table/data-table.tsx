@@ -118,17 +118,41 @@ export function DataTable<TData, TValue>({
       {},
     );
 
+    // Build dynamic filter params from tableFiltersIds
+    const dynamicFilterParams =
+      tableFiltersIds?.reduce(
+        (acc, key) => {
+          acc[key] = filterParams[key] ?? null;
+          return acc;
+        },
+        {} as Record<string, string | null>,
+      ) || {};
+
     const combinedParams: any = {
       ...paginationParams,
       ...sortingParams,
-      ...{
-        status: filterParams.status || null,
-        action: filterParams.action || null,
-        action_sub: filterParams.action_sub || null,
-      },
+      ...dynamicFilterParams,
     };
-    updateQueryString(combinedParams);
-  }, [pageIndex, pageSize, sorting, columnFilters, updateQueryString]);
+
+    // NEW: compare with current URL params before updating
+    const hasChanged = Object.entries(combinedParams).some(([key, value]) => {
+      const current = searchParams.get(key);
+      const normalized = value === null ? null : String(value);
+      return current !== normalized;
+    });
+
+    if (hasChanged) {
+      updateQueryString(combinedParams);
+    }
+  }, [
+    pageIndex,
+    pageSize,
+    sorting,
+    columnFilters,
+    updateQueryString,
+    tableFiltersIds,
+    searchParams,
+  ]);
 
   const table = useReactTable({
     data,

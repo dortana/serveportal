@@ -45,7 +45,7 @@ const UsersPage = async ({ searchParams }: PageProps) => {
         toolbarComponent={DataTableToolbar}
         allowSelection={false}
         paginationData={usersData.pagination}
-        tableFiltersIds={['status', 'action', 'action_sub']}
+        tableFiltersIds={['role', 'status']}
       />
     </div>
   );

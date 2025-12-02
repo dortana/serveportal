@@ -24,12 +24,10 @@ export const validateToken = async (token: string) => {
 export const getUsers = async (
   filterData: DataFilterType & {
     status?: string;
-    action?: string;
-    action_sub?: string;
+    role?: string;
   },
 ) => {
-  const { page, limit, order, sort, search, status, action, action_sub } =
-    filterData;
+  const { page, limit, order, sort, search, status, role } = filterData;
 
   const searchParams = new URLSearchParams([
     ['page', page ?? '1'],
@@ -45,13 +43,8 @@ export const getUsers = async (
   if (status && status?.length > 0) {
     searchParams.append('status', status);
   }
-
-  if (action && action?.length > 0) {
-    searchParams.append('action', action);
-  }
-
-  if (action_sub && action_sub?.length > 0) {
-    searchParams.append('action_sub', action_sub);
+  if (role && role?.length > 0) {
+    searchParams.append('role', role);
   }
 
   try {

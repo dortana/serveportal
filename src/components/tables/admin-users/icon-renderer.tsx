@@ -1,44 +1,62 @@
 'use client';
 
-import CashIcon from '@/components/icons/CashIcon';
-import TransferIcon from '@/components/icons/TransferIcon';
-import { JournalDocumentType } from '@/app/generated/prisma/client';
+import { UserRole, UserStatus } from '@/app/generated/prisma/client';
 import { useTranslations } from 'next-intl';
-import BankIcon from '@/components/icons/BankIcon';
+import AdminIcon from '@/components/icons/AdminIcon';
+import ExpertIcon from '@/components/icons/ExpertIcon';
+import CustomerIcon from '@/components/icons/CustomerIcon';
+import EmployeeIcon from '@/components/icons/EmployeeIcon';
 
-export const useJournalDocumentTypes = () => {
+export const useRolesIcon = () => {
   const t = useTranslations();
 
   return [
     {
-      value: JournalDocumentType.KA,
-      label: t('Cash (Kassa)'),
-      icon: <CashIcon />,
+      value: UserRole.ADMIN,
+      label: t('Admin'),
+      icon: <AdminIcon />,
     },
     {
-      value: JournalDocumentType.BA,
-      label: t('Bank Austria'),
-      icon: <BankIcon />,
+      value: UserRole.EXPERT,
+      label: t('Expert'),
+      icon: <ExpertIcon />,
     },
     {
-      value: JournalDocumentType.RB,
-      label: t('Raiffeisen Bank'),
-      icon: <BankIcon />,
+      value: UserRole.USER,
+      label: t('Customer'),
+      icon: <CustomerIcon />,
     },
     {
-      value: JournalDocumentType.VB,
-      label: t('Volksbank'),
-      icon: <BankIcon />,
+      value: UserRole.EMPLOYEE,
+      label: t('Employee'),
+      icon: <EmployeeIcon />,
+    },
+  ];
+};
+
+export const useStatusesIcon = () => {
+  const t = useTranslations();
+
+  return [
+    {
+      value: UserStatus.ACTIVE,
+      label: t('Active'),
+      icon: <AdminIcon />,
     },
     {
-      value: JournalDocumentType.BK,
-      label: t('Other Banks'),
-      icon: <BankIcon />,
+      value: UserStatus.BANNED,
+      label: t('Banned'),
+      icon: <ExpertIcon />,
     },
     {
-      value: JournalDocumentType.UM,
-      label: t('Transfer / Rebooking'),
-      icon: <TransferIcon />,
+      value: UserStatus.BLOCKED,
+      label: t('Blocked'),
+      icon: <CustomerIcon />,
+    },
+    {
+      value: UserStatus.DISABLED,
+      label: t('Disabled'),
+      icon: <EmployeeIcon />,
     },
   ];
 };
