@@ -59,6 +59,8 @@ jobs:
         run: pnpm install
 
       - name: Generate Prisma Client
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: pnpm prisma generate
 
       - name: Run TypeScript Type Checking
