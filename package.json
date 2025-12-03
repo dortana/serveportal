@@ -14,7 +14,8 @@
     "translations:format": "prettier --write src/messages",
     "translations:extract": "i18next 'src/**/*.{ts,tsx}' && pnpm run translations:sort && pnpm run translations:format",
     "translations:check": "i18next 'src/**/*.{ts,tsx}' --fail-on-update && pnpm run translations:sort && pnpm run translations:format",
-    "i18n:sync": "ts-node --esm scripts/translate.ts"
+    "i18n:sync": "ts-node --esm scripts/translate.ts",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@maptiler/sdk": "3.8.0",
