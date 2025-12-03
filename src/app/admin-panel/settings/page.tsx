@@ -10,8 +10,11 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const SettingsPage = () => {
-  return <div className='p-4 rounded-lg h-full bg-white'>Settings</div>;
+const SettingsPage = async () => {
+  const t = await getTranslations();
+  return (
+    <div className='p-4 rounded-lg h-full bg-white'>{t('MOU Settings')}</div>
+  );
 };
 
 export default SettingsPage;
