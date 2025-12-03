@@ -83,7 +83,7 @@ jobs:
     needs: translate
 
     # Only trigger deploy if translation job actually changed files
-    if: always()
+    if: ${{ needs.translate.result == 'success' }}
 
     steps:
       - name: Checkout Repository
