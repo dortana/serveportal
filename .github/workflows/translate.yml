@@ -1,0 +1,53 @@
+name: Translation Sync (DeepL)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/messages/en-US.json'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/messages/en-US.json'
+  workflow_dispatch:
+
+jobs:
+  translate:
+    name: Generate Missing Translations
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write # required to push updates
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # IMPORTANT for pushing
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Translation Sync
+        env:
+          DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
+        run: npm run i18n:sync
+
+      - name: Commit & Push Changes
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+
+          if ! git diff --quiet; then
+            git add src/messages/*.json
+            git commit -m "🔄 Auto-translate missing keys (DeepL)"
+            git push
+          else
+            echo "No translation changes to commit."
+          fi
