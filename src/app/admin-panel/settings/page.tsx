@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
 const SettingsPage = async () => {
   const t = await getTranslations();
   return (
-    <div className='p-4 rounded-lg h-full bg-white'>{t('MOUs Settings')}</div>
+    <div className='p-4 rounded-lg h-full bg-white'>{t('MOUs3 Settings')}</div>
   );
 };
 
