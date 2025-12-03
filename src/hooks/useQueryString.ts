@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useCallback } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useCallback } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 export function useQueryString() {
   const router = useRouter();
@@ -21,18 +21,18 @@ export function useQueryString() {
 
       return newSearchParams.toString();
     },
-    [searchParams]
+    [searchParams],
   );
 
   const updateQueryString = useCallback(
     (
       params: Record<string, string | number | null>,
-      options = { scroll: false }
+      options = { scroll: false },
     ) => {
       const queryString = createQueryString(params);
       router.push(`?${queryString}`, options);
     },
-    [createQueryString, router]
+    [createQueryString, router],
   );
 
   return { createQueryString, updateQueryString, searchParams };
