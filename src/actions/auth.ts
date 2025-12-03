@@ -14,6 +14,7 @@ import { app_name } from '@/lib/data';
 
 interface UserWitPassword extends User {
   password: string;
+  email: string;
   goToVerify?: boolean;
 }
 
