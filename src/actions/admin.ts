@@ -87,19 +87,6 @@ export async function addUserAction(
 ): Promise<any> {
   const t = await getTranslations();
 
-  const RoleEnum = z
-    .enum(['USER', 'ADMIN', 'EXPERT', 'EMPLOYEE'])
-    .or(z.literal(''))
-    .refine(v => v !== '', {
-      message: t('Role is required'),
-    });
-  const StatusEnum = z
-    .enum(['ACTIVE', 'BLOCKED', 'BANNED', 'DISABLED'])
-    .or(z.literal('')) // allow "" temporarily
-    .refine(v => v !== '', {
-      message: t('Status is required'),
-    });
-
   const schema = z.object({
     firstName: z.string().nonempty(t('First name is required')),
     lastName: z.string().nonempty(t('Last name is required')),
