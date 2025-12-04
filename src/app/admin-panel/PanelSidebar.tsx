@@ -97,7 +97,7 @@ const PanelSidebar = ({
               className={clsx(
                 'w-full py-2 rounded-tr-sm rounded-br-sm',
                 isActive
-                  ? 'font-semibold bg-gradient-to-r from-white to-gray-300'
+                  ? 'font-semibold bg-linear-to-r from-white to-gray-300'
                   : 'hover:text-brand transform transition-all duration-300',
               )}
             >

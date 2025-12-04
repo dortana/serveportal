@@ -1,9 +1,9 @@
 name: Translation Sync (DeepL)
 
-# Run only after CI/CD Workflow finishes successfully and we have new changes in en-US.json
+# Run only after Vercel Preview Deployment Workflow finishes successfully and we have new changes in en-US.json
 on:
   workflow_run:
-    workflows: ['CI/CD Workflow']
+    workflows: ['Vercel Preview Deployment']
     types: [completed]
 
   workflow_dispatch:
@@ -13,7 +13,7 @@ jobs:
     name: Generate Missing Translations
     runs-on: ubuntu-latest
 
-    # Only run if CI/CD workflow succeeded
+    # Only run if Vercel Preview Deployment workflow succeeded
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     permissions:
